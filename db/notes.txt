@@ -1,0 +1,18 @@
+DATABASE
+1.	To-do: 
+-	Give name for specific areas in room
+-	Define necessary constraints for fields
+-	Define code naming standard (ID) for entities: Room, Location (in room), Training, Repair, etc.
+
+2.	Procedures: 
+a.	Insert/Update values to a table:
+-	Option 1: if raw data exists in another sources: 
+•	Use Import/Export Wizard: for importing all rows in table
+https://stackoverflow.com/questions/39610133/how-to-import-an-excel-file-into-sql-server
+•	Copy paste data from the selected Excel rows: for importing selected rows in table
+https://sqlspreads.com/2017/05/04/how-to-insert-data-in-excel-to-sql-server/#:~:text=Right%2Dclick%20the%20table%20and,selected%20cells%20and%20select%20Copy.
+
+-	Option 2: Write SQL Queries
+
+b.	Query formulation: 
+-	For checking 
