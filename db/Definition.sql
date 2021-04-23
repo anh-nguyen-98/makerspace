@@ -110,6 +110,7 @@ CREATE TABLE MksUser(
 	userDept NVARCHAR(15),
 	userJob NVARCHAR(256),
 	userDOB DATE,
+	userAge INT,
 );
 
 ------VISIT-----
