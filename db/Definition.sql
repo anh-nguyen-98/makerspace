@@ -63,8 +63,8 @@ CREATE TABLE Equipment (
 	eCode NCHAR(15) UNIQUE, 
 	eName NVARCHAR(256) ,
 	eDesc NVARCHAR(4000),
-	eManual NVARCHAR(4000) , 
 	eFunction NVARCHAR(4000) ,
+	eManual NVARCHAR(4000) , 
 	eSafety NVARCHAR(4000) ,
 	eTraining INT
 );
