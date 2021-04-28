@@ -1,0 +1,10 @@
+INSERT INTO RoomSpace VALUES (1, 'A', 'Mechanics Space');
+INSERT INTO RoomSpace VALUES (1, 'B', 'Laser Space');
+INSERT INTO RoomSpace VALUES (1, 'C', 'Adhesive Space');
+INSERT INTO RoomSpace VALUES (2, 'A', 'Electronics Space');
+INSERT INTO RoomSpace VALUES (2, 'B', 'Showcase Space');
+INSERT INTO RoomSpace VALUES (2, 'C', 'Printing Space');
+INSERT INTO RoomSpace VALUES (2, 'E', 'Sewing Space');
+INSERT INTO RoomSpace VALUES (2, 'D', 'Handtools Space');
+INSERT INTO RoomSpace VALUES (2, 'F', 'Classroom Space');
+INSERT INTO RoomSpace VALUES (2, 'G', 'Science Space');
