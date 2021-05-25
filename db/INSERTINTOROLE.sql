@@ -1,0 +1,3 @@
+INSERT INTO Role VALUES('Admin');
+INSERT INTO Role VALUES('User');
+INSERT INTO Role VALUES('Guest');
