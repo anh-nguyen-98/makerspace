@@ -17,6 +17,10 @@
 
         <asp:SqlDataSource ID="MakerspaceDB" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT [catName] FROM [EquipmentCategory]"></asp:SqlDataSource>
 
+        
+
     </div>
-    
+    <div id="admin">
+        <asp:Button ID="addItemBtn" runat="server" Text="Add item"/>
+    </div>
 </asp:Content>

@@ -10,7 +10,7 @@
 
 namespace Makerspace
 {
-    public partial class User
+    public partial class AddEquipment
     {
     }
 }
