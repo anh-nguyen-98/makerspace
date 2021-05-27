@@ -17,6 +17,20 @@
 
         <asp:SqlDataSource ID="MakerspaceDB" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT [catName] FROM [EquipmentCategory]"></asp:SqlDataSource>
 
+        <br />
+        <asp:RadioButton ID="RadioButton3" runat="server" GroupName="EquipmentSearch" Text="Equipment Name" />
+        <asp:RadioButton ID="RadioButton2" runat="server" GroupName="EquipmentSearch" OnCheckedChanged="RadioButton2_CheckedChanged" Text="Equipment Function" />
+        <asp:RadioButton ID="RadioButton4" runat="server" GroupName="EquipmentSearch" Text="Equipment Location" />
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Button" />
+        <br />
+        <asp:GridView ID="GridView1" runat="server">
+        </asp:GridView>
+
+        <br />
+        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        <br />
+
     </div>
     
 </asp:Content>
