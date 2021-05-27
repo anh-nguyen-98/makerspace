@@ -28,6 +28,6 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT * FROM Equipment WHERE eName = @eName;
+	SELECT * FROM Equipment WHERE eName LIKE @eName;
 END
 GO
