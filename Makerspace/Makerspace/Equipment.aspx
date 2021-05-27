@@ -28,7 +28,6 @@
         </asp:GridView>
 
         <br />
-        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
         <br />
 
     </div>
