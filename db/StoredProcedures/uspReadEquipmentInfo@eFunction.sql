@@ -28,6 +28,22 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT *FROM Equipment WHERE eFunction=@eFunction;
+	SELECT 
+	CONCAT (eCode, '-', itemNum) AS itemCode,
+	eName,
+	CONCAT(Room.roomCode, '.', RoomSpace.spaceCode, '.', LocObject.objectCode, '.', Location.objectNum) AS locationCode,
+	CONCAT(Room.roomName, ' - ', RoomSpace.spaceName, ' - ', LocObject.objectName, ' - ', Location.objectNum) AS locationName
+	FROM Equipment INNER JOIN EquipmentItem
+	ON EquipmentItem.eID = Equipment.eID
+	INNER JOIN Location 
+	ON EquipmentItem.locID = Location.locID
+	INNER JOIN RoomSpace
+	ON Location.spaceID = RoomSpace.spaceID
+	INNER JOIN LocObject
+	ON Location.objectID = LocObject.objectID
+	INNER JOIN Room
+	ON RoomSpace.roomID = Room.roomID
+
+	WHERE eFunction LIKE @eFunction;
 END
 GO
