@@ -34,9 +34,9 @@ namespace Makerspace
                 String connString = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(connString);
                 con.Open();
-                String sp = "uspReadEquipLoc@eName";
+                String sp = "uspReadEquipInfo@eLocation";
                 SqlCommand cmd = new SqlCommand(sp, con);
-                cmd.Parameters.AddWithValue("@eName", string.Format("%{0}%", TextBox1.Text));
+                cmd.Parameters.AddWithValue("@eLocation", string.Format("%{0}%", TextBox1.Text));
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = cmd.ExecuteReader();
                 GridView1.DataSource = reader;
