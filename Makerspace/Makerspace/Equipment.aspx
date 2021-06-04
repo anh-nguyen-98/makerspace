@@ -6,17 +6,21 @@
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <asp:ListView ID="categoryList" runat="server" DataSourceID="MakerspaceDB">
-                <ItemTemplate>
-                    <b style="font-size: large; font-style: normal">
-                        <asp:Button  ID="cat_btn" runat="server" Text='<%# Eval("catName")%>'>   
-                        </asp:Button> 
-                    </b>
-                </ItemTemplate>
-                <ItemSeparatorTemplate>  |  </ItemSeparatorTemplate>
-            </asp:ListView>
+            <asp:Panel runat="server" HorizontalAlign="Center">
+                <asp:ListView ID="categoryList" runat="server" DataSourceID="MakerspaceDB" >
+                    <ItemTemplate>
+                        <b style="font-size: large; font-style: normal">
+                            <asp:Button  ID="cat_btn" runat="server" Text='<%# Eval("catName")%>'>   
+                            </asp:Button> 
+                        </b>
+                    </ItemTemplate>
+                    <ItemSeparatorTemplate>  |  </ItemSeparatorTemplate>
+                </asp:ListView>
+                <asp:SqlDataSource ID="MakerspaceDB" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT [catName] FROM [EquipmentCategory]"></asp:SqlDataSource>
+            </asp:Panel>
+            
 
-            <asp:SqlDataSource ID="MakerspaceDB" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT [catName] FROM [EquipmentCategory]"></asp:SqlDataSource>
+          
 
             <asp:Panel runat="server" 
                 ID="Criteria" 
