@@ -19,6 +19,7 @@
                     <asp:TreeNode Text="Delete" Value="Delete" NavigateUrl="~/DeleteEquipmentItem"></asp:TreeNode>
                 </asp:TreeNode>
                 <asp:TreeNode Text="User" Value="New Node">
+                    <asp:TreeNode Text="Get" Value="Get" NavigateUrl="~/GetUser"></asp:TreeNode>
                     <asp:TreeNode Text="Add" Value="Add" NavigateUrl="~/AddUser"></asp:TreeNode>
                     <asp:TreeNode Text="Edit" Value="Edit" NavigateUrl="~/EditUser"></asp:TreeNode>
                     <asp:TreeNode Text="Delete" Value="Delete" NavigateUrl="~/DeleteUser"></asp:TreeNode>
