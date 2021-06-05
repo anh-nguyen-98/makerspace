@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[uspReadEquipmentInfo@eFunction]
+ALTER PROCEDURE [dbo].[uspReadEquipmentInfo@eFunction]
 	-- Add the parameters for the stored procedure here
 	@eFunction nvarchar(4000)
 AS
