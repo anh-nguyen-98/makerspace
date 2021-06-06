@@ -15,10 +15,12 @@ namespace Makerspace
         {
             if (!IsPostBack)
             {
-
+               
             }
             else
             {
+
+
             }
 
         }
@@ -26,6 +28,7 @@ namespace Makerspace
 
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
+
             BindGVRadioBased();
 
         }
@@ -74,6 +77,7 @@ namespace Makerspace
             }
 
             BindGV(EquipGV, cmd, EquipGVCount);
+            
 
         }
 
@@ -148,9 +152,13 @@ namespace Makerspace
             string idString = EquipGV.SelectedRow.Cells[1].Text;
             Int32.TryParse(idString, out int id);
             BindFV(id);
+            SqlCommand cmdSelectItem = new SqlCommand("uspReadEquipItem@eID");
+            cmdSelectItem.CommandType = CommandType.StoredProcedure;
+            cmdSelectItem.Parameters.AddWithValue("@eID", id);
+            BindGV(ItemGV, cmdSelectItem, EquipGVCount);
         }
 
-        protected void BindFV(int id)
+        protected void BindFV( int id)
         {
             using (SqlConnection con = new SqlConnection(CONSTRING))
             using (SqlCommand cmd = new SqlCommand("uspReadEquip@eID", con))
@@ -212,5 +220,13 @@ namespace Makerspace
 
         }
 
+        protected void ItemGV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(ItemGV.SelectedValue.ToString());
+            System.Diagnostics.Debug.WriteLine(id);
+   
+            
+
+        }
     }
 }
