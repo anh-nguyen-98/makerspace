@@ -60,13 +60,13 @@
                     <asp:BoundField DataField="eName" HeaderText="Name"/>
                     <asp:BoundField DataField="ItemCode" HeaderText="Sub Items"/>
                     <asp:BoundField DataField="LocationID" HeaderText="Location"/>
+                    <asp:BoundField DataField="eFunction" HeaderText="Function" />
                     <asp:BoundField DataField="eTraining" HeaderText="Training Requirements"/>
                
                 </Columns>
             </asp:GridView>
 
-                
-  
+               
             <asp:FormView 
                 ID="EquipFormView" 
                 DataKeyNames="eID"
@@ -182,9 +182,60 @@
                 </EditItemTemplate>
        
 
-                </asp:FormView>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+            </asp:FormView>
+            <asp:GridView 
+                runat="server"
+                ID="ItemGV"
+                AllowPaging="false" 
+                AutoGenerateColumns="false"
+                DataKeyNames="itemID" 
+                AutoGenerateSelectButton="true"
+                OnSelectedIndexChanged="ItemGV_SelectedIndexChanged" 
+                ShowFooter="true">
+                <Columns>
+   <%--                 <asp:TemplateField HeaderText="ID">
+                        <ItemTemplate >
+                            <asp:Label runat="server" ID="itemID" Text='<%# Bind("itemID") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>--%>
+                    <asp:BoundField HeaderText="ID" DataField="itemID"/>
+                    <asp:TemplateField HeaderText="Code">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text="<% %>""></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField HeaderText="Code" DataField="itemCode"/>
+                    <asp:BoundField HeaderText="Status" DataField="itemStatus" />
+                    <asp:BoundField HeaderText="Location" DataField="locID"/>
+            
+                    <asp:TemplateField HeaderText="">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="EditBtn" runat="server" Text="Edit" 
+                                CommandName="Edit" CommandArgument='<%#Bind("itemID") %>' ></asp:LinkButton>
+                        </ItemTemplate>
+                        <FooterStyle />
+                        <FooterTemplate>
+                            <asp:LinkButton runat="server" Text="Add"
+                                CommandName="Add"></asp:LinkButton>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                    
+
+
+                </Columns>
+                
+               
+            </asp:GridView>
+
+
+            <br />
+
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
 
 
