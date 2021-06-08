@@ -11,27 +11,19 @@ using System.Data.SqlClient;
 namespace Makerspace
 {
     public partial class Equipment : System.Web.UI.Page
-    {
-
+    {   
+        protected static string CONNSTRING = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                BindGrid();
+            }
         }
 
-        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        protected void Search_Click(object sender, EventArgs e)
         {
-
-        }
-
-        protected void RadioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {  
-            String connString = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(connString);
+            SqlConnection con = new SqlConnection(CONNSTRING);
             con.Open();
             String sp = "";
             String param = "";
@@ -48,7 +40,7 @@ namespace Makerspace
                 param = "@eName";
             }
 
-            if (RadioButton2.Checked) 
+            if (RadioButton2.Checked)
             {
                 sp = "uspReadEquipInfo@eFunction";
                 param = "@eFunction";
@@ -72,13 +64,9 @@ namespace Makerspace
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            String connString = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(connString);
+            SqlConnection con = new SqlConnection(CONNSTRING);
             con.Open();
-            //BUG HERE - OUT OF INDEX
             int id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
-            //int index = GridView1.SelectedIndex;
-            //int id = Convert.ToInt32(GridView1.DataKeys[index].Value);
             SqlCommand cmd = new SqlCommand("DELETE FROM Equipment WHERE eID =" + id + "", con);
 
 
@@ -98,59 +86,130 @@ namespace Makerspace
 
 
         }
-
-        protected void Button3_Click(object sender, EventArgs e)
+        protected void AddEquipBtn_Click(object sender, EventArgs e)
         {
-
+            FormView1.Visible = true;
         }
 
-        protected void Button4_Click(object sender, EventArgs e)
+        protected void FormView1_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
-            String connString = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(connString);
-            con.Open();
-            String sp = "uspInsertEquip";
-            SqlCommand insert = new SqlCommand(sp, con);
-            insert.CommandType = CommandType.StoredProcedure;
+            String eCode = ((TextBox)FormView1.FindControl("eCode")).Text;
+            String eName = ((TextBox)FormView1.FindControl("eName")).Text;
+            String eDesc = ((TextBox)FormView1.FindControl("eDesc")).Text;
+            String eFunction = ((TextBox)FormView1.FindControl("eFunction")).Text;
+            String eManual = ((TextBox)FormView1.FindControl("eManual")).Text;
+            String eSafety = ((TextBox)FormView1.FindControl("eSafety")).Text;
+            Boolean Training = ((CheckBox)FormView1.FindControl("Training")).Checked;
             int eTraining = 0;
-
-            insert.Parameters.AddWithValue("eCode", TextBox2.Text);
-            insert.Parameters.AddWithValue("eName", TextBox3.Text);
-            insert.Parameters.AddWithValue("eDesc", TextBox4.Text);
-            insert.Parameters.AddWithValue("eFunction", TextBox5.Text);
-            insert.Parameters.AddWithValue("eManual", TextBox6.Text);
-            insert.Parameters.AddWithValue("eSafety", TextBox7.Text);
-
-            if (CheckBox1.Checked)
+            if (Training == true)
             {
                 eTraining = 1;
             }
+
+            SqlConnection con = new SqlConnection(CONNSTRING);
+            SqlCommand insert = new SqlCommand("uspInsertEquip", con);
             
+            insert.CommandType = CommandType.StoredProcedure;
+            insert.Parameters.AddWithValue("eCode", eCode);
+            insert.Parameters.AddWithValue("eName", eName);
+            insert.Parameters.AddWithValue("eDesc", eDesc);
+            insert.Parameters.AddWithValue("eFunction", eFunction);
+            insert.Parameters.AddWithValue("eManual", eManual);
+            insert.Parameters.AddWithValue("eSafety", eSafety);
             insert.Parameters.AddWithValue("eTraining", eTraining);
 
-
+            con.Open();
             insert.ExecuteNonQuery();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Successfully Added');", true);
-            TextBox2.Text = TextBox3.Text = TextBox4.Text = TextBox5.Text = TextBox6.Text = TextBox7.Text = string.Empty;
-            CheckBox1.Checked = false;
-            LoadNewInsert();
+
+            //Response.Write("Successfully added new euipment");
+
+            BindGrid();
             con.Close();
+           
 
         }
 
-
-
-        protected void LoadNewInsert()
+        protected void FormView1_ItemInserted(object sender, FormViewInsertedEventArgs e)
         {
-            String connString = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(connString);
-            SqlCommand newUpdated = new SqlCommand("SELECT * FROM Equipment", con);
-            SqlDataAdapter adapter = new SqlDataAdapter(newUpdated);
+            if (e.Exception == null)
+            {
+                if (e.AffectedRows == 1)
+                {
+                    FormView1.ChangeMode(FormViewMode.ReadOnly);
+                    Response.Write("Successfully added new equipment");
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Successfully Added');", true);
+                    ResetInsertFormView();
+                }
+                else
+                {   //If what exception is caught --> response according to exception. Below is the general response
+                    Response.Write("An error occured during insert process.");
+                    e.ExceptionHandled = true;
+                    e.KeepInInsertMode = true;
+                }
+            }
+            
+
+            
+        }
+
+        protected void BindGrid()
+        {
+            SqlConnection con = new SqlConnection(CONNSTRING);
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Equipment", con);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
             GridView1.DataSource = dt;
             GridView1.DataBind();
 
+        }
+
+        protected void ResetInsertFormView()
+        {
+            ((TextBox)FormView1.FindControl("eCode")).Text = "";
+            ((TextBox)FormView1.FindControl("eName")).Text = "";
+            ((TextBox)FormView1.FindControl("eDesc")).Text = "";
+            ((TextBox)FormView1.FindControl("eFunction")).Text = "";
+            ((TextBox)FormView1.FindControl("eManual")).Text = "";
+            ((TextBox)FormView1.FindControl("eSafety")).Text = "";
+            ((TextBox)FormView1.FindControl("eTraining")).Text = "";
+            FormView1.Visible = false;
+        }
+
+        protected void FormView1_ModeChanging(object sender, FormViewModeEventArgs e)
+        {
+            FormView1.ChangeMode(e.NewMode);
+
+        }
+
+
+        protected void InsertItem_Click(object sender, FormViewInsertedEventArgs f)
+        {
+
+        }
+
+        protected void FormView1_PageIndexChanging(object sender, FormViewPageEventArgs e)
+        {
+
+        }
+
+        protected void categoryList_Search(object sender, ListViewCommandEventArgs e)
+        {
+            String item = e.CommandName;
+            if (item.Equals("Small Tools"))
+            {
+                //Sql undefined
+            }
+        }
+
+        protected void CatBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            BindGrid();
         }
     }
 }
