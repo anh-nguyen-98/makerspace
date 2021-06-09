@@ -192,7 +192,7 @@ namespace Makerspace
 
         }
 
-        protected void categoryList_Search(object sender, ListViewCommandEventArgs e)
+        protected void CategoryList_Search(object sender, ListViewCommandEventArgs e)
         {
             String item = e.CommandName;
             if (item.Equals("Small Tools"))

@@ -5,7 +5,7 @@
    </div>
     <div id="CategoryMenu" style="text-align:center">
 
-        <asp:ListView ID="categoryList" runat="server" DataSourceID="MakerspaceDB" OnItemCommand="categoryList_Search">
+        <asp:ListView ID="categoryList" runat="server" DataSourceID="MakerspaceDB" OnItemCommand="CategoryList_Search">
             <ItemTemplate>
                     <b style="font-size: large; font-style: normal">
                         <asp:Button  ID="cat_btn" runat="server" Text='<%# Eval("catName")%>' CommandName='<%# Eval("catName")%>' OnClick="CatBtn_Click">   
