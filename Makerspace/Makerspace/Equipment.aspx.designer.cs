@@ -24,6 +24,15 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.ListView categoryList;
 
         /// <summary>
+        /// AddEquipBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddEquipBtn;
+
+        /// <summary>
         /// MakerspaceDB control.
         /// </summary>
         /// <remarks>
@@ -32,19 +41,13 @@ namespace Makerspace
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource MakerspaceDB;
 
-
-
-        /// addItemBtn control.
+        /// <summary>
+        /// RadioButton3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addItemBtn;
-        
-        /// <summary>
-
-        /// RadioButton3 control.
         protected global::System.Web.UI.WebControls.RadioButton RadioButton3;
 
         /// <summary>
@@ -92,7 +95,13 @@ namespace Makerspace
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
-        
-
+        /// <summary>
+        /// FormView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView FormView1;
     }
 }
