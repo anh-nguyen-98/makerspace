@@ -1,6 +1,4 @@
-#Makerspace DB Management
-
-##Initialize DB
+#Initialize DB
 - Run Definition
 Run step-by-step:
 - Equipment DB: Room -> RoomSpace -> LocObject -> Location -> Equipment -> EquipmentItem -> EquipmentCategory
