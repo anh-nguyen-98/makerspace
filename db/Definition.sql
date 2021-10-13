@@ -73,9 +73,6 @@ CREATE TABLE Equipment (
 	eTraining INT
 );
 
-
-
-
 ------EquipmentItem------
 CREATE TABLE EquipmentItem(
 	itemID INT IDENTITY(1,1) PRIMARY KEY,
@@ -88,6 +85,13 @@ CREATE TABLE EquipmentItem(
 	CONSTRAINT equipItemUnique UNIQUE (eID, itemNum),
 	CONSTRAINT EI_equipementFK FOREIGN KEY(eID) REFERENCES Equipment ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT EI_locFK FOREIGN KEY(locID) REFERENCES Location ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+----EquipmentCategory------
+CREATE TABLE EquipmentCategory (
+	catID INT IDENTITY(1,1) PRIMARY KEY,
+	catCode NCHAR(5),
+	catName NVARCHAR(20)
 );
 
 ------EquipmentRespair-----
@@ -116,16 +120,38 @@ CREATE TABLE MksUser(
 	userDOB DATE
 );
 
-------VISIT-----
-CREATE TABLE Visit(
-	visitID INT IDENTITY(1,1) PRIMARY KEY,
-	userID INT,
-	visitTime TIMESTAMP,
-	CONSTRAINT Visit_UserFK FOREIGN  KEY(userId) References MksUser ON DELETE CASCADE ON UPDATE CASCADE
+/*Role*/
+CREATE TABLE Role(
+	roleID INT IDENTITY(1,1) PRIMARY KEY,
+	roleName NVARCHAR(60)
 );
 
+/*User roles*/
+CREATE TABLE UserRoles(
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	userID INT,
+	roleID INT, 
+	CONSTRAINT userID FOREIGN KEY (userID) REFERENCES MksUser (userID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT roleID FOREIGN KEY (roleID) REFERENCES Role (roleID) ON DELETE CASCADE ON UPDATE CASCADE
+
+);
+
+/*Role Permission*/
+CREATE TABLE Permission(
+	permissionID INT IDENTITY(1,1) PRIMARY KEY,
+	permission NVARCHAR(256)
+)
+/* Mapping Role with Permission*/
+CREATE TABLE RolePermission(
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	roleID INT,
+	perID INT ,
+	CONSTRAINT role_ID FOREIGN KEY (roleID) REFERENCES Role (roleID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT perID FOREIGN KEY (perID) REFERENCES Permission (permissionID) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
 /* EquipmentTraining
-Maps a useron to an equipment that he/she completes training for. 
+Maps a user to an equipment that he/she completes training for. 
 */
 CREATE TABLE UserTraining(
 	usrtrID INT IDENTITY(1,1) PRIMARY KEY, 
@@ -136,6 +162,14 @@ CREATE TABLE UserTraining(
 	constraINT UT_UserFK FOREIGN KEY(userId) REFERENCES MksUser ON DELETE CASCADE ON UPDATE CASCADE,
 	constraINT UT_EquipementFK FOREIGN KEY(eID) REFERENCES Equipment ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+------VISIT-----
+/*CREATE TABLE Visit(
+	visitID INT IDENTITY(1,1) PRIMARY KEY,
+	userID INT,
+	visitTime TIMESTAMP,
+	CONSTRAINT Visit_UserFK FOREIGN  KEY(userId) References MksUser ON DELETE CASCADE ON UPDATE CASCADE
+);*/
 
 
 ------Inspection------
@@ -160,37 +194,7 @@ create table InspectionLine(
 	CONSTRAINT line_itemId_FK FOREIGN KEY(itemID) REFERENCES EquipmentItem ON DELETE CASCADE ON UPDATE CASCADE,
 
 );
-/*Role*/
-CREATE TABLE Role(
-	roleID INT IDENTITY(1,1) PRIMARY KEY,
-	roleName NVARCHAR(60)
-);
-/*User roles*/
-CREATE TABLE UserRoles(
-	id INT IDENTITY(1,1) PRIMARY KEY,
-	userID INT,
-	roleID INT, 
-	CONSTRAINT userID FOREIGN KEY (userID) REFERENCES MksUser (userID) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT roleID FOREIGN KEY (roleID) REFERENCES Role (roleID) ON DELETE CASCADE ON UPDATE CASCADE
 
-);
-/*Role Permission*/
-CREATE TABLE Permission(
-	permissionID INT IDENTITY(1,1) PRIMARY KEY,
-	permission NVARCHAR(256)
-)
-/* Mapping Role with Permission*/
-CREATE TABLE RolePermission(
-	id INT IDENTITY(1,1) PRIMARY KEY,
-	roleID INT,
-	perID INT ,
-	CONSTRAINT role_ID FOREIGN KEY (roleID) REFERENCES Role (roleID) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT perID FOREIGN KEY (perID) REFERENCES Permission (permissionID) ON DELETE CASCADE ON UPDATE CASCADE
-)
 
-CREATE TABLE EquipmentCategory (
-	catID INT IDENTITY(1,1) PRIMARY KEY,
-	catCode NCHAR(5),
-	catName NVARCHAR(20)
-);
+
 
