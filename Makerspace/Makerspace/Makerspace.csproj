@@ -186,8 +186,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="ManageEquipment.aspx" />
-    <Content Include="DeleteEquipmentItem.aspx" />
-    <Content Include="DeleteUser.aspx" />
     <Content Include="EditEquipment.aspx" />
     <Content Include="Equipment.aspx" />
     <Content Include="favicon.ico" />
@@ -474,20 +472,6 @@
     </Compile>
     <Compile Include="ManageEquipment.aspx.designer.cs">
       <DependentUpon>ManageEquipment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DeleteEquipmentItem.aspx.cs">
-      <DependentUpon>DeleteEquipmentItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DeleteEquipmentItem.aspx.designer.cs">
-      <DependentUpon>DeleteEquipmentItem.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DeleteUser.aspx.cs">
-      <DependentUpon>DeleteUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DeleteUser.aspx.designer.cs">
-      <DependentUpon>DeleteUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditEquipment.aspx.cs">
       <DependentUpon>EditEquipment.aspx</DependentUpon>

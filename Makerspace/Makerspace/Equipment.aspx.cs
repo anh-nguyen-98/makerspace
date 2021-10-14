@@ -37,8 +37,7 @@ namespace Makerspace
             ItemFV.Visible = false;
             BindGVRadioBased();
 
-                sp = "uspReadEquipInfo@eLocation";
-                param = "@eLocation";
+        }
 
         protected void BindGVRadioBased ()
         {
@@ -325,4 +324,5 @@ namespace Makerspace
             BindGVRadioBased();
         }
     }
+        
 }
