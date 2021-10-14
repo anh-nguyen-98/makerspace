@@ -180,7 +180,7 @@
     <Content Include="Equipment.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="GetUser.aspx" />
+    <Content Include="User.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -391,12 +391,12 @@
     <Compile Include="Equipment.aspx.designer.cs">
       <DependentUpon>Equipment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GetUser.aspx.cs">
-      <DependentUpon>GetUser.aspx</DependentUpon>
+    <Compile Include="User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GetUser.aspx.designer.cs">
-      <DependentUpon>GetUser.aspx</DependentUpon>
+    <Compile Include="User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

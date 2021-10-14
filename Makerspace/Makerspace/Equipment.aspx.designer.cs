@@ -33,15 +33,6 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.SqlDataSource MakerspaceDB;
 
         /// <summary>
-        /// Criteria control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Criteria;
-
-        /// <summary>
         /// NameBtn control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace Makerspace
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton FunctionBtn;
+
+        /// <summary>
+        /// ECodeBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton ECodeBtn;
 
         /// <summary>
         /// LocBtn control.
@@ -96,13 +96,13 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.Button SearchBtn;
 
         /// <summary>
-        /// ErrorLbl control.
+        /// EquipGridPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ErrorLbl;
+        protected global::System.Web.UI.WebControls.Panel EquipGridPanel;
 
         /// <summary>
         /// EquipGVCount control.
@@ -132,6 +132,24 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.FormView EquipFormView;
 
         /// <summary>
+        /// ItemGridPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ItemGridPanel;
+
+        /// <summary>
+        /// ItemCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemCount;
+
+        /// <summary>
         /// ItemGV control.
         /// </summary>
         /// <remarks>
@@ -139,5 +157,14 @@ namespace Makerspace
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView ItemGV;
+
+        /// <summary>
+        /// ItemFV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView ItemFV;
     }
 }

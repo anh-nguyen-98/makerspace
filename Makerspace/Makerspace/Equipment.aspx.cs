@@ -15,7 +15,11 @@ namespace Makerspace
         {
             if (!IsPostBack)
             {
-               
+                EquipFormView.Visible = false;
+                ItemGridPanel.Visible = false;
+                ItemFV.Visible = false;
+                BindGVRadioBased();
+
             }
             else
             {
@@ -28,7 +32,9 @@ namespace Makerspace
 
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
-
+            EquipFormView.Visible = false;
+            ItemGridPanel.Visible = false;
+            ItemFV.Visible = false;
             BindGVRadioBased();
 
         }
@@ -99,6 +105,12 @@ namespace Makerspace
 
             }
         }
+
+
+        //protected void BindGVRadioBased2()
+        //{
+        //    string[] BtnIDs = new string[] {"NameBtn"};
+        //}
         protected void Reset(Control parent)
         {
             foreach (Control c in parent.Controls)
@@ -149,28 +161,33 @@ namespace Makerspace
 
         protected void EquipGV_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ItemFV.Visible = false;
             string idString = EquipGV.SelectedRow.Cells[1].Text;
             Int32.TryParse(idString, out int id);
-            BindFV(id);
+            BindFV(EquipFormView, "uspReadEquip@eID", "@eID", id);
             SqlCommand cmdSelectItem = new SqlCommand("uspReadEquipItem@eID");
             cmdSelectItem.CommandType = CommandType.StoredProcedure;
             cmdSelectItem.Parameters.AddWithValue("@eID", id);
-            BindGV(ItemGV, cmdSelectItem, EquipGVCount);
+            BindGV(ItemGV, cmdSelectItem, ItemCount);
+            EquipFormView.Visible = true;
+            ItemGridPanel.Visible = true;
+
         }
 
-        protected void BindFV( int id)
+        protected void BindFV (FormView fv, string usp, string param, int id)
         {
             using (SqlConnection con = new SqlConnection(CONSTRING))
-            using (SqlCommand cmd = new SqlCommand("uspReadEquip@eID", con))
+            using (SqlCommand cmd = new SqlCommand(usp, con))
             {
                 con.Open();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@eID", id);
+               
+                cmd.Parameters.AddWithValue(param, id);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
-                EquipFormView.DataSource = dt;
-                EquipFormView.DataBind();
+                fv.DataSource = dt;
+                fv.DataBind();
             }
         }
 
@@ -181,7 +198,7 @@ namespace Makerspace
 
             EquipFormView.ChangeMode(e.NewMode);
             Int32.TryParse(EquipFormView.DataKey.Value.ToString(), out int id);
-            BindFV(id);
+            BindFV(EquipFormView, "uspReadEquip@eID", "@eID", id);
 
         }
 
@@ -195,7 +212,7 @@ namespace Makerspace
             string eFunction = ((TextBox)EquipFormView.FindControl("eFunctionUpdateTextBox")).Text;
             string eManual = ((TextBox)EquipFormView.FindControl("eManualUpdateTextBox")).Text;
             string eSafety = ((TextBox)EquipFormView.FindControl("eSafetyUpdateTextBox")).Text;
-            int eTraining = Convert.ToInt32(((DropDownList)EquipFormView.FindControl("eTrainingUpdateDdl")).SelectedValue);
+            int eTraining = Convert.ToInt32(((CheckBox)EquipFormView.FindControl("eTrainingCheckBox")).Checked? 1: 0);
 
             using (SqlConnection con = new SqlConnection(CONSTRING))
             using (SqlCommand cmd = new SqlCommand("uspUpdateEquip@eID", con))
@@ -215,18 +232,96 @@ namespace Makerspace
             }
                
             EquipFormView.ChangeMode(FormViewMode.ReadOnly);
-            BindFV(eID);
+            BindFV(EquipFormView, "uspReadEquip@eID", "@eID", eID);
             BindGVRadioBased();
 
         }
 
         protected void ItemGV_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             int id = Convert.ToInt32(ItemGV.SelectedValue.ToString());
-            System.Diagnostics.Debug.WriteLine(id);
-   
+            
+            BindFV(ItemFV, "uspReadEquipItem@itemID", "@itemID", id);
+            ItemFV.Visible = true;
             
 
+        }
+
+        protected void AddItemBtn_Click(object sender, EventArgs e)
+        {
+            ItemFV.ChangeMode(FormViewMode.Insert);
+        }
+
+        protected void ItemFV_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            int eID = Convert.ToInt32(((TextBox)ItemFV.FindControl("eIDTextBox")).Text);
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            using (SqlCommand cmd = new SqlCommand("uspInsertEquipItem", con))
+            {
+                con.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+              
+                cmd.Parameters.AddWithValue("@eID", eID);
+           
+                cmd.Parameters.AddWithValue("@itemStatus", Convert.ToInt32(((TextBox)ItemFV.FindControl("itemStatusTextBox")).Text));
+                cmd.Parameters.AddWithValue("@locID", Convert.ToInt32(((TextBox)ItemFV.FindControl("locIDTextBox")).Text));
+                cmd.Parameters.AddWithValue("@itemDeliveryDate", ((Calendar) ItemFV.FindControl("DeliveryDateCalendar"))
+                    .SelectedDate.ToString() );
+                cmd.Parameters.AddWithValue("@itemRemovalDate", ((Calendar)ItemFV.FindControl("RemovalDateCalendar"))
+                    .SelectedDate.ToString());
+                cmd.ExecuteNonQuery();
+
+            }
+            ItemFV.ChangeMode(FormViewMode.ReadOnly);
+            
+            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
+            selectCmd.CommandType = CommandType.StoredProcedure;
+            selectCmd.Parameters.AddWithValue("@eID", eID);
+
+            BindGV(ItemGV, selectCmd, ItemCount);
+            int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
+            BindFV(ItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
+
+            
+        }
+
+        protected void ItemFV_ModeChanging(object sender, FormViewModeEventArgs e)
+        {
+            ItemFV.ChangeMode(e.NewMode);
+     
+      
+
+        }
+
+     
+
+        protected void ItemFV_ItemDeleting(object sender, FormViewDeleteEventArgs e)
+        {
+            int id = Convert.ToInt32(ItemFV.DataKey.Value);
+            int eID = Convert.ToInt32(((Label)ItemFV.FindControl("eIDLabel")).Text);
+
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
+            {
+                con.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+
+            }
+            ItemFV.ChangeMode(FormViewMode.ReadOnly);
+            
+            BindFV(ItemFV, "uspReadEquipItem@itemID", "@itemID", 0);
+            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
+            selectCmd.CommandType = CommandType.StoredProcedure;
+            selectCmd.Parameters.AddWithValue("@eID", eID);
+            BindGV(ItemGV, selectCmd, ItemCount);
+        }
+
+        protected void EquipGV_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            EquipGV.PageIndex = e.NewPageIndex;
+            BindGVRadioBased();
         }
     }
 }
