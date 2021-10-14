@@ -1,5 +1,3 @@
-INSERT INTO EquipmentCategory (catName) VALUES ('Electronics');
-INSERT INTO EquipmentCategory (catName) VALUES ('Mechanics');
-INSERT INTO EquipmentCategory (catName) VALUES ('Printing');
-INSERT INTO EquipmentCategory (catName) VALUES ('Small Tools');
-INSERT INTO EquipmentCategory (catName) VALUES ('Large Tools');
+INSERT INTO EquipmentCategory (eID, catID) VALUES (6, 1);
+INSERT INTO EquipmentCategory (eID, catID) VALUES (3, 3);
+INSERT INTO EquipmentCategory (eID, catID) VALUES (1, 2);

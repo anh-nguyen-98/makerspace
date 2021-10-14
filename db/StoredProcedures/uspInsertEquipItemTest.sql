@@ -18,9 +18,12 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-ALTER PROCEDURE [dbo].[uspReadEquipmentInfo@eName]
+ALTER PROCEDURE [dbo].[uspInsertEquipItemTest]
 	-- Add the parameters for the stored procedure here
-	@eName nvarchar(256)
+	@eID INT,
+	@itemNum INT,
+	@locID INT,
+	@itemStatus INT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -28,23 +31,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT
-	CONCAT (eCode, '-', itemNum) AS itemCode,
-	eName,
-	CONCAT(Room.roomCode, '.', RoomSpace.spaceCode, '.', LocObject.objectCode, '.', Location.objectNum) AS locationCode,
-	CONCAT(Room.roomName, ' - ', RoomSpace.spaceName, ' - ', LocObject.objectName, ' - ', Location.objectNum) AS locationName
-
-	FROM Equipment INNER JOIN EquipmentItem 
-	ON EquipmentItem.eID = Equipment.eID
-	INNER JOIN Location 
-	ON EquipmentItem.locID = Location.locID
-	INNER JOIN RoomSpace
-	ON Location.spaceID = RoomSpace.spaceID
-	INNER JOIN LocObject
-	ON Location.objectID = LocObject.objectID
-	INNER JOIN Room
-	ON RoomSpace.roomID = Room.roomID
-	
-	WHERE eName LIKE @eName;
+	INSERT INTO EquipmentItem (eID, itemNum, itemStatus, locID) 
+	VALUES (@eID, @itemNum, @itemStatus, @locID);
 END
 GO
