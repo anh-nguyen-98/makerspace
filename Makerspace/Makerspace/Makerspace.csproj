@@ -100,6 +100,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -173,8 +174,6 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
-    <Content Include="AddEquipment.aspx" />
-    <Content Include="AddEquipmentItem.aspx" />
     <Content Include="AddUser.aspx" />
     <Content Include="Admin.aspx" />
     <Content Include="Contact.aspx" />
@@ -187,11 +186,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="ManageEquipment.aspx" />
-    <Content Include="DeleteEquipmentItem.aspx" />
-    <Content Include="DeleteUser.aspx" />
     <Content Include="EditEquipment.aspx" />
-    <Content Include="EditEquipmentItem.aspx" />
-    <Content Include="EditUser.aspx" />
     <Content Include="Equipment.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -432,20 +427,6 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AddEquipment.aspx.cs">
-      <DependentUpon>AddEquipment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddEquipment.aspx.designer.cs">
-      <DependentUpon>AddEquipment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AddEquipmentItem.aspx.cs">
-      <DependentUpon>AddEquipmentItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddEquipmentItem.aspx.designer.cs">
-      <DependentUpon>AddEquipmentItem.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AddUser.aspx.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -492,20 +473,6 @@
     <Compile Include="ManageEquipment.aspx.designer.cs">
       <DependentUpon>ManageEquipment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DeleteEquipmentItem.aspx.cs">
-      <DependentUpon>DeleteEquipmentItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DeleteEquipmentItem.aspx.designer.cs">
-      <DependentUpon>DeleteEquipmentItem.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DeleteUser.aspx.cs">
-      <DependentUpon>DeleteUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DeleteUser.aspx.designer.cs">
-      <DependentUpon>DeleteUser.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EditEquipment.aspx.cs">
       <DependentUpon>EditEquipment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -513,26 +480,19 @@
     <Compile Include="EditEquipment.aspx.designer.cs">
       <DependentUpon>EditEquipment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EditEquipmentItem.aspx.cs">
-      <DependentUpon>EditEquipmentItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EditEquipmentItem.aspx.designer.cs">
-      <DependentUpon>EditEquipmentItem.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EditUser.aspx.cs">
-      <DependentUpon>EditUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EditUser.aspx.designer.cs">
-      <DependentUpon>EditUser.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Equipment.aspx.cs">
       <DependentUpon>Equipment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Equipment.aspx.designer.cs">
       <DependentUpon>Equipment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

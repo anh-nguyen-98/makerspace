@@ -15,6 +15,12 @@ namespace Makerspace
         {
             if (!IsPostBack)
             {
+                ClearTextBoxes(AddUserForm);
+            }
+            else
+            {
+
+                ClearTextBoxes(AddUserForm);
 
             }
         }
@@ -37,8 +43,22 @@ namespace Makerspace
                 cmd.Parameters.AddWithValue("@userJob", Job.Text);
                 cmd.Parameters.AddWithValue("@userDOB", DOB.SelectedDate.ToString());
                 cmd.ExecuteNonQuery();
-            }
+                
+            }      
 
+        }
+
+        private void ClearTextBoxes(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)c).Text = "";
+                }
+                if (c.HasControls()) ClearTextBoxes(c);
+
+            }
         }
     }
 }

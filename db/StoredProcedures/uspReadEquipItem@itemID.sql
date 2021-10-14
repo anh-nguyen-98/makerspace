@@ -9,8 +9,6 @@
 -- This block of comments will not be included in
 -- the definition of the procedure.
 -- ================================================
-USE [MakerspaceDB]
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -20,10 +18,9 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[uspReadEquipmentInfo@eID] 
+CREATE PROCEDURE [dbo].[uspReadEquipItem@itemID]
 	-- Add the parameters for the stored procedure here
-	@eID int 
-	
+	@itemID INT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -31,6 +28,13 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT * FROM Equipment WHERE eID = @eID;
+	SELECT EquipmentItem.itemID, Equipment.eID, EquipmentItem.itemStatus, EquipmentItem.locID,
+	EquipmentItem.itemDeliveryDate, EquipmentItem.itemRemovalDate,
+	CONCAT(Equipment.eCode, '-', EquipmentItem.itemNum) AS itemCode
+	
+	FROM EquipmentItem
+	INNER JOIN Equipment ON Equipment.eID = EquipmentItem.eID
+	
+	WHERE EquipmentItem.itemID = @itemID;
 END
 GO
