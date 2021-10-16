@@ -1,4 +1,4 @@
 CREATE VIEW EquipmentItem_View
 AS
-    SELECT Equipment.eID,Equipment.eCode, Equipment.eName, EquipmentItem.itemNum, Equipment.eFunction FROM Equipment
-    JOIN EquipmentItem ON EquipmentItem.eID=Equipment.eID;
+    SELECT Equipment.id,Equipment.code, Equipment.name, EquipmentItem.num, Equipment.purpose FROM Equipment
+    JOIN EquipmentItem ON EquipmentItem.equipment_id=Equipment.id;
