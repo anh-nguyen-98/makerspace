@@ -1,8 +1,8 @@
 #Initialize Makerspace DB
 Run Definition
-Run step-by-step:
-- Equipment DB: Room -> RoomSpace -> LocObject -> Location -> Equipment -> EquipmentItem -> EquipmentCategory
-- MksUser DB: MksUser -> Permission -> Role
+Run Insert step-by-step:
+- Equipment DB: Room -> RoomSpace -> Object -> Location -> Category -> Equipment -> EquipmentItem
+- MUser DB: MUser -> Permission -> Role
 
 
 ##View for joining table
