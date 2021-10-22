@@ -71,8 +71,10 @@ CREATE TABLE Equipment (
 	purpose NVARCHAR(4000) ,
 	instruction NVARCHAR(4000),
 	training INT,
-	category_id INT
-	CONSTRAINT item_category FOREIGN KEY(category_id) REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE
+	category_id INT,
+	room_space_id INT,
+	CONSTRAINT item_category FOREIGN KEY(category_id) REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT location_fk FOREIGN KEY(room_space_id) REFERENCES RoomSpace(id)
 );
 
 

@@ -1,6 +1,14 @@
-USE [MakerspaceDB]
-GO
-/****** Object:  StoredProcedure [dbo].[uspReadAllEquip]    Script Date: 6/9/2021 11:54:41 PM ******/
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,26 +18,20 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[uspReadAllEquipment]
+CREATE PROCEDURE [dbo].[uspReadEquipmentByCategory] 
 	-- Add the parameters for the stored procedure here
-
-
-	
+	@category_id int
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
+	
     -- Insert statements for procedure here
-	SELECT 
+	SELECT
 	Equipment.id,
 	Equipment.code,
 	Equipment.name,
-	
-	--STRING_AGG(CONCAT (eCode, '-', itemNum), ','+ CHAR(10)) as ItemCode,
-	--STRING_AGG (CONCAT(Room.roomCode, '.', RoomSpace.spaceCode, '.', LocObject.objectCode, '.', Location.objectNum), ',') as LocationID,
-	--CONCAT(Room.roomName, ' - ', RoomSpace.spaceName, ' - ', LocObject.objectName, ' - ', Location.objectNum), ',') AS locationName,
 	Equipment.description,
 	Equipment.purpose,
 	Equipment.instruction,
@@ -42,7 +44,6 @@ BEGIN
 	INNER JOIN RoomSpace
 	ON Equipment.room_space_id = RoomSpace.id
 
-	--GROUP BY Equipment.eID, Equipment.eCode, Equipment.eName,Equipment.eDesc, 
-	--Equipment.eFunction, Equipment.eManual, Equipment.eSafety, Equipment.eTraining;
-
+	WHERE Equipment.category_id = @category_id;
 END
+GO
