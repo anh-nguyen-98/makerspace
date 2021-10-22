@@ -20,7 +20,6 @@ namespace Makerspace
             else
             {
 
-
             }
 
         }
@@ -65,7 +64,8 @@ namespace Makerspace
 
         }
 
-        protected void searchBox_TextChanged(object sender, EventArgs e)
+
+        protected void searchBtn_Click(object sender, EventArgs e)
         {
             string searchTerm = string.Format("%{0}%", searchBox.Text.Trim().ToLower());
             System.Diagnostics.Debug.WriteLine(searchTerm);

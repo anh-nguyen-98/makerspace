@@ -7,11 +7,11 @@
  
         <div class="container">
             <div class="row">
-                <div class="col-3">
-                    <asp:TextBox ID="searchBox" runat="server" placeholder="Search" CssClass="form-control"  OnTextChanged="searchBox_TextChanged"></asp:TextBox>
+                <div class="col-4 input-group">
+                    <asp:TextBox ID="searchBox" runat="server" CssClass="form-control rounded"></asp:TextBox>
+                    <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary" OnClick="searchBtn_Click" Text="Search"/>
                 </div>
-   
-
+ 
                 <div class="col-3">
                     <asp:DropDownList ID="CategoryDdl" runat="server" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="CategoryDdl_SelectedIndexChanged">
                         <asp:ListItem Value="0">Select category</asp:ListItem>
