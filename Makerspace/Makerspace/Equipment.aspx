@@ -75,6 +75,10 @@
 
                     OnModeChanging="EquipFormView_ModeChanging"
                     OnItemUpdating="EquipFormView_ItemUpdating"
+                    OnItemUpdated="EquipFormView_ItemUpdated"
+                    OnModeChanging="EquipFormView_ModeChanging"
+                    OnItemDeleting="EquipFormView_ItemDeleting"
+                    OnItemDeleted="EquipFormView_ItemDeleted">
    
                     >
                     <ItemTemplate>
@@ -123,7 +127,6 @@
                   
                             </tr>
                             <tr>
-                                <td><asp:LinkButton ID="Add" runat="server" Text="New" CommandName="Add"/></td>
                                 <td><asp:LinkButton ID="EditBtn" runat="server" Text="Edit" CommandName="Edit"/></td>
                                 <td><asp:LinkButton ID="Delete" runat="server" Text="Delete" CommandName="Delete" /></td>
                     
@@ -203,7 +206,9 @@
                         AutoGenerateColumns="false"
                         DataKeyNames="itemID" 
                         AutoGenerateSelectButton="true"
-                        OnSelectedIndexChanged="ItemGV_SelectedIndexChanged" 
+                        OnSelectedIndexChanged="ItemGV_SelectedIndexChanged"
+                        OnRowDeleting="ItemGV_RowDeleting"
+                        OnRowDeleted="ItemGV_RowDeleted"
                         ShowFooter="true">
                         <Columns>
 
@@ -213,14 +218,12 @@
                             <asp:BoundField HeaderText="Status" DataField="itemStatus" />
                             <asp:BoundField HeaderText="Location" DataField="locID"/>
                             <asp:BoundField HeaderText="Delivery Date" DataField="itemDeliveryDate"/>
+                            <asp:CommandField ShowDeleteButton="True" ButtonType="Button" />
                    
                             <asp:TemplateField HeaderText="Removal Date">
                                 <ItemTemplate>
                                     <asp:Label runat="server" ID="RemovalDateLbl" Text='<%# Eval("itemRemovalDate")%>'></asp:Label>
                                 </ItemTemplate>
-                                <FooterTemplate>
-                                    <asp:LinkButton runat="server" ID="AddItemBtn" OnClick="AddItemBtn_Click" Text="Add"></asp:LinkButton>
-                                </FooterTemplate>
                             </asp:TemplateField>
                         </Columns> 
                
@@ -229,64 +232,17 @@
                 </asp:Panel>
             </div>
 
-            <div>
-                <asp:FormView 
+            </asp:FormView>
+
+
+            <asp:label id="MessageLabel" forecolor="Red" runat="server"/>
+            <asp:Button ID="AddItemBtn_Click" runat="server" OnClick="AddItemBtn_Click" Text="New Equipment"/>
+            <asp:FormView 
                 runat="server" 
-                ID="ItemFV"
+                ID="AddItemFV"
                 DataKeyNames="itemID"
-                OnItemInserting="ItemFV_ItemInserting"
-                OnModeChanging="ItemFV_ModeChanging"
-                OnItemDeleting="ItemFV_ItemDeleting"
-               >
-                <ItemTemplate>
-                    <table>
-                
-                        <tr>
-                            <td>ID</td>
-                            <td>
-                                <asp:Label runat="server" Text='<%# Eval("itemID")%>'></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Equipment ID</td>
-                            <td>
-                                <asp:Label runat="server" Text='<%# Eval("eID") %>' ID="eIDLabel"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Code</td>
-                            <td>
-                                <asp:Label runat="server" Text='<%# Eval("itemCode") %>'></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Status</td>
-                            <td><asp:Label runat="server" Text='<%# Eval("itemStatus") %>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td>Location</td>
-                            <td><asp:Label runat="server" Text='<%# Eval("locID") %>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td>Delivery Date</td>
-                            <td><asp:Label runat="server" Text='<%# Eval("itemDeliveryDate") %>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td>Removal Date</td>
-                            <td><asp:Label runat="server" Text='<%# Eval("itemRemovalDate") %>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:LinkButton runat="server" Text="Add" CommandName="New"></asp:LinkButton>
-                            </td>
-                            <td>
-                                <asp:LinkButton runat="server" Text="Delete" 
-                                    CommandName="Delete" ></asp:LinkButton>
-                            </td>
-                            
-                        </tr>
-                    </table>
-                </ItemTemplate>
+                OnItemInserting="AddItemFV_ItemInserting"
+                OnItemInserted="AddItemFV_ItemInserted">
                 <InsertItemTemplate>
                     <table>
                         <tr>
@@ -338,16 +294,57 @@
                             </td>
                         </tr>
                     </table>
-
+                   
                 </InsertItemTemplate>
-            </asp:FormView>
+                <div>
+                <ItemTemplate>
+                    <table>
+                
+                        <tr>
+                            <td>ID</td>
+                            <td>
+                                <asp:Label runat="server" Text='<%# Eval("itemID")%>'></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Equipment ID</td>
+                            <td>
+                                <asp:Label runat="server" Text='<%# Eval("eID") %>' ID="eIDLabel"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Code</td>
+                            <td>
+                                <asp:Label runat="server" Text='<%# Eval("itemCode") %>'></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td><asp:Label runat="server" Text='<%# Eval("itemStatus") %>'></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td><asp:Label runat="server" Text='<%# Eval("locID") %>'></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>Delivery Date</td>
+                            <td><asp:Label runat="server" Text='<%# Eval("itemDeliveryDate") %>'></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td>Removal Date</td>
+                            <td><asp:Label runat="server" Text='<%# Eval("itemRemovalDate") %>'></asp:Label></td>
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                    </table>
+                </ItemTemplate>
+        </asp:FormView>
             </div>
             
 
-
-
         </ContentTemplate>
     </asp:UpdatePanel>
-
+    
    
 </asp:Content>

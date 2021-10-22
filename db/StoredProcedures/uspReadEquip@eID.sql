@@ -20,7 +20,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[uspReadEquipment@eID] 
+CREATE PROCEDURE [dbo].[uspReadEquip@eID] 
 	-- Add the parameters for the stored procedure here
 	@eID INT 
 	
