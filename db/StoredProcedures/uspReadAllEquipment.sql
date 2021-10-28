@@ -12,8 +12,6 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[uspReadAllEquipment]
 	-- Add the parameters for the stored procedure here
-
-
 	
 AS
 BEGIN
@@ -49,5 +47,6 @@ BEGIN
 
 	GROUP BY Equipment.eID, Equipment.eCode, Equipment.eName,Equipment.eDesc, 
 	Equipment.eFunction, Equipment.eManual, Equipment.eSafety, Equipment.eTraining;
+
 
 END

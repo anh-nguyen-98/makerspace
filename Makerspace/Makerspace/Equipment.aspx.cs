@@ -15,13 +15,10 @@ namespace Makerspace
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
                 load();
-
             }
             else
             {
-
 
             }
 
@@ -159,16 +156,11 @@ namespace Makerspace
                 adapter.Fill(dt);
                 fv.DataSource = dt;
                 fv.DataBind();
-            }
-        }
 
-        protected int getLocID(String locCode)
+        protected void CategoryDdl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String[] sep = new string[] { "." };
-            String[] codes = locCode.Split(sep, count: LEN_LOC_CODE, StringSplitOptions.RemoveEmptyEntries);
-            DataTable dt = new DataTable();
-
-            if (codes.Length == LEN_LOC_CODE)
+            int selectedId = Convert.ToInt32(CategoryDdl.SelectedValue);
+            if (selectedId == 0)
             {
                 string roomCode = codes[0];
                 string spaceCode = codes[1];
@@ -335,5 +327,5 @@ namespace Makerspace
         //}
 
     }
-        
+
 }
