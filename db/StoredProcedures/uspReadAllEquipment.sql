@@ -12,6 +12,8 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[uspReadAllEquipment]
 	-- Add the parameters for the stored procedure here
+
+
 	
 AS
 BEGIN
