@@ -53,8 +53,6 @@
                     OnModeChanging="EquipFormView_ModeChanging"
                     OnItemDeleting="EquipFormView_ItemDeleting"
                     OnItemDeleted="EquipFormView_ItemDeleted">
-   
-                    >
                     <ItemTemplate>
                         <h3><%# Eval("eName") %></h3>
                         <asp:Label runat="server" ID="eID" ></asp:Label>
@@ -206,11 +204,10 @@
                 </asp:Panel>
             </div>
 
-            </asp:FormView>
 
 
             <asp:label id="MessageLabel" forecolor="Red" runat="server"/>
-            <asp:Button ID="AddItemBtn_Click" runat="server" OnClick="AddItemBtn_Click" Text="New Equipment"/>
+            <asp:Button ID="AddItemBtn" runat="server" OnClick="AddItemBtn_Click" Text="New Equipment"/>
             <asp:FormView 
                 runat="server" 
                 ID="AddItemFV"
@@ -270,7 +267,6 @@
                     </table>
                    
                 </InsertItemTemplate>
-                <div>
                 <ItemTemplate>
                     <table>
                 

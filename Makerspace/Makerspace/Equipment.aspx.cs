@@ -66,7 +66,7 @@ namespace Makerspace
         //View selected equipment on gridview
         protected void EquipGV_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ItemFV.Visible = false;
+            AddItemFV.Visible = false;
             string idString = EquipGV.SelectedRow.Cells[1].Text;
             Int32.TryParse(idString, out int id);
             BindFV(EquipFormView, "uspReadEquip@eID", "@eID", id);
@@ -90,7 +90,7 @@ namespace Makerspace
 
         protected void EquipGV_PageIndexChanging(object sender, GridViewPageEventArgs e, Label MessageLabel)
         {
-            if (ItemFV.CurrentMode == FormViewMode.Edit)
+            if (AddItemFV.CurrentMode == FormViewMode.Edit)
             {
                 e.Cancel = true;
                 MessageLabel.Text = "Please finish the form before move to new page.";
@@ -104,8 +104,8 @@ namespace Makerspace
 
             int id = Convert.ToInt32(ItemGV.SelectedValue.ToString());
 
-            BindFV(ItemFV, "uspReadEquipItem@itemID", "@itemID", id);
-            ItemFV.Visible = true;
+            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", id);
+            AddItemFV.Visible = true;
 
 
         }
@@ -329,7 +329,7 @@ namespace Makerspace
 
             BindGV(ItemGV, selectCmd, ItemCount);
             int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
-            BindFV(ItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
+            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
         }
 
         ////Verify inserting process
