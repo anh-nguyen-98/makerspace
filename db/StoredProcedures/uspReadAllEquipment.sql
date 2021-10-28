@@ -12,6 +12,8 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[uspReadAllEquipment]
 	-- Add the parameters for the stored procedure here
+
+
 	
 AS
 BEGIN
@@ -21,32 +23,26 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT 
-	Equipment.eID,
-	Equipment.eCode,
-	Equipment.eName,
+	Equipment.id,
+	Equipment.code,
+	Equipment.name,
 	
-	STRING_AGG(CONCAT (eCode, '-', itemNum), ','+ CHAR(10)) as ItemCode,
-	STRING_AGG (CONCAT(Room.roomCode, '.', RoomSpace.spaceCode, '.', LocObject.objectCode, '.', Location.objectNum), ',') as LocationID,
-	--CONCAT(Room.roomName, ' - ', RoomSpace.spaceName, ' - ', LocObject.objectName, ' - ', Location.objectNum) AS locationName --
-	Equipment.eDesc,
-	Equipment.eFunction,
-	Equipment.eManual,
-	Equipment.eSafety,
-	Equipment.eTraining
-
-	FROM Equipment INNER JOIN EquipmentItem 
-	ON EquipmentItem.eID = Equipment.eID
-	INNER JOIN Location 
-	ON EquipmentItem.locID = Location.locID
+	--STRING_AGG(CONCAT (eCode, '-', itemNum), ','+ CHAR(10)) as ItemCode,
+	--STRING_AGG (CONCAT(Room.roomCode, '.', RoomSpace.spaceCode, '.', LocObject.objectCode, '.', Location.objectNum), ',') as LocationID,
+	--CONCAT(Room.roomName, ' - ', RoomSpace.spaceName, ' - ', LocObject.objectName, ' - ', Location.objectNum), ',') AS locationName,
+	Equipment.description,
+	Equipment.purpose,
+	Equipment.instruction,
+	Equipment.training,
+	Equipment.category_id,
+	Category.name as category_name,
+	RoomSpace.name as room_space_name
+	FROM Equipment INNER JOIN Category
+	ON Equipment.category_id = Category.id
 	INNER JOIN RoomSpace
-	ON Location.spaceID = RoomSpace.spaceID
-	INNER JOIN LocObject
-	ON Location.objectID = LocObject.objectID
-	INNER JOIN Room
-	ON RoomSpace.roomID = Room.roomID
+	ON Equipment.room_space_id = RoomSpace.id
 
-	GROUP BY Equipment.eID, Equipment.eCode, Equipment.eName,Equipment.eDesc, 
-	Equipment.eFunction, Equipment.eManual, Equipment.eSafety, Equipment.eTraining;
-
+	--GROUP BY Equipment.eID, Equipment.eCode, Equipment.eName,Equipment.eDesc, 
+	--Equipment.eFunction, Equipment.eManual, Equipment.eSafety, Equipment.eTraining;
 
 END

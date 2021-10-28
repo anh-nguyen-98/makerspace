@@ -15,7 +15,9 @@ namespace Makerspace
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
                 load();
+
             }
             else
             {
@@ -64,7 +66,7 @@ namespace Makerspace
         //View selected equipment on gridview
         protected void EquipGV_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ItemFV.Visible = false;
+            AddItemFV.Visible = false;
             string idString = EquipGV.SelectedRow.Cells[1].Text;
             Int32.TryParse(idString, out int id);
             BindFV(EquipFormView, "uspReadEquip@eID", "@eID", id);
@@ -88,7 +90,7 @@ namespace Makerspace
 
         protected void EquipGV_PageIndexChanging(object sender, GridViewPageEventArgs e, Label MessageLabel)
         {
-            if (ItemFV.CurrentMode == FormViewMode.Edit)
+            if (AddItemFV.CurrentMode == FormViewMode.Edit)
             {
                 e.Cancel = true;
                 MessageLabel.Text = "Please finish the form before move to new page.";
@@ -102,8 +104,8 @@ namespace Makerspace
 
             int id = Convert.ToInt32(ItemGV.SelectedValue.ToString());
 
-            BindFV(ItemFV, "uspReadEquipItem@itemID", "@itemID", id);
-            ItemFV.Visible = true;
+            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", id);
+            AddItemFV.Visible = true;
 
 
         }
@@ -156,34 +158,57 @@ namespace Makerspace
                 adapter.Fill(dt);
                 fv.DataSource = dt;
                 fv.DataBind();
-
+            }
+        }
         protected void CategoryDdl_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedId = Convert.ToInt32(CategoryDdl.SelectedValue);
             if (selectedId == 0)
             {
-                string roomCode = codes[0];
-                string spaceCode = codes[1];
-                string objectCode = codes[2];
-                string objectNumber = codes[3];
 
-                using (SqlConnection con = new SqlConnection(CONSTRING))
-                using (SqlCommand cmd = new SqlCommand("uspReadLoc", con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@roomCode", roomCode);
-                    cmd.Parameters.AddWithValue("@spaceCode", spaceCode);
-                    cmd.Parameters.AddWithValue("@objectCode", objectCode);
-                    cmd.Parameters.AddWithValue("@objectNumber", objectNumber);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                }
-                if (dt.Rows.Count > 0) return dt.Rows[0].Field<int>("locID");
+                load();
+                return;
             }
-            return 0;
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            {
+                SqlCommand cmd = new SqlCommand("uspReadEquipmentByCategory");
+                cmd.Parameters.AddWithValue("@category_id", selectedId);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Connection = con;
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                EquipGV.DataSource = dt;
+                EquipGV.DataBind();
+            }
 
         }
+
+
+        protected void searchBtn_Click(object sender, EventArgs e)
+        {
+            string searchTerm = string.Format("%{0}%", searchBox.Text.Trim().ToLower());
+            System.Diagnostics.Debug.WriteLine(searchTerm);
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            {
+                SqlCommand cmd = new SqlCommand("uspReadEquipmentBySearchTerm");
+                cmd.Parameters.AddWithValue("@name", searchTerm);
+                cmd.Parameters.AddWithValue("@code", searchTerm);
+                cmd.Parameters.AddWithValue("@purpose", searchTerm);
+                cmd.Parameters.AddWithValue("@category_name", searchTerm);
+                cmd.Parameters.AddWithValue("@room_space_name", searchTerm);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Connection = con;
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                EquipGV.DataSource = dt;
+                EquipGV.DataBind();
+            }
+        }
+
 
         //Update equipment info
         protected void EquipFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
@@ -304,7 +329,7 @@ namespace Makerspace
 
             BindGV(ItemGV, selectCmd, ItemCount);
             int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
-            BindFV(ItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
+            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
         }
 
         ////Verify inserting process
@@ -325,6 +350,7 @@ namespace Makerspace
         //        }
         //    }
         //}
+
 
     }
 

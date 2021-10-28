@@ -25,14 +25,21 @@
                 </div>
             </div>
                
-                    </Columns>
-                </asp:GridView>
+        </div>
+        <div class="my-4">
+            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center">
+                <Columns>
+                    <asp:ButtonField ButtonType="Button" Text="Select"  ControlStyle-CssClass="btn btn-primary" />
+                    <asp:BoundField  DataField="code" HeaderText="Code"/>
+                    <asp:BoundField DataField="name" HeaderText="Name"/>
+                    <asp:BoundField DataField="purpose" HeaderText="Usage" />
+                    <asp:BoundField DataField="category_name" HeaderText="Category" />
+                    <asp:BoundField DataField="room_space_name" HeaderText="Location" />
+                    <asp:ButtonField ButtonType="Button" Text="Delete" ControlStyle-CssClass="btn btn-danger" />
+                </Columns>
+            </asp:GridView>
+        </div>
             </div>
-
-
-                </asp:Panel>
-            </div>
-
 
             <div>
                 <asp:FormView 
@@ -46,8 +53,6 @@
                     OnModeChanging="EquipFormView_ModeChanging"
                     OnItemDeleting="EquipFormView_ItemDeleting"
                     OnItemDeleted="EquipFormView_ItemDeleted">
-   
-                    >
                     <ItemTemplate>
                         <h3><%# Eval("eName") %></h3>
                         <asp:Label runat="server" ID="eID" ></asp:Label>
@@ -199,11 +204,10 @@
                 </asp:Panel>
             </div>
 
-            </asp:FormView>
 
 
             <asp:label id="MessageLabel" forecolor="Red" runat="server"/>
-            <asp:Button ID="AddItemBtn_Click" runat="server" OnClick="AddItemBtn_Click" Text="New Equipment"/>
+            <asp:Button ID="AddItemBtn" runat="server" OnClick="AddItemBtn_Click" Text="New Equipment"/>
             <asp:FormView 
                 runat="server" 
                 ID="AddItemFV"
@@ -263,7 +267,6 @@
                     </table>
                    
                 </InsertItemTemplate>
-                <div>
                 <ItemTemplate>
                     <table>
                 
@@ -307,10 +310,5 @@
                     </table>
                 </ItemTemplate>
         </asp:FormView>
-            </div>
-            
-
-        </ContentTemplate>
-    </asp:UpdatePanel>
-   
+      </div>
 </asp:Content>
