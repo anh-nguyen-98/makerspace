@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[uspUpdateEquipmentInfo@eID]
+CREATE PROCEDURE [dbo].[uspUpdateEquip@eID]
 	-- Add the parameters for the stored procedure here
 	@eID int,
 	@eCode NCHAR(15),
