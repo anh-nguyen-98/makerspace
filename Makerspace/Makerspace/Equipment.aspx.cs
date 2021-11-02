@@ -15,7 +15,7 @@ namespace Makerspace
         {
             if (!IsPostBack)
             {
-                loadAllData();
+                load();
             }
             else
             {
@@ -24,7 +24,7 @@ namespace Makerspace
 
         }
 
-        protected void loadAllData()
+        protected void load()
         {
             using (SqlConnection con = new SqlConnection(CONSTRING)) 
             {
@@ -45,7 +45,7 @@ namespace Makerspace
             int selectedId = Convert.ToInt32(CategoryDdl.SelectedValue);
             if (selectedId == 0)
             {
-                loadAllData();
+                load();
                 return;
             }
             using (SqlConnection con = new SqlConnection(CONSTRING))
@@ -63,7 +63,6 @@ namespace Makerspace
             }
 
         }
-
 
         protected void searchBtn_Click(object sender, EventArgs e)
         {
@@ -86,7 +85,54 @@ namespace Makerspace
                 EquipGV.DataSource = dt;
                 EquipGV.DataBind();
             }
+            
         }
+
+
+        protected void EquipGV_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int rowIndex = Convert.ToInt32(e.CommandArgument);
+            System.Diagnostics.Debug.WriteLine(rowIndex);
+            string code = EquipGV.DataKeys[rowIndex].Value.ToString();
+            System.Diagnostics.Debug.WriteLine(code);
+            SqlConnection con = new SqlConnection(CONSTRING);
+            SqlCommand selectItem = new SqlCommand("uspReadEquipmentItemsByEquipmentCode");
+            selectItem.CommandType = CommandType.StoredProcedure;
+            selectItem.Parameters.AddWithValue("@equipment_code", code);
+            selectItem.Connection = con;
+            con.Open();
+            DataTable dt = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(selectItem);
+            adapter.Fill(dt);
+            if (e.CommandName == "ViewInfo")
+            {
+                EquipmentFormView.DataSource = dt;
+                EquipmentFormView.DataBind();
+                EquipmentModalPopup.Show();
+            }
+            if (e.CommandName == "ViewItems")
+            {
+                ItemsFormView.DataSource = dt;
+                ItemsFormView.DataBind();
+                ItemsModalPopup.Show();
+            }
+
+        }
+
+        protected void CloseModalBtn_Click(object sender, EventArgs e)
+        {
+            EquipmentModalPopup.Hide();
+        }
+        protected void CloseItemsModalBtn_Click(object sender, EventArgs e)
+        {
+            ItemsModalPopup.Hide();
+        }
+
+        protected void ItemsFormView_PageIndexChanging(object sender, FormViewPageEventArgs e)
+        {
+            
+        }
+       
     }
 
 }
