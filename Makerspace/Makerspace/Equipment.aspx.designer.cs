@@ -52,6 +52,7 @@ namespace Makerspace
 
         /// <summary>
         /// EquipFormView control.
+        /// PseudoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -61,6 +62,10 @@ namespace Makerspace
 
         /// <summary>
         /// ItemGridPanel control.
+        protected global::System.Web.UI.WebControls.Button PseudoBtn;
+
+        /// <summary>
+        /// EquipmentModalPopup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -70,6 +75,10 @@ namespace Makerspace
 
         /// <summary>
         /// ItemCount control.
+        protected global::AjaxControlToolkit.ModalPopupExtender EquipmentModalPopup;
+
+        /// <summary>
+        /// EquipmentFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -79,6 +88,10 @@ namespace Makerspace
 
         /// <summary>
         /// ItemGV control.
+        protected global::System.Web.UI.WebControls.FormView EquipmentFormView;
+
+        /// <summary>
+        /// ItemsModalPopup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -88,6 +101,10 @@ namespace Makerspace
 
         /// <summary>
         /// MessageLabel control.
+        protected global::AjaxControlToolkit.ModalPopupExtender ItemsModalPopup;
+
+        /// <summary>
+        /// ItemsFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -112,5 +129,6 @@ namespace Makerspace
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FormView AddItemFV;
+        protected global::System.Web.UI.WebControls.FormView ItemsFormView;
     }
 }

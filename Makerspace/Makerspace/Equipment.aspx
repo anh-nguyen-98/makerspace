@@ -1,15 +1,14 @@
+﻿<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %> 
 <%@ Page Title="Equipment Lookup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Equipment.aspx.cs" Inherits="Makerspace.Equipment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    
-    <h1>Equipment Lookup</h1>
 
-    <div>
+    <h1>Equipment Lookup</h1>
  
         <div class="container">
             <div class="row">
                 <div class="col-4 input-group">
                     <asp:TextBox ID="searchBox" runat="server" CssClass="form-control rounded"></asp:TextBox>
-                    <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary" OnClick="searchBtn_Click" Text="Search"/>
+                    <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary ml-1" OnClick="searchBtn_Click" Text="Search"/>
                 </div>
  
                 <div class="col-3">
@@ -27,185 +26,23 @@
                
         </div>
         <div class="my-4">
-            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center">
+            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="code">
                 <Columns>
-                    <asp:ButtonField ButtonType="Button" Text="Select"  ControlStyle-CssClass="btn btn-primary" />
-                    <asp:BoundField  DataField="code" HeaderText="Code"/>
+                    <asp:BoundField DataField="code" HeaderText="Code"/>
                     <asp:BoundField DataField="name" HeaderText="Name"/>
                     <asp:BoundField DataField="purpose" HeaderText="Usage" />
                     <asp:BoundField DataField="category_name" HeaderText="Category" />
                     <asp:BoundField DataField="room_space_name" HeaderText="Location" />
+                    <asp:ButtonField runat="server"  Text="Info" ControlStyle-CssClass="btn btn-primary" CommandName="ViewInfo"/>
+                    <asp:ButtonField runat="server"  Text="Items" ControlStyle-CssClass="btn btn-primary" CommandName="ViewItems"/>
                     <asp:ButtonField ButtonType="Button" Text="Delete" ControlStyle-CssClass="btn btn-danger" />
                 </Columns>
             </asp:GridView>
         </div>
-            </div>
-
-            <div>
-                <asp:FormView 
-                    ID="EquipFormView" 
-                    DataKeyNames="eID"
-                    runat="server"
-
-                    OnModeChanging="EquipFormView_ModeChanging"
-                    OnItemUpdating="EquipFormView_ItemUpdating"
-                    OnItemUpdated="EquipFormView_ItemUpdated"
-                    OnModeChanging="EquipFormView_ModeChanging"
-                    OnItemDeleting="EquipFormView_ItemDeleting"
-                    OnItemDeleted="EquipFormView_ItemDeleted">
-                    <ItemTemplate>
-                        <h3><%# Eval("eName") %></h3>
-                        <asp:Label runat="server" ID="eID" ></asp:Label>
-                        <table>
-                            <tr>
-                                <td>ID</td>
-                                <td><%#Eval("eID") %></td>
-                            </tr>
-                            <tr>
-                                <td>Code</td>
-                                <td><%#Eval("eCode") %></td>
-                            </tr>
-                            <tr>
-                                <td>Name</td>
-                                <td><%#Eval("eName") %></td>
-                            </tr>
-                            <tr>
-                                <td>Description</td>
-                                <td><%#Eval("eDesc") %></td>
-                            </tr>
-                            <tr>
-                                <td>Function</td>
-                                <td><%#Eval("eFunction") %></td>
-                            </tr>
-                            <tr>
-                                <td>Manual</td>
-                                <td><%#Eval("eManual") %></td>
-                            </tr>
-                            <tr>
-                                <td>Safety Caution</td>
-                                <td><%#Eval("eSafety") %></td>
-                            </tr>
-                            <tr>
-                                <td>Training Requirement</td>
-                       
-                                <td><asp:CheckBox 
-                                    runat="server" 
-                                    AutoPostBack="True"
-                                    Enabled="false"
-                                    Checked='<%# Convert.ToInt32( Eval("eTraining")).Equals(1) %>'
-                                    />
-                               
-                                </td>
-                  
-                            </tr>
-                            <tr>
-                                <td><asp:LinkButton ID="EditBtn" runat="server" Text="Edit" CommandName="Edit"/></td>
-                                <td><asp:LinkButton ID="Delete" runat="server" Text="Delete" CommandName="Delete" /></td>
-                    
-                            </tr>
-                        </table>
-                    </ItemTemplate> 
-                    <EditItemTemplate>
-                        <h3><%# Eval("eName") %></h3>
-                        <asp:Label runat="server" ID="eIDD" ></asp:Label>
-                        <table>
-                            <tr>
-                                <td>ID</td>
-                                <td><asp:Label ID="eIDLabel" runat="server" Text='<%#Eval("eID")%>'></asp:Label> </td>
-                            </tr>
-                            <tr>
-                                <td>Code</td> 
-                                <td><asp:TextBox ID="eCodeUpdateTextBox" runat="server" Text='<%#Bind("eCode") %>'></asp:TextBox> </td>
-                            </tr>
-                            <tr>
-                                <td>Name</td>
-                                <td><asp:TextBox ID="eNameUpdateTextBox" runat="server" Text='<%#Bind("eName") %>'></asp:TextBox></td>
-                            </tr>
-                            <tr>
-                                <td>Description</td>
-                                <td><asp:TextBox ID="eDescUpdateTextBox" runat="server" Text='<%#Bind("eDesc") %>'></asp:TextBox> </td>
-                            </tr>
-                            <tr>
-                                <td>Function</td>
-                                <td><asp:TextBox ID="eFunctionUpdateTextBox" runat="server" Text='<%#Bind("eFunction") %>'></asp:TextBox> </td>
-                            </tr>
-                            <tr>
-                                <td>Manual</td>
-                                <td><asp:TextBox ID="eManualUpdateTextBox" runat="server" Text='<%#Bind("eManual") %>'></asp:TextBox></td>
-                            </tr>
-                            <tr>
-                                <td>Safety Caution</td>
-                                <td><asp:TextBox ID="eSafetyUpdateTextBox" runat="server" Text='<%#Bind("eSafety") %>'></asp:TextBox></td>
-                            </tr>
-                            <tr>
-                                <td>Training Requirement</td>
-          
-                                <td>
-                                    <asp:CheckBox 
-                                        ID="eTrainingCheckBox"
-                                        runat="server"
-                                         AutoPostBack="true"
-                                         Enabled="true"
-                                         Checked='<%# Convert.ToInt32(Eval("eTraining")).Equals(1) %>'/>
-                                </td>
-                               
-                            </tr>
-                            <tr>
-                                <td><asp:LinkButton ID="UpdateBtn" runat="server" Text="Update" CommandName="Update"  /></td>
-                                <td><asp:LinkButton ID="CancelBtn" runat="server" Text="Cancel" CommandName="Cancel" /></td>
-                  
-                    
-                            </tr>
-                        </table>
-
-                    </EditItemTemplate>
        
 
-                </asp:FormView>
-            
-            <div>
-                <asp:Panel runat="server" ID="ItemGridPanel">
-                    <div >
-                        <asp:Label runat="server">Total: </asp:Label>
-                        <asp:Label runat="server" ID="ItemCount"></asp:Label>
-                    </div>
-
-                    <div>
-                        <asp:GridView 
-                        runat="server"
-                        ID="ItemGV"
-                        AllowPaging="false" 
-                        AutoGenerateColumns="false"
-                        DataKeyNames="itemID" 
-                        AutoGenerateSelectButton="true"
-                        OnSelectedIndexChanged="ItemGV_SelectedIndexChanged"
-                        OnRowDeleting="ItemGV_RowDeleting"
-                        OnRowDeleted="ItemGV_RowDeleted"
-                        ShowFooter="true">
-                        <Columns>
-
-                            <asp:BoundField HeaderText="ID" DataField="itemID"/>
-                            <asp:BoundField HeaderText="Equipment ID" DataField="eID" />
-                            <asp:BoundField HeaderText="Code" DataField="itemCode"/>
-                            <asp:BoundField HeaderText="Status" DataField="itemStatus" />
-                            <asp:BoundField HeaderText="Location" DataField="locID"/>
-                            <asp:BoundField HeaderText="Delivery Date" DataField="itemDeliveryDate"/>
-                            <asp:CommandField ShowDeleteButton="True" ButtonType="Button" />
-                   
-                            <asp:TemplateField HeaderText="Removal Date">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="RemovalDateLbl" Text='<%# Eval("itemRemovalDate")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns> 
-               
-                    </asp:GridView>
-                    </div>
-                </asp:Panel>
-            </div>
-
-
-
+        <div>
+    
             <asp:label id="MessageLabel" forecolor="Red" runat="server"/>
             <asp:Button ID="AddItemBtn" runat="server" OnClick="AddItemBtn_Click" Text="New Equipment"/>
             <asp:FormView 
@@ -311,4 +148,111 @@
                 </ItemTemplate>
         </asp:FormView>
       </div>
+            <asp:Button ID="PseudoBtn" runat="server" />    
+            <ajaxToolkit:ModalPopupExtender ID="EquipmentModalPopup" runat="server" TargetControlID="PseudoBtn" PopupControlID="divPopUp"></ajaxToolkit:ModalPopupExtender>
+            <div id="divPopUp" style="border-radius: 10px">
+                <asp:FormView 
+                    ID="EquipmentFormView" 
+                    runat="server"
+                    CssClass="bg-light rounded" Width="800px">
+                     
+                <ItemTemplate>
+                    <h1 class="p-5"><%# Eval("name") %> 
+                        <asp:Button runat="server" Text="Update" CssClass="btn btn-outline-primary ml-3"/>
+                        <asp:Button runat="server" Text="Delete" CssClass="btn btn-outline-danger ml-2"/>
+                    </h1>
+                    <table >
+ 
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Code:</td>
+                            <td class="px-5 py-2"><%#Eval("code") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Name:</td>
+                            <td class="px-5 py-2"><%#Eval("name") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Description:</td>
+                            <td class="px-5 py-2"><%#Eval("description") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Function:</td>
+                            <td class="px-5 py-2"><%#Eval("purpose") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Instruction:</td>
+                            <td class="px-5 py-2"><%#Eval("instruction") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Training Requirement:</td>
+                            <td class="px-5 py-2"><%# Convert.ToInt32( Eval("training")).Equals(1) ? "Yes" : "No" %></td> 
+                        </tr>
+            
+                    </table>
+               
+
+                </ItemTemplate> 
+                    <FooterTemplate>
+                    <div class="d-flex my-4 justify-content-around">
+
+                        <asp:Button ID="CloseModalBtn" runat="server" Text="Close" OnClick="CloseModalBtn_Click" CssClass="btn btn-secondary "/>
+                    </div>
+                </FooterTemplate>
+              </asp:FormView>
+            </div>
+            <ajaxToolkit:ModalPopupExtender ID="ItemsModalPopup" runat="server" TargetControlID="PseudoBtn" PopupControlID="ItemsPopUp"></ajaxToolkit:ModalPopupExtender>
+            <div id="ItemsPopUp">
+                <asp:FormView 
+                    ID="ItemsFormView" 
+                    runat="server"
+                    AllowPaging="true"
+                    OnPageIndexChanging="ItemsFormView_PageIndexChanging"
+                    CssClass="bg-light rounded" Width="800px">      
+                  <ItemTemplate>
+                    <h1 class="p-5"><%# Eval("name")%>  #<%# Eval("num") %> 
+                        <asp:Button runat="server" Text="Update" CssClass="btn btn-outline-primary ml-3"/>
+                        <asp:Button runat="server" Text="Delete" CssClass="btn btn-outline-danger ml-2"/>
+                    </h1>
+                    <table >
+ 
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Code:</td>
+                            <td class="px-5 py-2"><%#Eval("item_code") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Name:</td>
+                            <td class="px-5 py-2"><%#Eval("name") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Location:</td>
+                            <td class="px-5 py-2"><%#Eval("location_id") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Status:</td>
+                            <td class="px-5 py-2"><%#Eval("status").Equals(1) ? "Active" : "Inactive" %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Delivered at:</td>
+                            <td class="px-5 py-2"><%#Eval("delivered_at") %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold px-5 py-2">Removed at:</td>
+                            <td class="px-5 py-2"><%# Eval("removed_at") %></td> 
+                        </tr>
+            
+                    </table>
+                    
+
+                </ItemTemplate> 
+                 <PagerStyle  Font-Size="X-Large" HorizontalAlign="Center" />
+                <FooterTemplate>
+                    <div class="d-flex my-4 justify-content-around">
+                        <asp:Button ID="CloseItemsModalBtn" runat="server" Text="Close" OnClick="CloseItemsModalBtn_Click" CssClass="btn btn-secondary "/>
+                    </div>
+                </FooterTemplate>
+              </asp:FormView>
+            </div>
+          
+    </div>
+   
 </asp:Content>
