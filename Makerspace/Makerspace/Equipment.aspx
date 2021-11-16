@@ -1,4 +1,4 @@
-﻿<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %> 
+﻿﻿<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %> 
 <%@ Page Title="Equipment Lookup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Equipment.aspx.cs" Inherits="Makerspace.Equipment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -174,7 +174,8 @@
                     ID="ItemsFormView" 
                     runat="server" DataKeyNames="code"
                     CssClass="table table-borderless mb-0" Width="800px" AllowPaging="true"
-                    OnPageIndexChanging="ItemsFormView_PageIndexChanging" OnModeChanging="ItemsFormView_ModeChanging">      
+                    OnPageIndexChanging="ItemsFormView_PageIndexChanging" OnModeChanging="ItemsFormView_ModeChanging"
+                    OnItemInserting="AddItemFV_ItemInserting" OnItemInserted="AddItemFV_ItemInserted">      
                     <ItemTemplate>
                         <h3 class="px-5 py-2"><%# Eval("name")%>  #<%# Eval("num") %> 
                             <asp:Button runat="server" Text="Edit" CssClass="btn btn-outline-primary ml-3"/>
@@ -206,7 +207,59 @@
                                 <td class="px-5 py-2"><%# Eval("removed_at") %></td> 
                             </tr>
                         </table>
-                    </ItemTemplate> 
+                    </ItemTemplate>
+                    <InsertItemTemplate>
+                      <table>
+                          <tr>
+                              <td>
+                                  <h1>Add Equipment Item</h1>
+                              </td>
+                          </tr>
+                  
+                          
+                          <tr>
+                              <td>Equipment ID</td>
+                              <td>
+                                  <asp:TextBox runat="server" ID="eIDTextBox" TextMode="Number" Text='<%# Eval(EquipFormView.DataKey.Value.ToString()) %>'
+                                      ></asp:TextBox>
+                              </td>
+                          </tr>
+                      
+  
+                          <tr>
+                              <td>Status</td>
+                              <td><asp:TextBox runat="server" ID="itemStatusTextBox" ></asp:TextBox></td>
+                          </tr>
+                          <tr>
+                              <td>Location</td>
+                              <td><asp:TextBox runat="server" ID="locIDTextBox"></asp:TextBox></td>
+                          </tr>
+                          <tr>
+                              <td>Delivery Date</td>
+                              
+                               <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                      <ContentTemplate>
+                                          <asp:Calendar runat="server" ID="DeliveryDateCalendar"></asp:Calendar>
+                                      </ContentTemplate>
+                                  </asp:UpdatePanel>
+                          </tr>
+                          <tr>
+                              <td>Removal Date</td>
+                              
+                              <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                  <ContentTemplate>
+                                      <asp:Calendar runat="server" ID="RemovalDateCalendar"></asp:Calendar>
+                                  </ContentTemplate>
+                              </asp:UpdatePanel>
+                              
+                          </tr>
+                          <tr>
+                              <td>
+                                  <asp:LinkButton runat="server" CommandName="Insert" Text="Submit"></asp:LinkButton>
+                              </td>
+                          </tr>
+                      </table>   
+                    </InsertItemTemplate>
                     <PagerStyle HorizontalAlign="Center" Font-Size="Larger"/>
                     <FooterTemplate>
                         <div class="d-flex mt-0 justify-content-around">
@@ -217,6 +270,6 @@
                 <%-- endregion: Equipment SubItems FormView --%>
             </div>
             <%-- endregion: PopUp--%>
-    </div>
-   
+        </div>
+      </div>
 </asp:Content>

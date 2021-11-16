@@ -61,6 +61,7 @@ namespace Makerspace
 
         /// <summary>
         /// PseudoBtn control.
+        /// EquipFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -70,6 +71,10 @@ namespace Makerspace
 
         /// <summary>
         /// EquipmentModalPopup control.
+        protected global::System.Web.UI.WebControls.FormView EquipFormView;
+
+        /// <summary>
+        /// ItemGridPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -79,6 +84,10 @@ namespace Makerspace
 
         /// <summary>
         /// EquipmentFormView control.
+        protected global::System.Web.UI.WebControls.Panel ItemGridPanel;
+
+        /// <summary>
+        /// ItemCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -88,11 +97,43 @@ namespace Makerspace
 
         /// <summary>
         /// ItemsFormView control.
+        protected global::System.Web.UI.WebControls.Label ItemCount;
+
+        /// <summary>
+        /// ItemGV control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FormView ItemsFormView;
+        protected global::System.Web.UI.WebControls.GridView ItemGV;
+
+        /// <summary>
+        /// MessageLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MessageLabel;
+
+        /// <summary>
+        /// AddItemBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddItemBtn;
+
+        /// <summary>
+        /// AddItemFV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView AddItemFV;
     }
 }
