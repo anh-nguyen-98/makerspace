@@ -117,7 +117,10 @@ namespace Makerspace
                 EquipmentModalPopup.Show();
             }
         }
-
+        protected void ClosePopupModalBtn_Click(object sender, EventArgs e)
+        {
+            EquipmentModalPopup.Hide();
+        }
 
         protected void ItemsFormView_PageIndexChanging(object sender, FormViewPageEventArgs e)
         {
@@ -130,6 +133,7 @@ namespace Makerspace
 
         protected void EquipmentFormView_ModeChanging(object sender, FormViewModeEventArgs e)
         {
+            // Minh fills in code
             EquipmentFormView.ChangeMode(e.NewMode);
             if (e.NewMode.Equals(FormViewMode.Edit))
             {
@@ -142,6 +146,7 @@ namespace Makerspace
         }
         protected void EquipmentFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
         {
+            // Minh fills in code
             if (e.CommandName.ToString() == "New")
             {
                 ItemsFormView.Visible = false;
@@ -160,22 +165,20 @@ namespace Makerspace
 
         protected void EquipmentFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
+            // Minh fills in code
             EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
         }
 
         protected void EquipmentFormView_ItemInserted(object sender, FormViewInsertedEventArgs e)
         {
-         
+            // Minh fills in code
+        }
 
-        }
-        
-        protected void ClosePopupModalBtn_Click(object sender, EventArgs e)
-        {
-            EquipmentModalPopup.Hide();
-        }
+
 
         protected void AddNewEquipment_Click(object sender, EventArgs e)
         {
+            // Minh fills in code
             EquipmentFormView.ChangeMode(FormViewMode.Insert);
             ItemsFormView.Visible = false;
             EquipmentModalPopup.Show();
@@ -183,27 +186,29 @@ namespace Makerspace
 
         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
         {
-            
+            // Minh fills in code
+        }
+        protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
+        {
+            // Minh fills in code
         }
 
-        protected void ItemsFormView_ModeChanging(object sender, FormViewModeEventArgs e)
-        {
-            ItemsFormView.ChangeMode(e.NewMode);
-        }
+
 
         protected void EquipmentFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
         {
-
-        }
-
-        protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
-        {
-
+            // Minh fills in code
         }
 
         protected void EquipmentFormView_ItemDeleted(object sender, FormViewDeletedEventArgs e)
         {
+            // Minh fills in code
+        }
 
+        protected void ItemsFormView_ModeChanging(object sender, FormViewModeEventArgs e)
+        {
+            // Minh fills in code
+            ItemsFormView.ChangeMode(e.NewMode);
         }
     }
 
