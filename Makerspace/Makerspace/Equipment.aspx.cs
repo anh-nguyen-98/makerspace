@@ -9,7 +9,7 @@ namespace Makerspace
 {
     public partial class Equipment : System.Web.UI.Page
     {
-        protected static int LEN_LOC_CODE = 4;
+        protected static int ItemsCount = 0;
         protected static string CONSTRING = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,6 +40,24 @@ namespace Makerspace
             }
         }
 
+        private void loadDataFormViews (string equipment_code)
+        {
+            SqlConnection con = new SqlConnection(CONSTRING);
+            SqlCommand selectItem = new SqlCommand("uspReadEquipmentItemsByEquipmentCode");
+            selectItem.CommandType = CommandType.StoredProcedure;
+            selectItem.Parameters.AddWithValue("@equipment_code", equipment_code);
+            selectItem.Connection = con;
+            con.Open();
+            DataTable dt = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(selectItem);
+            adapter.Fill(dt);
+            ItemsCount = dt.Rows.Count;
+            EquipmentFormView.DataSource = dt;
+            EquipmentFormView.DataBind();
+            ItemsFormView.DataSource = dt;
+            ItemsFormView.DataBind();
+
+        }
         protected void CategoryDdl_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedId = Convert.ToInt32(CategoryDdl.SelectedValue);
@@ -91,48 +109,102 @@ namespace Makerspace
 
         protected void EquipGV_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            System.Diagnostics.Debug.WriteLine(rowIndex);
-            string code = EquipGV.DataKeys[rowIndex].Value.ToString();
-            System.Diagnostics.Debug.WriteLine(code);
-            SqlConnection con = new SqlConnection(CONSTRING);
-            SqlCommand selectItem = new SqlCommand("uspReadEquipmentItemsByEquipmentCode");
-            selectItem.CommandType = CommandType.StoredProcedure;
-            selectItem.Parameters.AddWithValue("@equipment_code", code);
-            selectItem.Connection = con;
-            con.Open();
-            DataTable dt = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(selectItem);
-            adapter.Fill(dt);
-            if (e.CommandName == "ViewInfo")
+            if (e.CommandName.ToString() == "Select")
             {
-                EquipmentFormView.DataSource = dt;
-                EquipmentFormView.DataBind();
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                string code = EquipGV.DataKeys[rowIndex].Value.ToString();
+                loadDataFormViews(code);
                 EquipmentModalPopup.Show();
             }
-            if (e.CommandName == "ViewItems")
-            {
-                ItemsFormView.DataSource = dt;
-                ItemsFormView.DataBind();
-                ItemsModalPopup.Show();
-            }
-
         }
 
-        protected void CloseModalBtn_Click(object sender, EventArgs e)
-        {
-            EquipmentModalPopup.Hide();
-        }
-        protected void CloseItemsModalBtn_Click(object sender, EventArgs e)
-        {
-            ItemsModalPopup.Hide();
-        }
 
         protected void ItemsFormView_PageIndexChanging(object sender, FormViewPageEventArgs e)
         {
+            EquipmentModalPopup.Show();
+            ItemsFormView.PageIndex = e.NewPageIndex;
+            string code = EquipmentFormView.DataKey.Value.ToString();
+            System.Diagnostics.Debug.WriteLine(code);
+            loadDataFormViews(code);
+        }
+
+        protected void EquipmentFormView_ModeChanging(object sender, FormViewModeEventArgs e)
+        {
+            EquipmentFormView.ChangeMode(e.NewMode);
+            if (e.NewMode.Equals(FormViewMode.Edit))
+            {
+                string code = EquipmentFormView.DataKey.Value.ToString();
+                System.Diagnostics.Debug.WriteLine("edit", code);
+                loadDataFormViews(code);
+
+            }
+
+        }
+        protected void EquipmentFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName.ToString() == "New")
+            {
+                ItemsFormView.Visible = false;
+            }
+            else
+            {
+                ItemsFormView.Visible = true;
+            }
+            if (e.CommandName.ToString() == "Cancel")
+            {
+                EquipmentModalPopup.Hide();
+            } else {
+                EquipmentModalPopup.Show();
+            }  
+        }
+
+        protected void EquipmentFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+        }
+
+        protected void EquipmentFormView_ItemInserted(object sender, FormViewInsertedEventArgs e)
+        {
+         
+
+        }
+        
+        protected void ClosePopupModalBtn_Click(object sender, EventArgs e)
+        {
+            EquipmentModalPopup.Hide();
+        }
+
+        protected void AddNewEquipment_Click(object sender, EventArgs e)
+        {
+            EquipmentFormView.ChangeMode(FormViewMode.Insert);
+            ItemsFormView.Visible = false;
+            EquipmentModalPopup.Show();
+        }
+
+        protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
+        {
             
         }
-       
+
+        protected void ItemsFormView_ModeChanging(object sender, FormViewModeEventArgs e)
+        {
+            ItemsFormView.ChangeMode(e.NewMode);
+        }
+
+        protected void EquipmentFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
+        {
+
+        }
+
+        protected void EquipmentFormView_ItemDeleted(object sender, FormViewDeletedEventArgs e)
+        {
+
+        }
     }
 
 }
