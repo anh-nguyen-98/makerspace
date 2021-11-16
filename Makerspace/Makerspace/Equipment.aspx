@@ -1,7 +1,6 @@
-﻿﻿<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %> 
-<%@ Page Title="Equipment Lookup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Equipment.aspx.cs" Inherits="Makerspace.Equipment" %>
+﻿<%@ Page Title="Equipment Lookup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Equipment.aspx.cs" Inherits="Makerspace.Equipment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
+    <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %> 
     <h1>Equipment Lookup</h1>
         <%-- startregion: Search Form --%>
         <div class="container">
@@ -29,7 +28,7 @@
 
         <div class="my-4">
             <%-- startregion: Equipment Gridview --%>
-            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="code">
+            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="id">
                 <Columns>
                     <asp:BoundField DataField="code" HeaderText="Code"/>
                     <asp:BoundField DataField="name" HeaderText="Name"/>
@@ -50,7 +49,7 @@
                 <%-- startregion: Equipment FormView --%>
                 <asp:FormView 
                     ID="EquipmentFormView" 
-                    runat="server"  DataKeyNames="code"
+                    runat="server"  DataKeyNames="equipment_id"
                     CssClass="my-2" Width="800px" OnModeChanging="EquipmentFormView_ModeChanging" OnItemCommand="EquipmentFormView_ItemCommand" 
                     OnItemInserting="EquipmentFormView_ItemInserting" OnItemInserted="EquipmentFormView_ItemInserted"
                     OnItemUpdating="EquipmentFormView_ItemUpdating" OnItemUpdated="EquipmentFormView_ItemUpdated"
@@ -172,7 +171,7 @@
                 <%-- startregion: Equipment SubItems FormView --%>
                 <asp:FormView 
                     ID="ItemsFormView" 
-                    runat="server" DataKeyNames="code"
+                    runat="server" DataKeyNames="equipment_id"
                     CssClass="table table-borderless mb-0" Width="800px" AllowPaging="true"
                     OnPageIndexChanging="ItemsFormView_PageIndexChanging" OnModeChanging="ItemsFormView_ModeChanging"
                     OnItemInserting="AddItemFV_ItemInserting" OnItemInserted="AddItemFV_ItemInserted">      
@@ -271,5 +270,5 @@
             </div>
             <%-- endregion: PopUp--%>
         </div>
-      </div>
+    
 </asp:Content>

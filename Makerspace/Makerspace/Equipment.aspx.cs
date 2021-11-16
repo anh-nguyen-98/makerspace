@@ -42,7 +42,7 @@ namespace Makerspace
                 EquipGV.DataBind();
             }
         }
-        
+
 
 
         protected void EquipGV_PageIndexChanging(object sender, GridViewPageEventArgs e, Label MessageLabel)
@@ -56,12 +56,12 @@ namespace Makerspace
 
         }
 
-        private void loadDataFormViews (string equipment_code)
+        private void loadDataFormViews (int equipment_id)
         {
             SqlConnection con = new SqlConnection(CONSTRING);
-            SqlCommand selectItem = new SqlCommand("uspReadEquipmentItemsByEquipmentCode");
+            SqlCommand selectItem = new SqlCommand("uspReadEquipmentItemsByEquipmentId");
             selectItem.CommandType = CommandType.StoredProcedure;
-            selectItem.Parameters.AddWithValue("@equipment_code", equipment_code);
+            selectItem.Parameters.AddWithValue("@equipment_id", equipment_id);
             selectItem.Connection = con;
             con.Open();
             DataTable dt = new DataTable();
@@ -83,7 +83,6 @@ namespace Makerspace
             {
                 con.Open();
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.AddWithValue(param, id);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -147,8 +146,8 @@ namespace Makerspace
             if (e.CommandName.ToString() == "Select")
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
-                string code = EquipGV.DataKeys[rowIndex].Value.ToString();
-                loadDataFormViews(code);
+                int equipment_id = Convert.ToInt32(EquipGV.DataKeys[rowIndex].Value.ToString());
+                loadDataFormViews(equipment_id);
                 EquipmentModalPopup.Show();
             }
         }
@@ -161,9 +160,9 @@ namespace Makerspace
         {
             EquipmentModalPopup.Show();
             ItemsFormView.PageIndex = e.NewPageIndex;
-            string code = EquipmentFormView.DataKey.Value.ToString();
-            System.Diagnostics.Debug.WriteLine(code);
-            loadDataFormViews(code);
+            int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+                System.Diagnostics.Debug.WriteLine("edit", equipment_id);
+                loadDataFormViews(equipment_id);
         }
 
         protected void EquipmentFormView_ModeChanging(object sender, FormViewModeEventArgs e)
@@ -172,9 +171,9 @@ namespace Makerspace
             EquipmentFormView.ChangeMode(e.NewMode);
             if (e.NewMode.Equals(FormViewMode.Edit))
             {
-                string code = EquipmentFormView.DataKey.Value.ToString();
-                System.Diagnostics.Debug.WriteLine("edit", code);
-                loadDataFormViews(code);
+                int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+                System.Diagnostics.Debug.WriteLine("edit", equipment_id);
+                loadDataFormViews(equipment_id);
 
             }
 
@@ -404,7 +403,7 @@ namespace Makerspace
                 cmd.ExecuteNonQuery();
 
             }
-            
+
             SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment");
             selectCmd.CommandType = CommandType.StoredProcedure;
             BindGV(EquipGV, selectCmd, ItemCount);
