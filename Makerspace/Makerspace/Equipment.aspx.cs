@@ -207,7 +207,6 @@ namespace Makerspace
             }
             if (e.CommandName.ToString() == "Cancel")
             {
-<<<<<<< HEAD
                 EquipmentModalPopup.Hide();
 
             } else {
@@ -215,7 +214,6 @@ namespace Makerspace
                 EquipmentModalPopup.Show();
             }
 
-=======
                 EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
                 ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
                 if (EquipmentFormView.DataKey.Value == null) return;
@@ -225,7 +223,6 @@ namespace Makerspace
                 ItemsFormView.Visible = true;
             } 
             EquipmentModalPopup.Show();
->>>>>>> 153f558367d4ec706775b9d907b2f45f06980db8
         }
 
         protected void EquipmentFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
@@ -427,7 +424,6 @@ namespace Makerspace
         protected void ItemsFormView_ModeChanging(object sender, FormViewModeEventArgs e)
         {
             ItemsFormView.ChangeMode(e.NewMode);
-<<<<<<< HEAD
             Int32.TryParse(ItemsFormView.DataKey.Value.ToString(), out int id);
             BindFV(ItemsFormView, "uspReadEquipmentItemsByEquipmentId", "@equipmentId", id);
         }
@@ -436,7 +432,6 @@ namespace Makerspace
       // START: MINH CAN REUSE THESE METHODS BELOW FOR FILLING THE LOGIC METHODS ABOVE
         //Update equipment info 
         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-=======
             if (e.NewMode.Equals(FormViewMode.Edit))
             {
                 int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
