@@ -78,6 +78,15 @@ namespace Makerspace
         protected global::AjaxControlToolkit.ModalPopupExtender EquipmentModalPopup;
 
         /// <summary>
+        /// ClosePopupBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ClosePopupBtn;
+
+        /// <summary>
         /// EquipmentFormView control.
         /// </summary>
         /// <remarks>

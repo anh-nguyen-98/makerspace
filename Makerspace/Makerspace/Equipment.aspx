@@ -44,8 +44,9 @@
             <asp:Button ID="PseudoBtn" runat="server" />
             
             <%-- startregion: PopUp (Equipment Formview + Equipment SubItems Formview) --%>
-            <ajaxToolkit:ModalPopupExtender ID="EquipmentModalPopup" runat="server" TargetControlID="PseudoBtn" PopupControlID="divPopUp"></ajaxToolkit:ModalPopupExtender>
+            <ajaxToolkit:ModalPopupExtender ID="EquipmentModalPopup" runat="server" TargetControlID="PseudoBtn" PopupControlID="divPopUp" ></ajaxToolkit:ModalPopupExtender>
             <div id="divPopUp" class="bg-light">
+                <asp:Button ID="ClosePopupBtn" runat="server" CssClass="close border-0 mr-4 mt-3 rounded" Text="&times;" Width="50px" Height="50px" Font-Size="30px"  OnClick="ClosePopupModalBtn_Click"/>
                 <%-- startregion: Equipment FormView --%>
                 <asp:FormView 
                     ID="EquipmentFormView" 
@@ -58,7 +59,9 @@
                         <h3 class="px-5 py-2"><%# Eval("name") %>
                             <asp:Button runat="server" Text="Edit" CssClass="btn btn-outline-primary ml-3" CommandName="Edit"/>
                             <asp:Button runat="server" Text="Delete" CssClass="btn btn-outline-danger ml-2" CommandName="Delete"/>
-                            <asp:Button runat="server" Text="Add" CssClass="btn btn-outline-danger ml-2" CommandName="New"/>
+                            <asp:Button runat="server" Text="New Item" CssClass="btn btn-primary ml-2" CommandName="New Item"/>
+                            
+                            <%--<div class="close" aria-label="close"><span aria-hidden="true">&times;</span></div>--%>
                         </h3>
                         <table >
                             <tr>
@@ -123,7 +126,7 @@
                                 <td><asp:CheckBox runat="server" ID="TrainingCheckbox"/></td>
                             </tr>
                         </table>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center mt-4">
                             <asp:Button runat="server" CssClass="btn btn-primary" CommandName="Insert" Text="Create"/>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <asp:Button runat="server" CssClass="btn btn-secondary" CommandName="Cancel" Text="Cancel"/>
@@ -157,7 +160,7 @@
                                 <td><asp:CheckBox runat="server" ID="TrainingCheckbox" Checked='<%# Convert.ToInt32( Eval("training")).Equals(1)%>'/></td>
                             </tr>
                         </table>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center mt-4">
                             <asp:Button runat="server" CssClass="btn btn-primary" CommandName="Update" Text="Update"/>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <asp:Button runat="server" CssClass="btn btn-secondary" CommandName="Cancel" Text="Cancel"/>
@@ -173,36 +176,35 @@
                     ID="ItemsFormView" 
                     runat="server" DataKeyNames="equipment_id"
                     CssClass="table table-borderless mb-0" Width="800px" AllowPaging="true"
-                    OnPageIndexChanging="ItemsFormView_PageIndexChanging" OnModeChanging="ItemsFormView_ModeChanging"
-                    OnItemInserting="AddItemFV_ItemInserting" OnItemInserted="AddItemFV_ItemInserted">      
+                    OnPageIndexChanging="ItemsFormView_PageIndexChanging" OnModeChanging="ItemsFormView_ModeChanging" OnItemCommand="ItemsFormView_ItemCommand"
+                    OnItemInserting="ItemsFormView_ItemInserting" OnItemInserted="ItemsFormView_ItemInserted"
+                    OnItemUpdating="ItemsFormView_ItemUpdating" OnItemUpdated="ItemsFormView_ItemUpdated"
+                    OnItemDeleting="ItemsFormView_ItemDeleting" OnItemDeleted="ItemsFormView_ItemDeleted">      
                     <ItemTemplate>
                         <h3 class="px-5 py-2"><%# Eval("name")%>  #<%# Eval("num") %> 
-                            <asp:Button runat="server" Text="Edit" CssClass="btn btn-outline-primary ml-3"/>
-                            <asp:Button runat="server" Text="Delete" CssClass="btn btn-outline-danger ml-2"/>
+                            <asp:Button runat="server" Text="Edit" CssClass="btn btn-outline-primary ml-3" CommandName="Edit"/>
+                            <asp:Button runat="server" Text="Delete" CssClass="btn btn-outline-danger ml-2" CommandName="Delete"/>
+                     </div>
                         </h3>
                         <table>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Code:</td>
+                                <td class="font-weight-bold px-5 py-2">Code</td>
                                 <td class="px-5 py-2"><%#Eval("item_code") %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Name:</td>
-                                <td class="px-5 py-2"><%#Eval("name") %></td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold px-5 py-2">Location:</td>
+                                <td class="font-weight-bold px-5 py-2">Location</td>
                                 <td class="px-5 py-2"><%#Eval("location_id") %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Status:</td>
+                                <td class="font-weight-bold px-5 py-2">Available</td>
                                 <td class="px-5 py-2"><%#Eval("status").Equals(1) ? "Active" : "Inactive" %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Delivered at:</td>
+                                <td class="font-weight-bold px-5 py-2">Delivered at</td>
                                 <td class="px-5 py-2"><%#Eval("delivered_at") %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Removed at:</td>
+                                <td class="font-weight-bold px-5 py-2">Removed at</td>
                                 <td class="px-5 py-2"><%# Eval("removed_at") %></td> 
                             </tr>
                         </table>
@@ -210,61 +212,77 @@
                     <InsertItemTemplate>
                       <table>
                           <tr>
-                              <td>
-                                  <h1>Add Equipment Item</h1>
-                              </td>
+                              <td class="font-weight-bold px-5 py-2">Equipment Name</td>
+                              <td class="px-5 py-2"><%= EquipGV.SelectedRow.Cells[1].Text.ToString() %></td>
                           </tr>
-                  
-                          
                           <tr>
-                              <td>Equipment ID</td>
-                              <td>
-                                  <asp:TextBox runat="server" ID="eIDTextBox" TextMode="Number" Text='<%# Eval(EquipFormView.DataKey.Value.ToString()) %>'
-                                      ></asp:TextBox>
-                              </td>
+                              <td class="font-weight-bold px-5 py-2">Equipment Code</td>
+                              <td class="px-5 py-2"><%= EquipGV.SelectedRow.Cells[0].Text.ToString() %></td>
+                          </tr>
+                          <tr>
+                              <td class="font-weight-bold px-5 py-2">Equipment Number</td>
+                              <td class="px-5 py-2"><%= ItemsCount +1 %></td>
                           </tr>
                       
-  
                           <tr>
-                              <td>Status</td>
-                              <td><asp:TextBox runat="server" ID="itemStatusTextBox" ></asp:TextBox></td>
+                              <td class="font-weight-bold px-5 py-2">Location</td>
+                              <td class="px-5 py-2"><asp:TextBox runat="server" ID="locIDTextBox" CssClass="form-control"></asp:TextBox></td>
                           </tr>
                           <tr>
-                              <td>Location</td>
-                              <td><asp:TextBox runat="server" ID="locIDTextBox"></asp:TextBox></td>
-                          </tr>
-                          <tr>
-                              <td>Delivery Date</td>
+                              <td class="font-weight-bold px-5 py-2">Delivery Date</td>
                               
-                               <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                                      <ContentTemplate>
-                                          <asp:Calendar runat="server" ID="DeliveryDateCalendar"></asp:Calendar>
-                                      </ContentTemplate>
-                                  </asp:UpdatePanel>
+                               <td class="px-5 py-2">
+                                    <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <asp:Calendar runat="server" ID="DeliveryDateCalendar" OnSelectionChanged="DeliveryDateCalendar_SelectionChanged"></asp:Calendar>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel></td>
                           </tr>
                           <tr>
-                              <td>Removal Date</td>
-                              
-                              <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                                  <ContentTemplate>
-                                      <asp:Calendar runat="server" ID="RemovalDateCalendar"></asp:Calendar>
-                                  </ContentTemplate>
-                              </asp:UpdatePanel>
-                              
+                              <td class="font-weight-bold px-5 py-2">Availabe</td>
+                              <td class="px-5 py-2"> <asp:CheckBox runat="server" ID="statusCheckBox" /> </td>
                           </tr>
-                          <tr>
-                              <td>
-                                  <asp:LinkButton runat="server" CommandName="Insert" Text="Submit"></asp:LinkButton>
-                              </td>
-                          </tr>
-                      </table>   
-                    </InsertItemTemplate>
-                    <PagerStyle HorizontalAlign="Center" Font-Size="Larger"/>
-                    <FooterTemplate>
-                        <div class="d-flex mt-0 justify-content-around">
-                            <asp:Button ID="ClosePopupModalBtn" runat="server" Text="Close" CommandName="Cancel" CssClass="btn btn-secondary "/>
+
+                      </table> 
+                         <div class="d-flex justify-content-center mt-4">
+                            <asp:Button runat="server" CssClass="btn btn-primary" CommandName="Insert" Text="Add"/>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Button runat="server" CssClass="btn btn-secondary" CommandName="Cancel" Text="Cancel"/>
                         </div>
-                    </FooterTemplate>
+                    </InsertItemTemplate>
+                    <EditItemTemplate>
+                        <table>
+                            <h3 class="px-5 py-2"><%# Eval("name")%>  #<%# Eval("num") %> </h3>
+                            <tr>
+                                <td class="font-weight-bold px-5 py-2">Code:</td>
+                                <td class="px-5 py-2"><%#Eval("item_code") %></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold px-5 py-2">Location</td>
+                                <td class="px-5 py-2"><asp:TextBox runat="server" ID="locIDTextBoxEdit" CssClass="form-control"></asp:TextBox></td>
+                            </tr>    
+                            <tr>
+                                <td class="font-weight-bold px-5 py-2">Available</td>
+                                <td class="px-5 py-2"> <asp:CheckBox runat="server" ID="statusCheckBoxEdit" /> </td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold px-5 py-2">Delivery Date</td>
+                                <td class="px-5 py-2">
+                                    <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <asp:Calendar runat="server" ID="DeliveryDateCalendarEdit" OnSelectionChanged="DeliveryDateCalendar_SelectionChanged"></asp:Calendar>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel></td>
+                            </tr>
+                        </table> 
+                        <div class="d-flex justify-content-center mt-4">
+                            <asp:Button runat="server" CssClass="btn btn-primary" CommandName="Update" Text="Update"/>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Button runat="server" CssClass="btn btn-secondary" CommandName="Cancel" Text="Cancel"/>
+                        </div>
+                    </EditItemTemplate>
+                    <PagerStyle HorizontalAlign="Center" Font-Size="Larger"/>
+
                 </asp:FormView>
                 <%-- endregion: Equipment SubItems FormView --%>
             </div>

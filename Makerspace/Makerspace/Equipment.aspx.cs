@@ -47,12 +47,12 @@ namespace Makerspace
 
         protected void EquipGV_PageIndexChanging(object sender, GridViewPageEventArgs e, Label MessageLabel)
         {
-            if (AddItemFV.CurrentMode == FormViewMode.Edit)
-            {
-                e.Cancel = true;
-                MessageLabel.Text = "Please finish the form before move to new page.";
-            }
-            EquipGV.PageIndex = e.NewPageIndex;
+           if (AddItemFV.CurrentMode == FormViewMode.Edit)
+           {
+               e.Cancel = true;
+               MessageLabel.Text = "Please finish the form before move to new page.";
+           }
+           EquipGV.PageIndex = e.NewPageIndex;
 
         }
 
@@ -119,7 +119,6 @@ namespace Makerspace
         protected void searchBtn_Click(object sender, EventArgs e)
         {
             string searchTerm = string.Format("%{0}%", searchBox.Text.Trim().ToLower());
-            System.Diagnostics.Debug.WriteLine(searchTerm);
             using (SqlConnection con = new SqlConnection(CONSTRING))
             {
                 SqlCommand cmd = new SqlCommand("uspReadEquipmentBySearchTerm");
@@ -148,11 +147,17 @@ namespace Makerspace
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
                 int equipment_id = Convert.ToInt32(EquipGV.DataKeys[rowIndex].Value.ToString());
                 loadDataFormViews(equipment_id);
+                EquipmentFormView.Visible = true;
+                ItemsFormView.Visible = true;
                 EquipmentModalPopup.Show();
             }
         }
         protected void ClosePopupModalBtn_Click(object sender, EventArgs e)
         {
+            EquipmentFormView.Visible = true;
+            ItemsFormView.Visible = true;
+            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+            ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
             EquipmentModalPopup.Hide();
         }
 
@@ -161,8 +166,7 @@ namespace Makerspace
             EquipmentModalPopup.Show();
             ItemsFormView.PageIndex = e.NewPageIndex;
             int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
-                System.Diagnostics.Debug.WriteLine("edit", equipment_id);
-                loadDataFormViews(equipment_id);
+            loadDataFormViews(equipment_id);
         }
 
         protected void EquipmentFormView_ModeChanging(object sender, FormViewModeEventArgs e)
@@ -172,7 +176,6 @@ namespace Makerspace
             if (e.NewMode.Equals(FormViewMode.Edit))
             {
                 int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
-                System.Diagnostics.Debug.WriteLine("edit", equipment_id);
                 loadDataFormViews(equipment_id);
 
             }
@@ -187,13 +190,24 @@ namespace Makerspace
                 ItemsFormView.Visible = false;
                 EquipmentFormView.Visible = true;
             }
+            else if (e.CommandName.ToString() == "Edit")
+            {
+                ItemsFormView.Visible = false;
+            }
+            else if (e.CommandName.ToString() == "New Item")
+            {
+                EquipmentFormView.Visible = false;
+                ItemsFormView.ChangeMode(FormViewMode.Insert); 
+            }
             else
             {
+                EquipmentFormView.Visible = true;
                 ItemsFormView.Visible = true;
                 EquipmentFormView.Visible = true;
             }
             if (e.CommandName.ToString() == "Cancel")
             {
+<<<<<<< HEAD
                 EquipmentModalPopup.Hide();
 
             } else {
@@ -201,6 +215,17 @@ namespace Makerspace
                 EquipmentModalPopup.Show();
             }
 
+=======
+                EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
+                if (EquipmentFormView.DataKey.Value == null) return;
+                int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+                loadDataFormViews(equipment_id);
+                EquipmentFormView.Visible = true;
+                ItemsFormView.Visible = true;
+            } 
+            EquipmentModalPopup.Show();
+>>>>>>> 153f558367d4ec706775b9d907b2f45f06980db8
         }
 
         protected void EquipmentFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
@@ -268,8 +293,6 @@ namespace Makerspace
                 e.KeepInInsertMode = true;
             }
         }
-
-
 
         protected void AddNewEquipment_Click(object sender, EventArgs e)
         {
@@ -404,6 +427,7 @@ namespace Makerspace
         protected void ItemsFormView_ModeChanging(object sender, FormViewModeEventArgs e)
         {
             ItemsFormView.ChangeMode(e.NewMode);
+<<<<<<< HEAD
             Int32.TryParse(ItemsFormView.DataKey.Value.ToString(), out int id);
             BindFV(ItemsFormView, "uspReadEquipmentItemsByEquipmentId", "@equipmentId", id);
         }
@@ -412,126 +436,194 @@ namespace Makerspace
       // START: MINH CAN REUSE THESE METHODS BELOW FOR FILLING THE LOGIC METHODS ABOVE
         //Update equipment info 
         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-        {
-
-            Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int eID);
-            string eCode = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
-            string eName = ((TextBox)EquipmentFormView.FindControl("eNameUpdateTextBox")).Text;
-            string eDesc = ((TextBox)EquipmentFormView.FindControl("eDescUpdateTextBox")).Text;
-            string eFunction = ((TextBox)EquipmentFormView.FindControl("eFunctionUpdateTextBox")).Text;
-            string eManual = ((TextBox)EquipmentFormView.FindControl("eManualUpdateTextBox")).Text;
-            string eSafety = ((TextBox)EquipmentFormView.FindControl("eSafetyUpdateTextBox")).Text;
-            int eTraining = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingCheckBox")).Checked ? 1 : 0);
-
-            using (SqlConnection con = new SqlConnection(CONSTRING))
-            using (SqlCommand cmd = new SqlCommand("uspUpdateEquip@eID", con))
+=======
+            if (e.NewMode.Equals(FormViewMode.Edit))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@eID", eID);
-                cmd.Parameters.AddWithValue("@eName", eName);
-                cmd.Parameters.AddWithValue("@eCode", eCode);
-                cmd.Parameters.AddWithValue("@eDesc", eDesc);
-                cmd.Parameters.AddWithValue("@eFunction", eFunction);
-                cmd.Parameters.AddWithValue("@eManual", eManual);
-                cmd.Parameters.AddWithValue("@eSafety", eSafety);
-                cmd.Parameters.AddWithValue("@eTraining", eTraining);
-                con.Open();
-                cmd.ExecuteNonQuery();
+                int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+                loadDataFormViews(equipment_id);
 
             }
+        }
 
-            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-            BindFV(EquipmentFormView, "uspReadEquip@eID", "@eID", eID);
+        protected void DeliveryDateCalendar_SelectionChanged(object sender, EventArgs e)
+        {
+            EquipmentModalPopup.Show();
+        }
+
+        protected void ItemsFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
+>>>>>>> 153f558367d4ec706775b9d907b2f45f06980db8
+        {
+            // Minh fills in code
+            if (e.CommandName.ToString() == "Edit") {
+                EquipmentFormView.Visible = false;
+                ItemsFormView.Visible = true;
+            }
+            else if (e.CommandName.ToString() == "Cancel")
+            {
+                EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
+                int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+                loadDataFormViews(equipment_id);
+                EquipmentFormView.Visible = true;
+                ItemsFormView.Visible = true;
+            }
+            EquipmentModalPopup.Show();
+        }
+
+        protected void ItemsFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            // Minh fills in code
+        }
+
+        protected void ItemsFormView_ItemInserted(object sender, FormViewInsertedEventArgs e)
+        {
+            // Minh fills in code
+        }
+
+        protected void ItemsFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
+        {
+            // Minh fills in code
+        }
+
+        protected void ItemsFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
+        {
+            // Minh fills in code
+        }
+
+        protected void ItemsFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
+        {
+            // Minh fills in code
+        }
+
+        protected void ItemsFormView_ItemDeleted(object sender, FormViewDeletedEventArgs e)
+        {
+            // Minh fills in code
+        }
+
+
+        // START: MINH CAN REUSE THESE METHODS BELOW FOR FILLING THE LOGIC METHODS ABOVE
+        // Update equipment info 
+        protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
+        {
+
+           Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int eID);
+           string eCode = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
+           string eName = ((TextBox)EquipmentFormView.FindControl("eNameUpdateTextBox")).Text;
+           string eDesc = ((TextBox)EquipmentFormView.FindControl("eDescUpdateTextBox")).Text;
+           string eFunction = ((TextBox)EquipmentFormView.FindControl("eFunctionUpdateTextBox")).Text;
+           string eManual = ((TextBox)EquipmentFormView.FindControl("eManualUpdateTextBox")).Text;
+           string eSafety = ((TextBox)EquipmentFormView.FindControl("eSafetyUpdateTextBox")).Text;
+           int eTraining = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingCheckBox")).Checked ? 1 : 0);
+
+           using (SqlConnection con = new SqlConnection(CONSTRING))
+           using (SqlCommand cmd = new SqlCommand("uspUpdateEquip@eID", con))
+           {
+               cmd.CommandType = CommandType.StoredProcedure;
+               cmd.Parameters.AddWithValue("@eID", eID);
+               cmd.Parameters.AddWithValue("@eName", eName);
+               cmd.Parameters.AddWithValue("@eCode", eCode);
+               cmd.Parameters.AddWithValue("@eDesc", eDesc);
+               cmd.Parameters.AddWithValue("@eFunction", eFunction);
+               cmd.Parameters.AddWithValue("@eManual", eManual);
+               cmd.Parameters.AddWithValue("@eSafety", eSafety);
+               cmd.Parameters.AddWithValue("@eTraining", eTraining);
+               con.Open();
+               cmd.ExecuteNonQuery();
+
+           }
+
+           EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+           BindFV(EquipmentFormView, "uspReadEquip@eID", "@eID", eID);
 
         }
 
         //Verify Equip Info Updates
         protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e, Label MessageLabel)
         {
-            if (e.Exception == null)
-            {
-                if (e.AffectedRows == 1)
-                {
-                    String keyFieldValue = e.Keys["eName"].ToString();
-                    MessageLabel.Text = keyFieldValue + "has been updated successfully";
-                }
-                else
-                {
-                    MessageLabel.Text = "An errror occured during the update process";
-                    e.ExceptionHandled = true;
-                    e.KeepInEditMode = true;
-                }
-            }
+           if (e.Exception == null)
+           {
+               if (e.AffectedRows == 1)
+               {
+                   String keyFieldValue = e.Keys["eName"].ToString();
+                   MessageLabel.Text = keyFieldValue + "has been updated successfully";
+               }
+               else
+               {
+                   MessageLabel.Text = "An errror occured during the update process";
+                   e.ExceptionHandled = true;
+                   e.KeepInEditMode = true;
+               }
+           }
         }
         //Delete equipment on form view
         protected void EquipmentFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
         {
-            int id = Convert.ToInt32(EquipmentFormView.DataKey.Value);
-            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
+           int id = Convert.ToInt32(EquipmentFormView.DataKey.Value);
+           int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
 
-            using (SqlConnection con = new SqlConnection(CONSTRING))
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
-            {
-                con.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
+           using (SqlConnection con = new SqlConnection(CONSTRING))
+           using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
+           {
+               con.Open();
+               cmd.CommandType = CommandType.Text;
+               cmd.ExecuteNonQuery();
 
-            }
-            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+           }
+           EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
 
-            BindFV(EquipmentFormView, "uspReadEquipItem@itemID", "@itemID", 0);
-            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
-            selectCmd.CommandType = CommandType.StoredProcedure;
-            selectCmd.Parameters.AddWithValue("@eID", eID);
-            BindGV(EquipGV, selectCmd, ItemCount);
+           BindFV(EquipmentFormView, "uspReadEquipItem@itemID", "@itemID", 0);
+           SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
+           selectCmd.CommandType = CommandType.StoredProcedure;
+           selectCmd.Parameters.AddWithValue("@eID", eID);
+           BindGV(EquipGV, selectCmd, ItemCount);
         }
 
 
         //Verify deleting equipment process
         protected void EquipmentFormView_ItemDeleted(object sender, FormViewDeletedEventArgs e, Label MessageLabel)
         {
-            if (e.Exception == null)
-            {
-                MessageLabel.Text = "Equipment Deleted";
-            }
-            else
-            {
-                MessageLabel.Text = "Could not delete equipment";
-                e.ExceptionHandled = true;
-            }
+           if (e.Exception == null)
+           {
+               MessageLabel.Text = "Equipment Deleted";
+           }
+           else
+           {
+               MessageLabel.Text = "Could not delete equipment";
+               e.ExceptionHandled = true;
+           }
         }
 
 
         // add Equipment Sub-item
         protected void AddItemFV_ItemInserting(object sender, EventArgs e)
         {
-            int eID = Convert.ToInt32(((TextBox)AddItemFV.FindControl("eIDTextBox")).Text);
-            using (SqlConnection con = new SqlConnection(CONSTRING))
-            using (SqlCommand cmd = new SqlCommand("uspInsertEquipItem", con))
-            {
-                con.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
+           int eID = Convert.ToInt32(((TextBox)AddItemFV.FindControl("eIDTextBox")).Text);
+           using (SqlConnection con = new SqlConnection(CONSTRING))
+           using (SqlCommand cmd = new SqlCommand("uspInsertEquipItem", con))
+           {
+               con.Open();
+               cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@eID", eID);
+               cmd.Parameters.AddWithValue("@eID", eID);
 
-                cmd.Parameters.AddWithValue("@itemStatus", Convert.ToInt32(((TextBox)AddItemFV.FindControl("itemStatusTextBox")).Text));
-                cmd.Parameters.AddWithValue("@locID", Convert.ToInt32(((TextBox)AddItemFV.FindControl("locIDTextBox")).Text));
-                cmd.Parameters.AddWithValue("@itemDeliveryDate", ((Calendar)AddItemFV.FindControl("DeliveryDateCalendar"))
-                    .SelectedDate.ToString());
-                cmd.Parameters.AddWithValue("@itemRemovalDate", ((Calendar)AddItemFV.FindControl("RemovalDateCalendar"))
-                    .SelectedDate.ToString());
-                cmd.ExecuteNonQuery();
+               cmd.Parameters.AddWithValue("@itemStatus", Convert.ToInt32(((TextBox)AddItemFV.FindControl("itemStatusTextBox")).Text));
+               cmd.Parameters.AddWithValue("@locID", Convert.ToInt32(((TextBox)AddItemFV.FindControl("locIDTextBox")).Text));
+               cmd.Parameters.AddWithValue("@itemDeliveryDate", ((Calendar)AddItemFV.FindControl("DeliveryDateCalendar"))
+                   .SelectedDate.ToString());
+               cmd.Parameters.AddWithValue("@itemRemovalDate", ((Calendar)AddItemFV.FindControl("RemovalDateCalendar"))
+                   .SelectedDate.ToString());
+               cmd.ExecuteNonQuery();
 
-            }
-            AddItemFV.ChangeMode(FormViewMode.ReadOnly);
+           }
+           AddItemFV.ChangeMode(FormViewMode.ReadOnly);
 
-            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
-            selectCmd.CommandType = CommandType.StoredProcedure;
-            selectCmd.Parameters.AddWithValue("@eID", eID);
+           SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
+           selectCmd.CommandType = CommandType.StoredProcedure;
+           selectCmd.Parameters.AddWithValue("@eID", eID);
 
-            BindGV(ItemGV, selectCmd, ItemCount);
-            int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
-            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
+           BindGV(ItemGV, selectCmd, ItemCount);
+           int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
+           BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
         }
 
         ////Verify inserting process
@@ -556,37 +648,37 @@ namespace Makerspace
         // Delete Equipment Sub Item
         protected void ItemGV_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int id = Convert.ToInt32(ItemGV.Rows[e.RowIndex].FindControl("itemID").ToString());
-            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
-            using (SqlConnection con = new SqlConnection(CONSTRING))
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
-            {
-                con.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
+           int id = Convert.ToInt32(ItemGV.Rows[e.RowIndex].FindControl("itemID").ToString());
+           int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
+           using (SqlConnection con = new SqlConnection(CONSTRING))
+           using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
+           {
+               con.Open();
+               cmd.CommandType = CommandType.Text;
+               cmd.ExecuteNonQuery();
 
-            }
+           }
 
-            SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment");
-            selectCmd.CommandType = CommandType.StoredProcedure;
-            BindGV(EquipGV, selectCmd, ItemCount);
+           SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment");
+           selectCmd.CommandType = CommandType.StoredProcedure;
+           BindGV(EquipGV, selectCmd, ItemCount);
         }
 
         // Verify deleting Equipment Sub Item
         protected void ItemGV_RowDeleted(object sender, GridViewDeletedEventArgs e, Label Message)
         {
-            if (e.Exception == null)
-            {
-                Message.Text = "Row deleted successfully.";
-            }
-            else
-            {
-                Message.Text = "An error occurred while attempting to delete the row.";
-                e.ExceptionHandled = true;
-            }
+           if (e.Exception == null)
+           {
+               Message.Text = "Row deleted successfully.";
+           }
+           else
+           {
+               Message.Text = "An error occurred while attempting to delete the row.";
+               e.ExceptionHandled = true;
+           }
 
         }
-      //END
+        //END
     }
 
 }
