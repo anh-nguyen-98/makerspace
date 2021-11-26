@@ -208,6 +208,7 @@ namespace Makerspace
 
         protected void EquipmentFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
+            // more validation needed for equipment code format
             string code = ((TextBox)EquipmentFormView.FindControl("CodeTextBox")).Text;
             string name = ((TextBox)EquipmentFormView.FindControl("NameTextBox")).Text;
             string description = ((TextBox)EquipmentFormView.FindControl("DescriptionTextBox")).Text;
@@ -235,10 +236,8 @@ namespace Makerspace
                 int affectedRows = 0;
                 try
                 {
-
                     affectedRows = cmd.ExecuteNonQuery();
                     EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
-                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
                     EquipmentModalPopup.Hide();
                     load();
                 }
@@ -329,7 +328,7 @@ namespace Makerspace
                 {
                     EquipmentFormView_ItemUpdated(sender, new FormViewUpdatedEventArgs(affectedRows, exception));
                 }
-                
+
             }
 
         }
@@ -369,20 +368,25 @@ namespace Makerspace
         protected void EquipmentFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
         {
             int id = Convert.ToInt32(EquipmentFormView.DataKey.Value);
-            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("id")).Text);
 
             using (SqlConnection con = new SqlConnection(CONSTRING))
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM Equipment WHERE id = " + eID + "", con))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Equipment WHERE id = " + id + "", con))
             {
                 con.Open();
                 cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
+                int affectedRows = 0;
+                try
+                {
+                    affectedRows = cmd.ExecuteNonQuery();
+                    EquipmentFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, null));
+                } catch (Exception exception)
+                {
+                    EquipmentFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, exception));
+                }
+                
 
             }
             EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-            
-
-            BindFV(EquipmentFormView, "uspReadEquipment@id", "@id", 0);
             SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment", new SqlConnection(CONSTRING));
             selectCmd.CommandType = CommandType.StoredProcedure;
             selectCmd.Connection = new SqlConnection(CONSTRING);
@@ -408,13 +412,13 @@ namespace Makerspace
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
                 }
-                else
-                {
-                    string message = e.Exception.Message;
-                    string script = "window.onload = function(){ alert('" + message + "')};";
-                    ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
-                    e.ExceptionHandled = true;
-                }
+                //else
+                //{
+                //    string message = e.Exception.Message;
+                //    string script = "window.onload = function(){ alert('" + message + "')};";
+                //    ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
+                //    e.ExceptionHandled = true;
+                //}
             }
             else
             {

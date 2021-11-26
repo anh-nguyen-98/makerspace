@@ -17,7 +17,8 @@ ALTER PROCEDURE [dbo].[uspInsertEquipment]
     @description NVARCHAR(4000),
 	@purpose NVARCHAR(4000) ,
 	@instruction NVARCHAR(4000),
-	@training INT
+	@training INT,
+	@id INT OUTPUT
 AS
 BEGIN
 
@@ -25,7 +26,8 @@ BEGIN
 	BEGIN
 		INSERT INTO Equipment (code, name, description, purpose, instruction, training, category_id, room_space_id) 
 		VALUES (@code, @name, @description, @purpose, @instruction, @training, 1, 1);
-		
+		SET @id = SCOPE_IDENTITY();
+		INSERT INTO EquipmentItem (equipment_id, num, status) VALUES (@id, 1, 1);
 	END
 END
 	
