@@ -140,24 +140,28 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Code</td>
-                                <td><asp:TextBox runat="server" ID="CodeTextBox" CssClass="form-control" Text='<%# Eval("code") %>' Enabled="false"></asp:TextBox></td>
+                                <td><asp:TextBox runat="server" ID="eCodeUpdateTextBox" CssClass="form-control" Text='<%# Eval("code") %>' Enabled="false"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Name</td>
-                                <td><asp:TextBox runat="server" ID="NameTextBox"  CssClass="form-control" Text='<%# Bind("name") %>'></asp:TextBox></td>
+                                <td><asp:TextBox runat="server" ID="eNameUpdateTextBox"  CssClass="form-control" Text='<%# Bind("name") %>'></asp:TextBox></td>
                             </tr>
 
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Description</td>
-                                <td><asp:TextBox runat="server" TextMode="MultiLine" ID="DescriptionTextBox"  CssClass="form-control" Text='<%# Bind("description") %>'></asp:TextBox></td>
+                                <td><asp:TextBox runat="server" TextMode="MultiLine" ID="eDescUpdateTextBox"  CssClass="form-control" Text='<%# Bind("description") %>'></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Function</td>
-                                <td><asp:TextBox runat="server" TextMode="MultiLine" ID="FunctionTextbox"  CssClass="form-control" Text='<%# Bind("purpose") %>'></asp:TextBox></td>
+                                <td><asp:TextBox runat="server" TextMode="MultiLine" ID="eFunctionUpdateTextBox"  CssClass="form-control" Text='<%# Bind("purpose") %>'></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold px-5 py-2">Instruction</td>
+                                <td><asp:TextBox runat="server" TextMode="MultiLine" ID="eInstructionUpdateTextBox"  CssClass="form-control" Text='<%# Bind("instruction") %>'></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Training</td>
-                                <td><asp:CheckBox runat="server" ID="TrainingCheckbox" Checked='<%# Convert.ToInt32( Eval("training")).Equals(1)%>'/></td>
+                                <td><asp:CheckBox runat="server" ID="eTrainingUpdateCheckbox" Checked='<%# Convert.ToInt32( Eval("training")).Equals(1)%>'/></td>
                             </tr>
                         </table>
                         <div class="d-flex justify-content-center mt-4">

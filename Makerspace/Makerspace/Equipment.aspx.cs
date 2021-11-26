@@ -171,8 +171,7 @@ namespace Makerspace
         protected void EquipmentFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
         {
             // Minh fills in code
-            if (e.CommandName.ToString() == "New" ||
-                e.CommandName.ToString() == "Update")
+            if (e.CommandName.ToString() == "New")
             {
                 ItemsFormView.Visible = false;
                 EquipmentFormView.Visible = true;
@@ -263,7 +262,6 @@ namespace Makerspace
                 //else
                 //{
                 //    string message = e.exception.message; ==>  try getting message from null object reference is invalid (e.exception = null)
-                //    string message = "System error. Please try later.";
                 //    string script = "window.onload = function(){ alert('" + message + "')};";
                 //    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
                 //    e.ExceptionHandled = true;
@@ -293,31 +291,47 @@ namespace Makerspace
         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
         {
             Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int id);
-            string code = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
+            // equipment code is uneditable
+            //string code = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
             string name = ((TextBox)EquipmentFormView.FindControl("eNameUpdateTextBox")).Text;
             string description = ((TextBox)EquipmentFormView.FindControl("eDescUpdateTextBox")).Text;
             string purpose = ((TextBox)EquipmentFormView.FindControl("eFunctionUpdateTextBox")).Text;
-            string instruction = ((TextBox)EquipmentFormView.FindControl("eManualUpdateTextBox")).Text;
+            string instruction = ((TextBox)EquipmentFormView.FindControl("eInstructionUpdateTextBox")).Text;
             //string eSafety = ((TextBox)EquipmentFormView.FindControl("eSafetyUpdateTextBox")).Text;
-            int training = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingCheckBox")).Checked ? 1 : 0);
+            int training = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingUpdateCheckBox")).Checked ? 1 : 0);
 
             using (SqlConnection con = new SqlConnection(CONSTRING))
             using (SqlCommand cmd = new SqlCommand("uspUpdateEquip@eID", con))
             {
+                int affectedRows = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@eID", id);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@code", code);
-                cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@purpose", purpose);
-                cmd.Parameters.AddWithValue("@instruction", instruction);
+                cmd.Parameters.AddWithValue("@eName", name);
+                //cmd.Parameters.AddWithValue("@eCode", code);
+                cmd.Parameters.AddWithValue("@eDesc", description);
+                cmd.Parameters.AddWithValue("@eFunction", purpose);
+                cmd.Parameters.AddWithValue("@eInstruction", instruction);
                 //cmd.Parameters.AddWithValue("@eSafety", eSafety);
-                cmd.Parameters.AddWithValue("@training", training);
+                cmd.Parameters.AddWithValue("@eTraining", training);
                 con.Open();
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    affectedRows = cmd.ExecuteNonQuery();
+                    EquipmentFormView_ItemUpdated(sender, new FormViewUpdatedEventArgs(affectedRows, null));
+                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                    //BindFV(EquipmentFormView, "uspReadEquipment@id", "@id", id);
+                    // EquipmentFormview and ItemsFormView use the same SQL source for databinding ==> loadDataFormViews(id) helps rebind both FVs with same SQL resource
+                    loadDataFormViews(id);
+                    load(); // gridview reloading needed
+                    EquipmentModalPopup.Show();
+                }
+                catch (Exception exception)
+                {
+                    EquipmentFormView_ItemUpdated(sender, new FormViewUpdatedEventArgs(affectedRows, exception));
+                }
+                
             }
-            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-            BindFV(EquipmentFormView, "uspReadEquipment@id", "@id", id);
+
         }
         protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
         {
@@ -325,19 +339,20 @@ namespace Makerspace
             {
                 if (e.AffectedRows == 1)
                 {
-                    String keyFieldValue = e.Keys["eName"].ToString();
-                    string message = keyFieldValue + "has been updated successfully";
+                    // String keyFieldValue = e.Keys["eName"].ToString(); ==> e.keys["eName"] not existed
+                    String keyFieldValue = EquipGV.SelectedRow.Cells[0].Text.Trim(); // get equipment code of EquipmentFormview via the code of selected row Gridview
+                    string message = "Equipment " + keyFieldValue + " has been updated successfully";
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
                 }
-                else
-                {
-                    string message = e.Exception.Message;
-                    string script = "window.onload = function(){ alert('" + message + "')};";
-                    ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
-                    e.ExceptionHandled = true;
-                    e.KeepInEditMode = true;
-                }
+                //else
+                //{
+                //    string message = e.Exception.Message; ==>  try getting message from null object reference is invalid (e.exception = null)
+                //    string script = "window.onload = function(){ alert('" + message + "')};";
+                //    ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
+                //    e.ExceptionHandled = true;
+                //    e.KeepInEditMode = true;
+                //}
             }
             else
             {
