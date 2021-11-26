@@ -108,10 +108,6 @@
                                 <td><asp:TextBox runat="server" ID="NameTextBox"  CssClass="form-control"></asp:TextBox></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Location</td>
-                                <td><asp:TextBox runat="server" ID="locIDTextBox"  CssClass="form-control"></asp:TextBox></td>
-                            </tr>
-                            <tr>
                                 <td class="font-weight-bold px-5 py-2">Description</td>
                                 <td><asp:TextBox runat="server" TextMode="MultiLine" ID="DescriptionTextBox"  CssClass="form-control"></asp:TextBox></td>
 
@@ -120,6 +116,10 @@
                                 <td class="font-weight-bold px-5 py-2">Function</td>
                                 <td><asp:TextBox runat="server" TextMode="MultiLine" ID="FunctionTextbox"  CssClass="form-control"></asp:TextBox></td>
                             
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold px-5 py-2">Instruction</td>
+                                <td><asp:TextBox runat="server" ID="InstructionTextBox"  CssClass="form-control"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Training</td>

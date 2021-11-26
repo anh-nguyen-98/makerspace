@@ -10,26 +10,21 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[uspInsertEquipment]
+ALTER PROCEDURE [dbo].[uspInsertEquipment]
 	-- Add the parameters for the stored procedure here
-	@id INT,
-	@code INT,
+	@code NCHAR(15),
 	@name NVARCHAR,
     @description NVARCHAR(4000),
 	@purpose NVARCHAR(4000) ,
 	@instruction NVARCHAR(4000),
-	@training INT,
+	@training INT
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	IF NOT EXISTS (SELECT * FROM Equipment WHERE id = @id) 
 	BEGIN
-		INSERT INTO Equipment (id, code, name, description, purpose, instruction, training) 
-		VALUES (@id, @code, @name, @description, @purpose, @instruction, @training);
+		INSERT INTO Equipment (code, name, description, purpose, instruction, training, category_id, room_space_id) 
+		VALUES (@code, @name, @description, @purpose, @instruction, @training, 1, 1);
 		
 	END
 END

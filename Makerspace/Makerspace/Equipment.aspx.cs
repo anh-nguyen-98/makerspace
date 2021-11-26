@@ -43,19 +43,6 @@ namespace Makerspace
             }
         }
 
-
-
-        protected void EquipGV_PageIndexChanging(object sender, GridViewPageEventArgs e, Label MessageLabel)
-        {
-           if (AddItemFV.CurrentMode == FormViewMode.Edit)
-           {
-               e.Cancel = true;
-               MessageLabel.Text = "Please finish the form before move to new page.";
-           }
-           EquipGV.PageIndex = e.NewPageIndex;
-
-        }
-
         private void loadDataFormViews (int equipment_id)
         {
             SqlConnection con = new SqlConnection(CONSTRING);
@@ -203,17 +190,9 @@ namespace Makerspace
             {
                 EquipmentFormView.Visible = true;
                 ItemsFormView.Visible = true;
-                EquipmentFormView.Visible = true;
             }
             if (e.CommandName.ToString() == "Cancel")
             {
-                EquipmentModalPopup.Hide();
-
-            } else {
-
-                EquipmentModalPopup.Show();
-            }
-
                 EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
                 ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
                 if (EquipmentFormView.DataKey.Value == null) return;
@@ -221,45 +200,54 @@ namespace Makerspace
                 loadDataFormViews(equipment_id);
                 EquipmentFormView.Visible = true;
                 ItemsFormView.Visible = true;
+                EquipmentModalPopup.Hide();
             } 
-            EquipmentModalPopup.Show();
+            else {
+                EquipmentModalPopup.Show();
+            }
         }
 
         protected void EquipmentFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
             string code = ((TextBox)EquipmentFormView.FindControl("CodeTextBox")).Text;
             string name = ((TextBox)EquipmentFormView.FindControl("NameTextBox")).Text;
-            string description = ((TextBox)EquipmentFormView.FindControl("DescriptionTextBox")).ToString();
-            string function = ((TextBox)EquipmentFormView.FindControl("FunctionTextBox")).ToString();
+            string description = ((TextBox)EquipmentFormView.FindControl("DescriptionTextBox")).Text;
+            string function = ((TextBox)EquipmentFormView.FindControl("FunctionTextBox")).Text;
+            string instruction = ((TextBox)EquipmentFormView.FindControl("InstructionTextBox")).Text;
             CheckBox training = (CheckBox)EquipmentFormView.FindControl("Trainingcheckbox");
             using (SqlConnection con = new SqlConnection(CONSTRING))
             using (SqlCommand cmd = new SqlCommand("uspInsertEquipment", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@eCode", code);
-                cmd.Parameters.AddWithValue("@eName", name);
-                //no locID in equipment --> remove UI locID
-                cmd.Parameters.AddWithValue("@eDesc", description);
-                cmd.Parameters.AddWithValue("@eFunction", function);
-
+                cmd.Parameters.AddWithValue("@code", code);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@description", description);
+                cmd.Parameters.AddWithValue("@purpose", function);
+                cmd.Parameters.AddWithValue("@instruction", instruction);
                 if (training.Checked)
                 {
-                    cmd.Parameters.AddWithValue("@eTraining", 1);
+                    cmd.Parameters.AddWithValue("@training", 1);
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@eTraining", 0);
+                    cmd.Parameters.AddWithValue("@training", 0);
                 }
                 con.Open();
-                cmd.ExecuteNonQuery();
-                
+                int affectedRows = 0;
+                try
+                {
 
+                    affectedRows = cmd.ExecuteNonQuery();
+                    EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
+                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                    EquipmentModalPopup.Hide();
+                    load();
+                }
+                catch (Exception exception)
+                {
+                    EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, exception));
+                }
             }
-            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-            Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int id);
-            BindFV(EquipmentFormView, "uspReadEquipment@id", "@id", id);
-
-
         }
 
         protected void EquipmentFormView_ItemInserted(object sender, FormViewInsertedEventArgs e)
@@ -272,18 +260,21 @@ namespace Makerspace
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
                 }
-                else
-                {
-                    string message = e.Exception.Message;
-                    string script = "window.onload = function(){ alert('" + message + "')};";
-                    ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
-                    e.ExceptionHandled = true;
-                    e.KeepInInsertMode = true;
-                }
+                //else
+                //{
+                //    string message = e.exception.message; ==>  try getting message from null object reference is invalid (e.exception = null)
+                //    string message = "System error. Please try later.";
+                //    string script = "window.onload = function(){ alert('" + message + "')};";
+                //    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                //    e.ExceptionHandled = true;
+                //    e.KeepInInsertMode = false;
+                //}
             }
             else
             {
-                string message = e.Exception.Message;
+                //string message = e.Exception.Message; ==> accessing e.Exception.Message throws error for unknown reason
+                // the message is hardcoded temporarily, for duplicate key might be the only error from user in this case. More check is required.
+                string message = "Equipment code already exists";
                 string script = "window.onload = function(){ alert('" + message + "')};";
                 ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
                 e.ExceptionHandled = true;
@@ -324,9 +315,7 @@ namespace Makerspace
                 cmd.Parameters.AddWithValue("@training", training);
                 con.Open();
                 cmd.ExecuteNonQuery();
-
             }
-
             EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
             BindFV(EquipmentFormView, "uspReadEquipment@id", "@id", id);
         }
@@ -428,42 +417,45 @@ namespace Makerspace
             BindFV(ItemsFormView, "uspReadEquipmentItemsByEquipmentId", "@equipmentId", id);
         }
 
-//---------------SAMPLE------------------------------------------------------------------------//
-      // START: MINH CAN REUSE THESE METHODS BELOW FOR FILLING THE LOGIC METHODS ABOVE
+        //---------------SAMPLE------------------------------------------------------------------------//
+        // START: MINH CAN REUSE THESE METHODS BELOW FOR FILLING THE LOGIC METHODS ABOVE
         //Update equipment info 
-//         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-//             if (e.NewMode.Equals(FormViewMode.Edit))
-//             {
-//                 int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
-//                 loadDataFormViews(equipment_id);
+        //protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
+        //{
+        //    if (e.NewMode.Equals(FormViewMode.Edit))
+                     
+        //                 int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+        //        loadDataFormViews(equipment_id);
+        //        { }
 
-//             }
-//         }
+        //}
 
-//         protected void DeliveryDateCalendar_SelectionChanged(object sender, EventArgs e)
-//         {
-//             EquipmentModalPopup.Show();
-//         }
 
-//         protected void ItemsFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
-//         {
-//             // Minh fills in code
-//             if (e.CommandName.ToString() == "Edit") {
-//                 EquipmentFormView.Visible = false;
-//                 ItemsFormView.Visible = true;
-//             }
-//             else if (e.CommandName.ToString() == "Cancel")
-//             {
-//                 EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-//                 ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
-//                 int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
-//                 loadDataFormViews(equipment_id);
-//                 EquipmentFormView.Visible = true;
-//                 ItemsFormView.Visible = true;
-//             }
-//             EquipmentModalPopup.Show();
-//         }
-//---------------------------------------------------------------------------------------------------------//
+    protected void DeliveryDateCalendar_SelectionChanged(object sender, EventArgs e)
+        {
+            EquipmentModalPopup.Show();
+        }
+
+        protected void ItemsFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            // Minh fills in code
+            if (e.CommandName.ToString() == "Edit")
+            {
+                EquipmentFormView.Visible = false;
+                ItemsFormView.Visible = true;
+            }
+            else if (e.CommandName.ToString() == "Cancel")
+            {
+                EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
+                int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+                loadDataFormViews(equipment_id);
+                EquipmentFormView.Visible = true;
+                ItemsFormView.Visible = true;
+            }
+            EquipmentModalPopup.Show();
+        }
+        //---------------------------------------------------------------------------------------------------------//
 
         protected void ItemsFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
