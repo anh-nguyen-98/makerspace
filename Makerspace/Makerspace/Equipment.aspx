@@ -86,7 +86,8 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Instruction:</td>
-                                <td class="px-5 py-2"><%#Eval("instruction") %></td>
+                                <%--<td class="px-5 py-2"><%#Eval("instruction") %></td>--%>
+                                <td><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="https://www.google.com.vn/?hl=vi" >HyperLink</asp:HyperLink></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Training:</td>

@@ -239,6 +239,7 @@ namespace Makerspace
                     affectedRows = cmd.ExecuteNonQuery();
                     EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
                     EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                    ItemsFormView.Visible = false;
                     EquipmentModalPopup.Hide();
                     load();
                 }
@@ -433,8 +434,14 @@ namespace Makerspace
         protected void ItemsFormView_ModeChanging(object sender, FormViewModeEventArgs e)
         {
             ItemsFormView.ChangeMode(e.NewMode);
-            Int32.TryParse(ItemsFormView.DataKey.Value.ToString(), out int id);
-            BindFV(ItemsFormView, "uspReadEquipmentItemsByEquipmentId", "@equipmentId", id);
+            //Int32.TryParse(ItemsFormView.DataKey.Value.ToString(), out int id);
+            //BindFV(ItemsFormView, "uspReadEquipmentItemsByEquipmentId", "@equipmentId", id);
+            if (e.NewMode.Equals(FormViewMode.Edit))
+            {
+                int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value.ToString());
+                loadDataFormViews(equipment_id);
+
+            }
         }
 
         //---------------SAMPLE------------------------------------------------------------------------//
