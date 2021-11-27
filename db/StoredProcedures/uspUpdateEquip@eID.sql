@@ -21,24 +21,19 @@ GO
 CREATE PROCEDURE [dbo].[uspUpdateEquip@eID]
 	-- Add the parameters for the stored procedure here
 	@eID int,
-	@eCode NCHAR(15),
 	@eName NVARCHAR(256),
 	@eDesc NVARCHAR(4000),
 	@eFunction NVARCHAR(4000),
-	@eManual NVARCHAR(4000),
-	@eSafety NVARCHAR(4000),
+	@eInstruction NVARCHAR(4000),
 	@eTraining int
 
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
 	UPDATE Equipment
-	SET eCode = @eCode, eName = @eName, eDesc = @eDesc, eFunction = @eFunction,
-	eManual = @eManual, eSafety = @eSafety, eTraining=@eTraining
-	WHERE eID = @eID
+	SET name = @eName, description = @eDesc, purpose = @eFunction,
+	instruction = @eInstruction, training=@eTraining
+	WHERE id = @eID
 END
 GO

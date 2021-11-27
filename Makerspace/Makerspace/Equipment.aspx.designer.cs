@@ -42,6 +42,15 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.DropDownList CategoryDdl;
 
         /// <summary>
+        /// AddNewEquipment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddNewEquipment;
+
+        /// <summary>
         /// EquipGV control.
         /// </summary>
         /// <remarks>
@@ -51,17 +60,12 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.GridView EquipGV;
 
         /// <summary>
-        /// EquipFormView control.
         /// PseudoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView EquipFormView;
-
-        /// <summary>
-        /// ItemGridPanel control.
         protected global::System.Web.UI.WebControls.Button PseudoBtn;
 
         /// <summary>
@@ -71,11 +75,16 @@ namespace Makerspace
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ItemGridPanel;
+        protected global::AjaxControlToolkit.ModalPopupExtender EquipmentModalPopup;
 
         /// <summary>
-        /// ItemCount control.
-        protected global::AjaxControlToolkit.ModalPopupExtender EquipmentModalPopup;
+        /// ClosePopupBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ClosePopupBtn;
 
         /// <summary>
         /// EquipmentFormView control.
@@ -84,24 +93,7 @@ namespace Makerspace
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ItemCount;
-
-        /// <summary>
-        /// ItemGV control.
         protected global::System.Web.UI.WebControls.FormView EquipmentFormView;
-
-        /// <summary>
-        /// ItemsModalPopup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ItemGV;
-
-        /// <summary>
-        /// MessageLabel control.
-        protected global::AjaxControlToolkit.ModalPopupExtender ItemsModalPopup;
 
         /// <summary>
         /// ItemsFormView control.
@@ -110,25 +102,6 @@ namespace Makerspace
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MessageLabel;
-
-        /// <summary>
-        /// AddItemBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddItemBtn;
-
-        /// <summary>
-        /// AddItemFV control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView AddItemFV;
         protected global::System.Web.UI.WebControls.FormView ItemsFormView;
     }
 }
