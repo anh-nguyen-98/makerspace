@@ -18,7 +18,7 @@ ALTER PROCEDURE [dbo].[uspInsertEquipment]
 	@purpose NVARCHAR(4000) ,
 	@instruction NVARCHAR(4000),
 	@training INT,
-	@id INT OUTPUT
+	@id INT = 0 OUTPUT
 AS
 BEGIN
 
