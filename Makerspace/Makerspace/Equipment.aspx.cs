@@ -238,9 +238,8 @@ namespace Makerspace
                 {
                     affectedRows = cmd.ExecuteNonQuery();
                     EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
-                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-                    ItemsFormView.Visible = false;
                     EquipmentModalPopup.Hide();
+                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
                     load();
                 }
                 catch (Exception exception)
