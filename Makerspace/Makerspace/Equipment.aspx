@@ -41,7 +41,7 @@
             </asp:GridView>
             <%-- endregion: Equipment Gridview --%>
 
-            <asp:Button ID="PseudoBtn" runat="server" />
+            <asp:Button ID="PseudoBtn" runat="server" CssClass="d-none" />
             
             <%-- startregion: PopUp (Equipment Formview + Equipment SubItems Formview) --%>
             <ajaxToolkit:ModalPopupExtender ID="EquipmentModalPopup" runat="server" TargetControlID="PseudoBtn" PopupControlID="divPopUp" ></ajaxToolkit:ModalPopupExtender>
