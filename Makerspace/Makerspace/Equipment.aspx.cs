@@ -238,6 +238,7 @@ namespace Makerspace
                 {
                     affectedRows = cmd.ExecuteNonQuery();
                     EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
+                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
                     EquipmentModalPopup.Hide();
                     load();
                 }
@@ -252,7 +253,7 @@ namespace Makerspace
         {
             if (e.Exception == null)
             {
-                if (e.AffectedRows == 1)
+                if (e.AffectedRows == 1 || e.AffectedRows == 2)
                 {
                     string message = "New equipment added successfully";
                     string script = "window.onload = function(){ alert('" + message + "')};";
