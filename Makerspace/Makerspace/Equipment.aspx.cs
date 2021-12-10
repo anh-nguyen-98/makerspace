@@ -199,7 +199,7 @@ namespace Makerspace
                 loadDataFormViews(equipment_id);
                 EquipmentFormView.Visible = true;
                 ItemsFormView.Visible = true;
-                EquipmentModalPopup.Hide();
+                EquipmentModalPopup.Show();
             } 
             else {
                 EquipmentModalPopup.Show();

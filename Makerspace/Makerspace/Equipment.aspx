@@ -65,32 +65,32 @@
                         </h3>
                         <table >
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Code:</td>
+                                <td class="font-weight-bold px-5 py-2">Code</td>
                                 <td class="px-5 py-2"><%#Eval("code") %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Name:</td>
+                                <td class="font-weight-bold px-5 py-2">Name</td>
                                 <td class="px-5 py-2"><%#Eval("name") %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Total:</td>
+                                <td class="font-weight-bold px-5 py-2">Total</td>
                                 <td class="px-5 py-2"><%= ItemsCount %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Description:</td>
+                                <td class="font-weight-bold px-5 py-2">Description</td>
                                 <td class="px-5 py-2"><%#Eval("description") %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Function:</td>
+                                <td class="font-weight-bold px-5 py-2">Function</td>
                                 <td class="px-5 py-2"><%#Eval("purpose") %></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Instruction:</td>
+                                <td class="font-weight-bold px-5 py-2">Instruction</td>
                                 <%--<td class="px-5 py-2"><%#Eval("instruction") %></td>--%>
                                 <td class="px-5 py-2"><asp:HyperLink ID="HyperLink" runat="server" NavigateUrl="https://www.google.com.vn/?hl=vi">Guide to use <%#Eval("name") %></asp:HyperLink></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold px-5 py-2">Training:</td>
+                                <td class="font-weight-bold px-5 py-2">Training</td>
                                 <td class="px-5 py-2"><%# Convert.ToInt32( Eval("training")).Equals(1) ? "Yes" : "No" %></td> 
                             </tr>           
                         </table>
