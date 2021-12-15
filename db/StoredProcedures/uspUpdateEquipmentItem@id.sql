@@ -34,5 +34,5 @@ BEGIN
 	SET location_id = @location_id, status = @status, delivered_at = @delivered_at,
 	removed_at = @removed_at
 	WHERE id = @id
+
 END
-GO

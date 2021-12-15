@@ -67,6 +67,13 @@ namespace Makerspace
                 string message = "There is no available item for this equipment.";
                 string script = "window.onload = function(){ alert('" + message + "')};";
                 ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
+                SqlCommand sqlCommand = new SqlCommand("SELECT id as equipment_id, name, code, description, purpose, instruction, training FROM Equipment WHERE id=" + equipment_id);
+                sqlCommand.Connection = con;
+                dt = new DataTable();
+                adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dt);
+                EquipmentFormView.DataSource = dt;
+                EquipmentFormView.DataBind();
             }
         }
 
@@ -146,6 +153,10 @@ namespace Makerspace
                 EquipmentFormView.Visible = true;
                 ItemsFormView.Visible = true;
                 EquipmentModalPopup.Show();
+            }
+            else if (e.CommandName.ToString() == "Delete")
+            {
+   
             }
         }
         protected void ClosePopupModalBtn_Click(object sender, EventArgs e)
@@ -428,7 +439,7 @@ namespace Makerspace
             }
         }
 
-    protected void DeliveryDateCalendar_SelectionChanged(object sender, EventArgs e)
+        protected void DeliveryDateCalendar_SelectionChanged(object sender, EventArgs e)
         {
             EquipmentModalPopup.Show();
         }
@@ -439,6 +450,11 @@ namespace Makerspace
             if (e.CommandName.ToString() == "Edit")
             {
                 EquipmentFormView.Visible = false;
+                ItemsFormView.Visible = true;
+            }
+            if (e.CommandName.ToString() == "Update")
+            {
+                EquipmentFormView.Visible = true;
                 ItemsFormView.Visible = true;
             }
             else if (e.CommandName.ToString() == "Cancel")
@@ -457,11 +473,10 @@ namespace Makerspace
         protected void ItemsFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
             int equipment_id = Convert.ToInt32(EquipmentFormView.DataKey.Value);
-            int location_id = (Convert.ToInt32((TextBox)ItemsFormView.FindControl("locIDTextBox")));
-            Calendar itemDeliveryDate = (Calendar)ItemsFormView.FindControl("DeliveryDateCalendar");
-            //missing UI for itemRemovalDate
-            Calendar itemRemovalDate = (Calendar)ItemsFormView.FindControl("RemovalDateCalendar");
-            int itemStatus = Convert.ToInt32(((CheckBox)ItemsFormView.FindControl("statusCheckBox")).Checked ? 1 : 0);
+            int location_id = Convert.ToInt32(((TextBox)ItemsFormView.FindControl("locIDTextBox")).Text);
+            string itemDeliveryDate = ((TextBox)ItemsFormView.FindControl("DeliveryDateTextbox")).Text;
+            string itemRemovalDate = ((TextBox)ItemsFormView.FindControl("RemovalDateTextbox")).Text;
+            int itemStatus = ((CheckBox)ItemsFormView.FindControl("statusCheckBox")).Checked ? 1 : 0;
             using (SqlConnection con = new SqlConnection(CONSTRING))
             using (SqlCommand cmd = new SqlCommand("uspInsertEquipItem", con))
             {
@@ -479,6 +494,7 @@ namespace Makerspace
                     ItemsFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
                     EquipmentModalPopup.Hide();
                     EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                    ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
                     load();
                     loadDataFormViews(equipment_id);
                 }
@@ -513,10 +529,10 @@ namespace Makerspace
         protected void ItemsFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
         {
             Int32.TryParse(ItemsFormView.DataKey.Value.ToString(), out int id);
-            int location_id = (Convert.ToInt32((TextBox)ItemsFormView.FindControl("locIDTextBox")));
-            Calendar itemDeliveryDate = (Calendar)ItemsFormView.FindControl("DeliveryDateCalendar");
-            Calendar itemRemovalDate = (Calendar)ItemsFormView.FindControl("RemovalDateCalendar");
-            int itemStatus = Convert.ToInt32(((CheckBox)ItemsFormView.FindControl("statusCheckBox")).Checked ? 1 : 0);
+            int location_id = Convert.ToInt32(((TextBox)ItemsFormView.FindControl("locIDTextBoxEdit")).Text);
+            string itemDeliveryDate = ((TextBox)ItemsFormView.FindControl("DeliveryDateTextboxEdit")).Text;
+            string itemRemovalDate = ((TextBox)ItemsFormView.FindControl("RemovalDateTextboxEdit")).Text;         
+            int itemStatus = Convert.ToInt32(((CheckBox)ItemsFormView.FindControl("statusCheckBoxEdit")).Checked ? 1 : 0);
 
             using (SqlConnection con = new SqlConnection(CONSTRING))
             using (SqlCommand cmd = new SqlCommand("uspUpdateEquipItem@id", con))
@@ -533,8 +549,10 @@ namespace Makerspace
                 {
                     affectedRows = cmd.ExecuteNonQuery();
                     ItemsFormView_ItemUpdated(sender, new FormViewUpdatedEventArgs(affectedRows, null));
+                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
                     ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
-                    loadDataFormViews(id);
+                    Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int equipment_id);
+                    loadDataFormViews(equipment_id);
                     EquipmentModalPopup.Show();
                 }
                 catch (Exception exception)
@@ -588,11 +606,10 @@ namespace Makerspace
                 }
 
             }
-
-
-
+            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
             ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
-            loadDataFormViews(id);
+            Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int equipment_id);
+            loadDataFormViews(equipment_id);
             EquipmentModalPopup.Show();
 
         }
@@ -603,7 +620,7 @@ namespace Makerspace
             {
                 if (e.AffectedRows >= 1)
                 {
-                    string message = "Equipment deleted";
+                    string message = "Equipment item deleted";
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
                 }
@@ -617,185 +634,60 @@ namespace Makerspace
             }
         }
 
-//--------------------------------------------------------------------------------------------------------//
-        // START: MINH CAN REUSE THESE METHODS BELOW FOR FILLING THE LOGIC METHODS ABOVE
-        // Update equipment info 
-//         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-//         {
+        protected void RemovalDateCalendar_SelectionChanged(object sender, EventArgs e)
+        {
+            EquipmentModalPopup.Show();
+        }
 
-//            Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int eID);
-//            string eCode = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
-//            string eName = ((TextBox)EquipmentFormView.FindControl("eNameUpdateTextBox")).Text;
-//            string eDesc = ((TextBox)EquipmentFormView.FindControl("eDescUpdateTextBox")).Text;
-//            string eFunction = ((TextBox)EquipmentFormView.FindControl("eFunctionUpdateTextBox")).Text;
-//            string eManual = ((TextBox)EquipmentFormView.FindControl("eManualUpdateTextBox")).Text;
-//            string eSafety = ((TextBox)EquipmentFormView.FindControl("eSafetyUpdateTextBox")).Text;
-//            int eTraining = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingCheckBox")).Checked ? 1 : 0);
+        protected void EquipGV_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int rowIndex = Convert.ToInt32(e.RowIndex);
+            int equipment_id = Convert.ToInt32(EquipGV.DataKeys[rowIndex].Value.ToString());
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            {
+                con.Open();
+                int affectedRows = 0;
+                using (SqlCommand deleteCmd = new SqlCommand("DELETE FROM Equipment WHERE id = " + equipment_id + "", con))
+                {
+                    try
+                    {
+                        affectedRows = deleteCmd.ExecuteNonQuery();
+                        EquipGV_RowDeleted(sender, new GridViewDeletedEventArgs(affectedRows, null));
+                        SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment", new SqlConnection(CONSTRING));
+                        selectCmd.CommandType = CommandType.StoredProcedure;
+                        DataTable dt = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(selectCmd);
+                        adapter.Fill(dt);
+                        EquipGV.DataSource = dt;
+                        EquipGV.DataBind();
+                    }
+                    catch (Exception exception)
+                    {
+                        EquipGV_RowDeleted(sender, new GridViewDeletedEventArgs(affectedRows, exception));
+                    }
+                }
+            }
+        }
 
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("uspUpdateEquip@eID", con))
-//            {
-//                cmd.CommandType = CommandType.StoredProcedure;
-//                cmd.Parameters.AddWithValue("@eID", eID);
-//                cmd.Parameters.AddWithValue("@eName", eName);
-//                cmd.Parameters.AddWithValue("@eCode", eCode);
-//                cmd.Parameters.AddWithValue("@eDesc", eDesc);
-//                cmd.Parameters.AddWithValue("@eFunction", eFunction);
-//                cmd.Parameters.AddWithValue("@eManual", eManual);
-//                cmd.Parameters.AddWithValue("@eSafety", eSafety);
-//                cmd.Parameters.AddWithValue("@eTraining", eTraining);
-//                con.Open();
-//                cmd.ExecuteNonQuery();
-
-//            }
-
-//            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-//            BindFV(EquipmentFormView, "uspReadEquip@eID", "@eID", eID);
-
-//         }
-
-        //Verify Equip Info Updates
-//         protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e, Label MessageLabel)
-//         {
-//            if (e.Exception == null)
-//            {
-//                if (e.AffectedRows == 1)
-//                {
-//                    String keyFieldValue = e.Keys["eName"].ToString();
-//                    MessageLabel.Text = keyFieldValue + "has been updated successfully";
-//                }
-//                else
-//                {
-//                    MessageLabel.Text = "An errror occured during the update process";
-//                    e.ExceptionHandled = true;
-//                    e.KeepInEditMode = true;
-//                }
-//            }
-//         }
-//         //Delete equipment on form view
-//         protected void EquipmentFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
-//         {
-//            int id = Convert.ToInt32(EquipmentFormView.DataKey.Value);
-//            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
-
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
-//            {
-//                con.Open();
-//                cmd.CommandType = CommandType.Text;
-//                cmd.ExecuteNonQuery();
-
-//            }
-//            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-
-//            BindFV(EquipmentFormView, "uspReadEquipItem@itemID", "@itemID", 0);
-//            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
-//            selectCmd.CommandType = CommandType.StoredProcedure;
-//            selectCmd.Parameters.AddWithValue("@eID", eID);
-//            BindGV(EquipGV, selectCmd, ItemCount);
-//         }
-
-
-//         //Verify deleting equipment process
-//         protected void EquipmentFormView_ItemDeleted(object sender, FormViewDeletedEventArgs e, Label MessageLabel)
-//         {
-//            if (e.Exception == null)
-//            {
-//                MessageLabel.Text = "Equipment Deleted";
-//            }
-//            else
-//            {
-//                MessageLabel.Text = "Could not delete equipment";
-//                e.ExceptionHandled = true;
-//            }
-//         }
-
-
-//         // add Equipment Sub-item
-//         protected void AddItemFV_ItemInserting(object sender, EventArgs e)
-//         {
-//            int eID = Convert.ToInt32(((TextBox)AddItemFV.FindControl("eIDTextBox")).Text);
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("uspInsertEquipItem", con))
-//            {
-//                con.Open();
-//                cmd.CommandType = CommandType.StoredProcedure;
-
-//                cmd.Parameters.AddWithValue("@eID", eID);
-
-//                cmd.Parameters.AddWithValue("@itemStatus", Convert.ToInt32(((TextBox)AddItemFV.FindControl("itemStatusTextBox")).Text));
-//                cmd.Parameters.AddWithValue("@locID", Convert.ToInt32(((TextBox)AddItemFV.FindControl("locIDTextBox")).Text));
-//                cmd.Parameters.AddWithValue("@itemDeliveryDate", ((Calendar)AddItemFV.FindControl("DeliveryDateCalendar"))
-//                    .SelectedDate.ToString());
-//                cmd.Parameters.AddWithValue("@itemRemovalDate", ((Calendar)AddItemFV.FindControl("RemovalDateCalendar"))
-//                    .SelectedDate.ToString());
-//                cmd.ExecuteNonQuery();
-
-//            }
-//            AddItemFV.ChangeMode(FormViewMode.ReadOnly);
-
-//            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
-//            selectCmd.CommandType = CommandType.StoredProcedure;
-//            selectCmd.Parameters.AddWithValue("@eID", eID);
-
-//            BindGV(ItemGV, selectCmd, ItemCount);
-//            int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
-//            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
-//         }
-
-//         ////Verify inserting process
-//         //protected void AddItemFV_ItemInserted(object sender, FormViewInsertedEventArgs e, Label MessageLabel)
-//         //{
-//         //    if (e.Exception == null)
-//         //    {
-//         //        if (e.AffectedRows == 1)
-//         //        {
-//         //            MessageLabel.Text = "New equipment added successfully";
-//         //            e.KeepInInsertMode = true;
-//         //        }
-//         //        else
-//         //        {
-//         //            MessageLabel.Text = e.Exception.Message;
-//         //            e.ExceptionHandled = true;
-//         //            e.KeepInInsertMode = true;
-//         //        }
-//         //    }
-//         //}
-
-//         // Delete Equipment Sub Item
-//         protected void ItemGV_RowDeleting(object sender, GridViewDeleteEventArgs e)
-//         {
-//            int id = Convert.ToInt32(ItemGV.Rows[e.RowIndex].FindControl("itemID").ToString());
-//            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
-//            {
-//                con.Open();
-//                cmd.CommandType = CommandType.Text;
-//                cmd.ExecuteNonQuery();
-
-//            }
-
-//            SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment");
-//            selectCmd.CommandType = CommandType.StoredProcedure;
-//            BindGV(EquipGV, selectCmd, ItemCount);
-//         }
-
-//         // Verify deleting Equipment Sub Item
-//         protected void ItemGV_RowDeleted(object sender, GridViewDeletedEventArgs e, Label Message)
-//         {
-//            if (e.Exception == null)
-//            {
-//                Message.Text = "Row deleted successfully.";
-//            }
-//            else
-//            {
-//                Message.Text = "An error occurred while attempting to delete the row.";
-//                e.ExceptionHandled = true;
-//            }
-
-//         }
-        //END
+        protected void EquipGV_RowDeleted(object sender, GridViewDeletedEventArgs e)
+        {
+            if (e.Exception == null)
+            {
+                if (e.AffectedRows == 1)
+                {
+                    string message = "Equipment deleted";
+                    string script = "window.onload = function(){ alert('" + message + "')};";
+                    ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
+                }
+            }
+            else
+            {
+                string message = "An error has occured. Please check your input";
+                string script = "window.onload = function(){ alert('" + message + "')};";
+                ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
+                e.ExceptionHandled = true;
+            }
+        }
     }
 
 }
