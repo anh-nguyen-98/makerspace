@@ -28,7 +28,7 @@
 
         <div class="my-4">
             <%-- startregion: Equipment Gridview --%>
-            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="id">
+            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="id" OnRowDeleting="EquipGV_RowDeleting" OnRowDeleted="EquipGV_RowDeleted">
                 <Columns>
                     <asp:BoundField DataField="code" HeaderText="Code"/>
                     <asp:BoundField DataField="name" HeaderText="Name"/>
@@ -36,7 +36,7 @@
                     <asp:BoundField DataField="category_name" HeaderText="Category" />
                     <asp:BoundField DataField="room_space_name" HeaderText="Location" />
                     <asp:ButtonField runat="server"  Text="Select" ControlStyle-CssClass="btn btn-primary" CommandName="Select"/>
-                    <asp:ButtonField ButtonType="Button" Text="Delete" ControlStyle-CssClass="btn btn-danger" />
+                    <asp:ButtonField ButtonType="Button" Text="Delete" ControlStyle-CssClass="btn btn-danger" CommandName="Delete"/>
                 </Columns>
             </asp:GridView>
             <%-- endregion: Equipment Gridview --%>
@@ -179,7 +179,7 @@
                 <%-- startregion: Equipment SubItems FormView --%>
                 <asp:FormView 
                     ID="ItemsFormView" 
-                    runat="server" DataKeyNames="equipment_id"
+                    runat="server" DataKeyNames="item_id"
                     CssClass="table table-borderless mb-0" Width="800px" AllowPaging="true"
                     OnPageIndexChanging="ItemsFormView_PageIndexChanging" OnModeChanging="ItemsFormView_ModeChanging" OnItemCommand="ItemsFormView_ItemCommand"
                     OnItemInserting="ItemsFormView_ItemInserting" OnItemInserted="ItemsFormView_ItemInserted"
@@ -237,11 +237,17 @@
                               <td class="font-weight-bold px-5 py-2">Delivery Date</td>
                               
                                <td class="px-5 py-2">
-                                    <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                                        <ContentTemplate>
-                                            <asp:Calendar runat="server" ID="DeliveryDateCalendar" OnSelectionChanged="DeliveryDateCalendar_SelectionChanged"></asp:Calendar>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel></td>
+                                   <asp:TextBox ID="DeliveryDateTextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                   <ajaxToolkit:CalendarExtender runat="server" PopupButtonID="imgPopup" TargetControlID="DeliveryDateTextBox" Format="MM/dd/yyyy" />
+                               </td>
+                          </tr>
+                          <tr>
+                              <td class="font-weight-bold px-5 py-2">Removal Date</td>
+                              
+                               <td class="px-5 py-2">
+                                   <asp:TextBox ID="RemovalDateTextbox" runat="server" CssClass="form-control"></asp:TextBox>
+                                   <ajaxToolkit:CalendarExtender runat="server" PopupButtonID="imgPopup" TargetControlID="RemovalDateTextbox" Format="MM/dd/yyyy" />
+                               </td>
                           </tr>
                           <tr>
                               <td class="font-weight-bold px-5 py-2">Availabe</td>
@@ -264,20 +270,26 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Location</td>
-                                <td class="px-5 py-2"><asp:TextBox runat="server" ID="locIDTextBoxEdit" CssClass="form-control"></asp:TextBox></td>
+                                <td class="px-5 py-2"><asp:TextBox runat="server" ID="locIDTextBoxEdit" CssClass="form-control" Text='<%# Bind("location_id") %>'></asp:TextBox></td>
                             </tr>    
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Available</td>
-                                <td class="px-5 py-2"> <asp:CheckBox runat="server" ID="statusCheckBoxEdit" /> </td>
+                                <td class="px-5 py-2"> <asp:CheckBox runat="server" ID="statusCheckBoxEdit" Checked='<%# Eval("status").Equals(1) %>'/></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold px-5 py-2">Delivery Date</td>
                                 <td class="px-5 py-2">
-                                    <asp:UpdatePanel runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                                        <ContentTemplate>
-                                            <asp:Calendar runat="server" ID="DeliveryDateCalendarEdit" OnSelectionChanged="DeliveryDateCalendar_SelectionChanged"></asp:Calendar>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel></td>
+                                   <asp:TextBox ID="DeliveryDateTextBoxEdit" runat="server" CssClass="form-control" Text='<%#Bind("delivered_at") %>'></asp:TextBox>
+                                   <ajaxToolkit:CalendarExtender runat="server" PopupButtonID="imgPopup" TargetControlID="DeliveryDateTextBoxEdit" Format="MM/dd/yyyy" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold px-5 py-2">Removal Date</td>
+                                <td class="px-5 py-2">
+                                   <asp:TextBox ID="RemovalDateTextBoxEdit" runat="server" CssClass="form-control" Text='<%#Bind("removed_at") %>'></asp:TextBox>
+                                   <ajaxToolkit:CalendarExtender runat="server" PopupButtonID="imgPopup" TargetControlID="RemovalDateTextBoxEdit" Format="MM/dd/yyyy" />
+                                </td>
                             </tr>
                         </table> 
                         <div class="d-flex justify-content-center mt-4">
