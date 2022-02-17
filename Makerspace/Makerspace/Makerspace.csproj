@@ -186,6 +186,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Images\hammer.jpg" />
+    <Content Include="Resource.aspx" />
     <Content Include="Equipment.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -450,6 +452,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resource.aspx.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resource.aspx.designer.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
     </Compile>
     <Compile Include="Equipment.aspx.cs">
       <DependentUpon>Equipment.aspx</DependentUpon>
