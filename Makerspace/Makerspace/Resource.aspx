@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Makerspace Equipment and Materials" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Resource.aspx.cs" Inherits="Makerspace.Resource" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %> 
-    <h1>Equipment and Materials Lookup</h1>
+    <h1>Makerspace Equipment and Materials</h1>
         <%-- startregion: Search Form --%>
         <div class="container">
             <div class="row">
@@ -10,7 +10,7 @@
                     <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary ml-1" OnClick="searchBtn_Click" Text="Search"/>
                 </div>
  
-                <div class="col-3" style="visibility:hidden">
+                <div class="col-3">
                     <asp:DropDownList ID="CategoryDdl" runat="server" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="CategoryDdl_SelectedIndexChanged">
                         <asp:ListItem Value="0">Select category</asp:ListItem>
                         <asp:ListItem Value="1">Electronics</asp:ListItem>
@@ -18,7 +18,7 @@
                         <asp:ListItem Value="3">Printing</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div class="col-3 ml-auto" style="visibility:hidden">
+                <div class="col-3 ml-auto">
                     <asp:button ID="AddNewEquipment" runat="server" type="button" CssClass="btn btn-primary float-right" Text="New equipment" OnClick="AddNewEquipment_Click"></asp:button>
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <%-- endregion: Search Form --%>
 
         <div class="my-4">
-            <%-- startregion: Equipment Gridview --%>
+            <%-- startregion: Equipment Listview --%>
 
             <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4">
                 <GroupTemplate>
@@ -37,28 +37,34 @@
                 </GroupTemplate>
                 <ItemTemplate>
                     <td runat="server" >
-                        <table>
+                        <table class="rounded text-center" style="background-color: #F1F3F6; width:180px;">
                             <tr>
-                                <td>
-                                    <img src="Images/hammer.jpg" width="100" height="75"/>
+                                <td class="px-3 pt-3">
+                                    <img class="rounded" src="Images/hammer.jpg" width="150" height="120"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-0">
+                                    <asp:Label runat="server" Text='<%# Eval("name") %>' CssClass="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label runat="server" Text='<%# Eval("code") %>'></asp:Label>
+                                    <div style="background-color: #3A4276; font-size: 12px" class="rounded font-weight-bold text-white text-small">Handtools Space</div>
+                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 20px">S12</div>
                                 </td>
                             </tr>
-                            <tr><td><br /></td></tr>
+                            
                         </table>
 
                     </td>
                 </ItemTemplate>
                 <LayoutTemplate>
-                    <table style="width:100%;">
+                    <table  style="width:100%;">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table id="groupPlaceholderContainer" runat="server" style="width:100%">
+                                    <table cellpadding="3" class="table table-borderless table-hover" id="groupPlaceholderContainer" runat="server" style="width:100%">
                                         <tr id="groupPlaceholder"></tr>
                                     </table>
                                 </td>
