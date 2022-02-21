@@ -40,18 +40,22 @@
                         <table class="rounded text-center" style="background-color: #F1F3F6; width:180px;">
                             <tr>
                                 <td class="px-3 pt-3">
-                                    <img class="rounded" src="Images/hammer.jpg" width="150" height="120"/>
+                                    <img class="rounded" src='Images/<%# Eval("image") %>' width="150" height="120"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="p-0">
                                     <asp:Label runat="server" Text='<%# Eval("name") %>' CssClass="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
+                                    <br />
+                                    <asp:Label runat="server" Text='<%# Eval("name_vie") %>' Font-Size="12px" ForeColor="#3A4276"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div style="background-color: #3A4276; font-size: 12px" class="rounded font-weight-bold text-white text-small">Handtools Space</div>
-                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 20px">S12</div>
+                                    <div style="background-color: #3A4276; font-size: 12px" class="rounded font-weight-bold text-white">
+                                        <asp:Label runat="server" Text='<%# Eval("room_space_name") %>'></asp:Label>
+                                    </div>
+                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 20px"><asp:Label runat="server" Text='<%# String.Concat (Eval("object_code").ToString().Trim(), Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
                                 </td>
                             </tr>
                             
@@ -64,7 +68,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <table cellpadding="3" class="table table-borderless table-hover" id="groupPlaceholderContainer" runat="server" style="width:100%">
+                                    <table cellpadding="3" class="table table-borderless" id="groupPlaceholderContainer" runat="server" style="width:100%">
                                         <tr id="groupPlaceholder"></tr>
                                     </table>
                                 </td>
