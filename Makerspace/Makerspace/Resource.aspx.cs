@@ -31,7 +31,7 @@ namespace Makerspace
         {
             using (SqlConnection con = new SqlConnection(CONSTRING))
             {
-                SqlCommand cmd = new SqlCommand("uspReadAllEquipment");
+                SqlCommand cmd = new SqlCommand("uspReadMostPopularEquipment");
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.Connection = con;
