@@ -165,6 +165,7 @@
     <Content Include="Images\logo.png" />
     <Content Include="Profile.aspx" />
     <Content Include="Project.aspx" />
+    <Content Include="Resource.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -323,6 +324,13 @@
     </Compile>
     <Compile Include="Equipment.aspx.designer.cs">
       <DependentUpon>Equipment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resource.aspx.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Resource.aspx.designer.cs">
+      <DependentUpon>Resource.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
