@@ -32,7 +32,9 @@
                     <table>
                         <tr>
                             <td>
-                                    <img class="center" src="Images/popular.png" height="91" width="92"/>                          
+                                <div style="background-color:#F1F3F6; height:80px; width:80px">
+                                        <img src="Images/popular.png" style="display:block; margin:auto; height:50%; width:50%"/>
+                                </div>                          
                             </td>
                          </tr>
                         <tr>
