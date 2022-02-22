@@ -79,11 +79,13 @@
                             <tr></tr>
                         </tbody>
                     </table>
+                     
                 </LayoutTemplate>
                 
             </asp:ListView>
 
-            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="id">
+            <%-- startregion: Equipment Gridview --%>
+            <asp:GridView ID="EquipGV" Visible="false" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="id">
                 <Columns>
                     <asp:BoundField DataField="code" HeaderText="Code"/>
                     <asp:BoundField DataField="name" HeaderText="Name"/>

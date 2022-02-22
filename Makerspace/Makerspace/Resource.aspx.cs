@@ -513,184 +513,184 @@ namespace Makerspace
             // Minh fills in code
         }
 
-//--------------------------------------------------------------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
         // START: MINH CAN REUSE THESE METHODS BELOW FOR FILLING THE LOGIC METHODS ABOVE
         // Update equipment info 
-//         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-//         {
+        //         protected void EquipmentFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
+        //         {
 
-//            Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int eID);
-//            string eCode = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
-//            string eName = ((TextBox)EquipmentFormView.FindControl("eNameUpdateTextBox")).Text;
-//            string eDesc = ((TextBox)EquipmentFormView.FindControl("eDescUpdateTextBox")).Text;
-//            string eFunction = ((TextBox)EquipmentFormView.FindControl("eFunctionUpdateTextBox")).Text;
-//            string eManual = ((TextBox)EquipmentFormView.FindControl("eManualUpdateTextBox")).Text;
-//            string eSafety = ((TextBox)EquipmentFormView.FindControl("eSafetyUpdateTextBox")).Text;
-//            int eTraining = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingCheckBox")).Checked ? 1 : 0);
+        //            Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int eID);
+        //            string eCode = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
+        //            string eName = ((TextBox)EquipmentFormView.FindControl("eNameUpdateTextBox")).Text;
+        //            string eDesc = ((TextBox)EquipmentFormView.FindControl("eDescUpdateTextBox")).Text;
+        //            string eFunction = ((TextBox)EquipmentFormView.FindControl("eFunctionUpdateTextBox")).Text;
+        //            string eManual = ((TextBox)EquipmentFormView.FindControl("eManualUpdateTextBox")).Text;
+        //            string eSafety = ((TextBox)EquipmentFormView.FindControl("eSafetyUpdateTextBox")).Text;
+        //            int eTraining = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingCheckBox")).Checked ? 1 : 0);
 
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("uspUpdateEquip@eID", con))
-//            {
-//                cmd.CommandType = CommandType.StoredProcedure;
-//                cmd.Parameters.AddWithValue("@eID", eID);
-//                cmd.Parameters.AddWithValue("@eName", eName);
-//                cmd.Parameters.AddWithValue("@eCode", eCode);
-//                cmd.Parameters.AddWithValue("@eDesc", eDesc);
-//                cmd.Parameters.AddWithValue("@eFunction", eFunction);
-//                cmd.Parameters.AddWithValue("@eManual", eManual);
-//                cmd.Parameters.AddWithValue("@eSafety", eSafety);
-//                cmd.Parameters.AddWithValue("@eTraining", eTraining);
-//                con.Open();
-//                cmd.ExecuteNonQuery();
+        //            using (SqlConnection con = new SqlConnection(CONSTRING))
+        //            using (SqlCommand cmd = new SqlCommand("uspUpdateEquip@eID", con))
+        //            {
+        //                cmd.CommandType = CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@eID", eID);
+        //                cmd.Parameters.AddWithValue("@eName", eName);
+        //                cmd.Parameters.AddWithValue("@eCode", eCode);
+        //                cmd.Parameters.AddWithValue("@eDesc", eDesc);
+        //                cmd.Parameters.AddWithValue("@eFunction", eFunction);
+        //                cmd.Parameters.AddWithValue("@eManual", eManual);
+        //                cmd.Parameters.AddWithValue("@eSafety", eSafety);
+        //                cmd.Parameters.AddWithValue("@eTraining", eTraining);
+        //                con.Open();
+        //                cmd.ExecuteNonQuery();
 
-//            }
+        //            }
 
-//            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-//            BindFV(EquipmentFormView, "uspReadEquip@eID", "@eID", eID);
+        //            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+        //            BindFV(EquipmentFormView, "uspReadEquip@eID", "@eID", eID);
 
-//         }
+        //         }
 
         //Verify Equip Info Updates
-//         protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e, Label MessageLabel)
-//         {
-//            if (e.Exception == null)
-//            {
-//                if (e.AffectedRows == 1)
-//                {
-//                    String keyFieldValue = e.Keys["eName"].ToString();
-//                    MessageLabel.Text = keyFieldValue + "has been updated successfully";
-//                }
-//                else
-//                {
-//                    MessageLabel.Text = "An errror occured during the update process";
-//                    e.ExceptionHandled = true;
-//                    e.KeepInEditMode = true;
-//                }
-//            }
-//         }
-//         //Delete equipment on form view
-//         protected void EquipmentFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
-//         {
-//            int id = Convert.ToInt32(EquipmentFormView.DataKey.Value);
-//            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
+        //         protected void EquipmentFormView_ItemUpdated(object sender, FormViewUpdatedEventArgs e, Label MessageLabel)
+        //         {
+        //            if (e.Exception == null)
+        //            {
+        //                if (e.AffectedRows == 1)
+        //                {
+        //                    String keyFieldValue = e.Keys["eName"].ToString();
+        //                    MessageLabel.Text = keyFieldValue + "has been updated successfully";
+        //                }
+        //                else
+        //                {
+        //                    MessageLabel.Text = "An errror occured during the update process";
+        //                    e.ExceptionHandled = true;
+        //                    e.KeepInEditMode = true;
+        //                }
+        //            }
+        //         }
+        //         //Delete equipment on form view
+        //         protected void EquipmentFormView_ItemDeleting(object sender, FormViewDeleteEventArgs e)
+        //         {
+        //            int id = Convert.ToInt32(EquipmentFormView.DataKey.Value);
+        //            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
 
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
-//            {
-//                con.Open();
-//                cmd.CommandType = CommandType.Text;
-//                cmd.ExecuteNonQuery();
+        //            using (SqlConnection con = new SqlConnection(CONSTRING))
+        //            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
+        //            {
+        //                con.Open();
+        //                cmd.CommandType = CommandType.Text;
+        //                cmd.ExecuteNonQuery();
 
-//            }
-//            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+        //            }
+        //            EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
 
-//            BindFV(EquipmentFormView, "uspReadEquipItem@itemID", "@itemID", 0);
-//            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
-//            selectCmd.CommandType = CommandType.StoredProcedure;
-//            selectCmd.Parameters.AddWithValue("@eID", eID);
-//            BindGV(EquipGV, selectCmd, ItemCount);
-//         }
-
-
-//         //Verify deleting equipment process
-//         protected void EquipmentFormView_ItemDeleted(object sender, FormViewDeletedEventArgs e, Label MessageLabel)
-//         {
-//            if (e.Exception == null)
-//            {
-//                MessageLabel.Text = "Equipment Deleted";
-//            }
-//            else
-//            {
-//                MessageLabel.Text = "Could not delete equipment";
-//                e.ExceptionHandled = true;
-//            }
-//         }
+        //            BindFV(EquipmentFormView, "uspReadEquipItem@itemID", "@itemID", 0);
+        //            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
+        //            selectCmd.CommandType = CommandType.StoredProcedure;
+        //            selectCmd.Parameters.AddWithValue("@eID", eID);
+        //            BindGV(EquipGV, selectCmd, ItemCount);
+        //         }
 
 
-//         // add Equipment Sub-item
-//         protected void AddItemFV_ItemInserting(object sender, EventArgs e)
-//         {
-//            int eID = Convert.ToInt32(((TextBox)AddItemFV.FindControl("eIDTextBox")).Text);
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("uspInsertEquipItem", con))
-//            {
-//                con.Open();
-//                cmd.CommandType = CommandType.StoredProcedure;
+        //         //Verify deleting equipment process
+        //         protected void EquipmentFormView_ItemDeleted(object sender, FormViewDeletedEventArgs e, Label MessageLabel)
+        //         {
+        //            if (e.Exception == null)
+        //            {
+        //                MessageLabel.Text = "Equipment Deleted";
+        //            }
+        //            else
+        //            {
+        //                MessageLabel.Text = "Could not delete equipment";
+        //                e.ExceptionHandled = true;
+        //            }
+        //         }
 
-//                cmd.Parameters.AddWithValue("@eID", eID);
 
-//                cmd.Parameters.AddWithValue("@itemStatus", Convert.ToInt32(((TextBox)AddItemFV.FindControl("itemStatusTextBox")).Text));
-//                cmd.Parameters.AddWithValue("@locID", Convert.ToInt32(((TextBox)AddItemFV.FindControl("locIDTextBox")).Text));
-//                cmd.Parameters.AddWithValue("@itemDeliveryDate", ((Calendar)AddItemFV.FindControl("DeliveryDateCalendar"))
-//                    .SelectedDate.ToString());
-//                cmd.Parameters.AddWithValue("@itemRemovalDate", ((Calendar)AddItemFV.FindControl("RemovalDateCalendar"))
-//                    .SelectedDate.ToString());
-//                cmd.ExecuteNonQuery();
+        //         // add Equipment Sub-item
+        //         protected void AddItemFV_ItemInserting(object sender, EventArgs e)
+        //         {
+        //            int eID = Convert.ToInt32(((TextBox)AddItemFV.FindControl("eIDTextBox")).Text);
+        //            using (SqlConnection con = new SqlConnection(CONSTRING))
+        //            using (SqlCommand cmd = new SqlCommand("uspInsertEquipItem", con))
+        //            {
+        //                con.Open();
+        //                cmd.CommandType = CommandType.StoredProcedure;
 
-//            }
-//            AddItemFV.ChangeMode(FormViewMode.ReadOnly);
+        //                cmd.Parameters.AddWithValue("@eID", eID);
 
-//            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
-//            selectCmd.CommandType = CommandType.StoredProcedure;
-//            selectCmd.Parameters.AddWithValue("@eID", eID);
+        //                cmd.Parameters.AddWithValue("@itemStatus", Convert.ToInt32(((TextBox)AddItemFV.FindControl("itemStatusTextBox")).Text));
+        //                cmd.Parameters.AddWithValue("@locID", Convert.ToInt32(((TextBox)AddItemFV.FindControl("locIDTextBox")).Text));
+        //                cmd.Parameters.AddWithValue("@itemDeliveryDate", ((Calendar)AddItemFV.FindControl("DeliveryDateCalendar"))
+        //                    .SelectedDate.ToString());
+        //                cmd.Parameters.AddWithValue("@itemRemovalDate", ((Calendar)AddItemFV.FindControl("RemovalDateCalendar"))
+        //                    .SelectedDate.ToString());
+        //                cmd.ExecuteNonQuery();
 
-//            BindGV(ItemGV, selectCmd, ItemCount);
-//            int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
-//            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
-//         }
+        //            }
+        //            AddItemFV.ChangeMode(FormViewMode.ReadOnly);
 
-//         ////Verify inserting process
-//         //protected void AddItemFV_ItemInserted(object sender, FormViewInsertedEventArgs e, Label MessageLabel)
-//         //{
-//         //    if (e.Exception == null)
-//         //    {
-//         //        if (e.AffectedRows == 1)
-//         //        {
-//         //            MessageLabel.Text = "New equipment added successfully";
-//         //            e.KeepInInsertMode = true;
-//         //        }
-//         //        else
-//         //        {
-//         //            MessageLabel.Text = e.Exception.Message;
-//         //            e.ExceptionHandled = true;
-//         //            e.KeepInInsertMode = true;
-//         //        }
-//         //    }
-//         //}
+        //            SqlCommand selectCmd = new SqlCommand("uspReadEquipItem@eID", new SqlConnection(CONSTRING));
+        //            selectCmd.CommandType = CommandType.StoredProcedure;
+        //            selectCmd.Parameters.AddWithValue("@eID", eID);
 
-//         // Delete Equipment Sub Item
-//         protected void ItemGV_RowDeleting(object sender, GridViewDeleteEventArgs e)
-//         {
-//            int id = Convert.ToInt32(ItemGV.Rows[e.RowIndex].FindControl("itemID").ToString());
-//            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
-//            using (SqlConnection con = new SqlConnection(CONSTRING))
-//            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
-//            {
-//                con.Open();
-//                cmd.CommandType = CommandType.Text;
-//                cmd.ExecuteNonQuery();
+        //            BindGV(ItemGV, selectCmd, ItemCount);
+        //            int itemId = Convert.ToInt32(ItemGV.DataKeys[ItemGV.Rows.Count - 1].Value.ToString());
+        //            BindFV(AddItemFV, "uspReadEquipItem@itemID", "@itemID", itemId);
+        //         }
 
-//            }
+        //         ////Verify inserting process
+        //         //protected void AddItemFV_ItemInserted(object sender, FormViewInsertedEventArgs e, Label MessageLabel)
+        //         //{
+        //         //    if (e.Exception == null)
+        //         //    {
+        //         //        if (e.AffectedRows == 1)
+        //         //        {
+        //         //            MessageLabel.Text = "New equipment added successfully";
+        //         //            e.KeepInInsertMode = true;
+        //         //        }
+        //         //        else
+        //         //        {
+        //         //            MessageLabel.Text = e.Exception.Message;
+        //         //            e.ExceptionHandled = true;
+        //         //            e.KeepInInsertMode = true;
+        //         //        }
+        //         //    }
+        //         //}
 
-//            SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment");
-//            selectCmd.CommandType = CommandType.StoredProcedure;
-//            BindGV(EquipGV, selectCmd, ItemCount);
-//         }
+        //         // Delete Equipment Sub Item
+        //         protected void ItemGV_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //         {
+        //            int id = Convert.ToInt32(ItemGV.Rows[e.RowIndex].FindControl("itemID").ToString());
+        //            int eID = Convert.ToInt32(((Label)EquipmentFormView.FindControl("eIDLabel")).Text);
+        //            using (SqlConnection con = new SqlConnection(CONSTRING))
+        //            using (SqlCommand cmd = new SqlCommand("DELETE FROM EquipmentItem WHERE itemID = " + id + "", con))
+        //            {
+        //                con.Open();
+        //                cmd.CommandType = CommandType.Text;
+        //                cmd.ExecuteNonQuery();
 
-//         // Verify deleting Equipment Sub Item
-//         protected void ItemGV_RowDeleted(object sender, GridViewDeletedEventArgs e, Label Message)
-//         {
-//            if (e.Exception == null)
-//            {
-//                Message.Text = "Row deleted successfully.";
-//            }
-//            else
-//            {
-//                Message.Text = "An error occurred while attempting to delete the row.";
-//                e.ExceptionHandled = true;
-//            }
+        //            }
 
-//         }
+        //            SqlCommand selectCmd = new SqlCommand("uspReadAllEquipment");
+        //            selectCmd.CommandType = CommandType.StoredProcedure;
+        //            BindGV(EquipGV, selectCmd, ItemCount);
+        //         }
+
+        //         // Verify deleting Equipment Sub Item
+        //         protected void ItemGV_RowDeleted(object sender, GridViewDeletedEventArgs e, Label Message)
+        //         {
+        //            if (e.Exception == null)
+        //            {
+        //                Message.Text = "Row deleted successfully.";
+        //            }
+        //            else
+        //            {
+        //                Message.Text = "An error occurred while attempting to delete the row.";
+        //                e.ExceptionHandled = true;
+        //            }
+
+        //         }
         //END
     }
 
