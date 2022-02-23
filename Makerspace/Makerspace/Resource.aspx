@@ -20,7 +20,8 @@
 
         <%--startregion: ListView Category--%>
         <label style="color:#00196E; font-size:20px; font-weight:600">Category </label>
-        <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="3" DataSourceID="Category_DataSource">
+        <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="3" DataSourceID="Category_DataSource" 
+             DataKeyNames="name" OnSelectedIndexChanged="Category_ListView_SelectedIndexChanged">
             <GroupTemplate>
                 <tr id="itemPlaceholderContainer" runat="server">
                     <td id="itemPlaceholder" runat="server" colspan="4">
@@ -28,10 +29,12 @@
                 </tr>
             </GroupTemplate>
             <ItemTemplate>
-                <td runat="server">
-                    <table style="border-collapse:collapse">
+                
+                <asp:LinkButton runat="server" CommandName="Select">
+                    <td runat="server">
+                        <table style="border-collapse:collapse">
                         <tr>
-                            <td>
+                            <td>          
                                 <div style="background-color:#F1F3F6; border-radius:12px; height:92px; width:92px; position:relative">
                                         <img src="<%# Eval("src") %>" style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); height:40px"/>
                                 </div>
@@ -41,9 +44,11 @@
                             <td class="text-center">
                                 <asp:Label  style="color:#00196E; font-size:15px; font-weight:800" runat="server" Text='<%# Eval("name") %>'></asp:Label>
                             </td>
-                        </tr>
-                    </table>
-                </td>
+                        </tr>                   
+                       </table>
+                   </td>
+                </asp:LinkButton>
+                
             </ItemTemplate>
             <LayoutTemplate>
                 <table style="width:100%">

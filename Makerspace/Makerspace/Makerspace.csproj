@@ -163,6 +163,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\popular.png" />
     <Content Include="Profile.aspx" />
     <Content Include="Project.aspx" />
     <Content Include="Resource.aspx" />

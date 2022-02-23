@@ -664,6 +664,13 @@ namespace Makerspace
                 e.ExceptionHandled = true;
             }
         }
+
+
+        protected void Category_ListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selected_category = Category_ListView.SelectedValue.ToString();
+
+        }
     }
 
 }
