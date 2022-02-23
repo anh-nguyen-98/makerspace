@@ -29,17 +29,17 @@
             </GroupTemplate>
             <ItemTemplate>
                 <td runat="server">
-                    <table>
+                    <table style="border-collapse:collapse">
                         <tr>
                             <td>
-                                <div style="background-color:#F1F3F6; height:80px; width:80px">
-                                        <img src="Images/popular.png" style="display:block; margin:auto; height:50%; width:50%"/>
-                                </div>                          
+                                <div style="background-color:#F1F3F6; border-radius:12px; height:92px; width:92px; position:relative">
+                                        <img src="<%# Eval("src") %>" style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); height:40px"/>
+                                </div>
                             </td>
                          </tr>
                         <tr>
-                            <td>
-                                <asp:Label style="color:#00196E; font-size:15px; font-weight:800; text-align:center" runat="server" Text='<%# Eval("name") %>'></asp:Label>
+                            <td class="text-center">
+                                <asp:Label  style="color:#00196E; font-size:15px; font-weight:800" runat="server" Text='<%# Eval("name") %>'></asp:Label>
                             </td>
                         </tr>
                     </table>
