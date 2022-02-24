@@ -102,6 +102,7 @@ namespace Makerspace
             {
                 SqlCommand cmd = new SqlCommand("uspReadEquipmentBySearchTerm");
                 cmd.Parameters.AddWithValue("@name", searchTerm);
+                cmd.Parameters.AddWithValue("@name_vie", searchTerm);
                 cmd.Parameters.AddWithValue("@code", searchTerm);
                 cmd.Parameters.AddWithValue("@purpose", searchTerm);
                 cmd.Parameters.AddWithValue("@category_name", searchTerm);
@@ -112,8 +113,8 @@ namespace Makerspace
                 DataTable dt = new DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dt);
-                EquipGV.DataSource = dt;
-                EquipGV.DataBind();
+                EquipLV.DataSource = dt;
+                EquipLV.DataBind();
             }
             
         }
