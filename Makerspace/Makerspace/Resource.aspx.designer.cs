@@ -58,6 +58,7 @@ namespace Makerspace
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource Category_DataSource;
+        protected global::System.Web.UI.WebControls.ListView EquipLV;
 
         /// <summary>
         /// EquipGV control.

@@ -18,6 +18,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
+  --blue-fuv: #00196E;
   --primary: #007bff;
   --secondary: #6c757d;
   --success: #28a745;
@@ -10096,6 +10097,10 @@ button.bg-dark:focus {
   font-weight: 700 !important;
 }
 
+.font-weight-medium {
+    font-weight: 600 !important;
+}
+
 .font-weight-bolder {
   font-weight: bolder !important;
 }
@@ -10106,6 +10111,10 @@ button.bg-dark:focus {
 
 .text-white {
   color: #fff !important;
+}
+
+.text-blue-fuv {
+  color: #00196E;
 }
 
 .text-primary {

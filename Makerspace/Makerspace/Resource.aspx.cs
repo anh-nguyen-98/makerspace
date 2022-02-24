@@ -26,7 +26,7 @@ namespace Makerspace
         }
 
         //Post back data
-        //Bind GridView
+        //Bind ListView
         protected void load()
         {
             using (SqlConnection con = new SqlConnection(CONSTRING))
@@ -38,8 +38,8 @@ namespace Makerspace
                 DataTable db = new DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(db);
-                EquipGV.DataSource = db;
-                EquipGV.DataBind();
+                EquipLV.DataSource = db;
+                EquipLV.DataBind();
             }
         }
 
@@ -50,7 +50,7 @@ namespace Makerspace
             selectItem.CommandType = CommandType.StoredProcedure;
             selectItem.Parameters.AddWithValue("@equipment_id", equipment_id);
             selectItem.Connection = con;
-            con.Open(); 
+            con.Open();
             DataTable dt = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(selectItem);
             adapter.Fill(dt);
@@ -74,7 +74,7 @@ namespace Makerspace
                 adapter.Fill(dt);
                 EquipmentFormView.DataSource = dt;
                 EquipmentFormView.DataBind();
-            }
+        }
         }
 
 
@@ -133,7 +133,7 @@ namespace Makerspace
             else if (e.CommandName.ToString() == "Delete")
             {
    
-            }
+        }
         }
         protected void ClosePopupModalBtn_Click(object sender, EventArgs e)
         {
@@ -234,12 +234,12 @@ namespace Makerspace
                 {
                     if (code.Length > 0) //equipment code must not be null
                     {
-                        affectedRows = cmd.ExecuteNonQuery();
-                        EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
-                        EquipmentModalPopup.Hide();
-                        EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
-                        load();
-                    }
+                    affectedRows = cmd.ExecuteNonQuery();
+                    EquipmentFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, null));
+                    EquipmentModalPopup.Hide();
+                    EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                    load();
+                }
                 }
                 catch (Exception exception)
                 {
@@ -258,12 +258,20 @@ namespace Makerspace
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
                 }
+                //else
+                //{
+                //    string message = e.exception.message; ==>  try getting message from null object reference is invalid (e.exception = null)
+                //    string script = "window.onload = function(){ alert('" + message + "')};";
+                //    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                //    e.ExceptionHandled = true;
+                //    e.KeepInInsertMode = false;
+                //}
             }
             else
             {
                 //string message = e.Exception.Message; ==> accessing e.Exception.Message throws error for unknown reason
                 // the message is hardcoded temporarily, for duplicate key might be the only error from user in this case. More check is required.
-                string message = "An error has occured. Please check your input";
+                string message = "An error has occured. Please try again.";
                 string script = "window.onload = function(){ alert('" + message + "')};";
                 ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
                 e.ExceptionHandled = true;
@@ -283,10 +291,12 @@ namespace Makerspace
         {
             Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int id);
             // equipment code is uneditable
+            //string code = ((TextBox)EquipmentFormView.FindControl("eCodeUpdateTextBox")).Text;
             string name = ((TextBox)EquipmentFormView.FindControl("eNameUpdateTextBox")).Text;
             string description = ((TextBox)EquipmentFormView.FindControl("eDescUpdateTextBox")).Text;
             string purpose = ((TextBox)EquipmentFormView.FindControl("eFunctionUpdateTextBox")).Text;
             string instruction = ((TextBox)EquipmentFormView.FindControl("eInstructionUpdateTextBox")).Text;
+            //string eSafety = ((TextBox)EquipmentFormView.FindControl("eSafetyUpdateTextBox")).Text;
             int training = Convert.ToInt32(((CheckBox)EquipmentFormView.FindControl("eTrainingUpdateCheckBox")).Checked ? 1 : 0);
 
             using (SqlConnection con = new SqlConnection(CONSTRING))
@@ -294,20 +304,15 @@ namespace Makerspace
             {
                 int affectedRows = 0;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@purpose", purpose);
-                cmd.Parameters.AddWithValue("@instruction", instruction);
-                cmd.Parameters.AddWithValue("@training", training);
                 con.Open();
                 try
                 {
                     affectedRows = cmd.ExecuteNonQuery();
                     EquipmentFormView_ItemUpdated(sender, new FormViewUpdatedEventArgs(affectedRows, null));
                     EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
+                    //BindFV(EquipmentFormView, "uspReadEquipment@id", "@id", id);
+                    // EquipmentFormview and ItemsFormView use the same SQL source for databinding ==> loadDataFormViews(id) helps rebind both FVs with same SQL resource
                     loadDataFormViews(id);
-                    load();
                     EquipmentModalPopup.Show();
                 }
                 catch (Exception exception)
@@ -329,6 +334,14 @@ namespace Makerspace
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
                 }
+                //else
+                //{
+                //    string message = e.Exception.Message; ==>  try getting message from null object reference is invalid (e.exception = null)
+                //    string script = "window.onload = function(){ alert('" + message + "')};";
+                //    ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
+                //    e.ExceptionHandled = true;
+                //    e.KeepInEditMode = true;
+                //}
             }
             else
             {
@@ -350,21 +363,24 @@ namespace Makerspace
             //we have to delete records in EquipmentItem first then delete record in Equipment
             //but MSSQL allows to delete directly in Equipment -> is this be concerned?
             using (SqlConnection con = new SqlConnection(CONSTRING))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Equipment WHERE id = " + id + "", con))
             {
                 con.Open();
+                cmd.CommandType = CommandType.Text;
                 int affectedRows = 0;
                 using (SqlCommand deleteCmd = new SqlCommand("DELETE FROM Equipment WHERE id = " + id + "", con))
                 {
-                    try
-                    {
+                try
+                {
                         affectedRows = deleteCmd.ExecuteNonQuery();
-                        EquipmentFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, null));
+                    EquipmentFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, null));
                     }
                     catch (Exception exception)
-                    {
-                        EquipmentFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, exception));
-                    }
+                {
+                    EquipmentFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, exception));
                 }
+                }
+                
 
             }
 
@@ -394,6 +410,13 @@ namespace Makerspace
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
                 }
+                //else
+                //{
+                //    string message = e.Exception.Message;
+                //    string script = "window.onload = function(){ alert('" + message + "')};";
+                //    ClientScript.RegisterStartupScript(this.GetType(), "Alert", script, true);
+                //    e.ExceptionHandled = true;
+                //}
             }
             else
             {
@@ -415,7 +438,7 @@ namespace Makerspace
             }
         }
 
-        protected void DeliveryDateCalendar_SelectionChanged(object sender, EventArgs e)
+    protected void DeliveryDateCalendar_SelectionChanged(object sender, EventArgs e)
         {
             EquipmentModalPopup.Show();
         }
@@ -473,7 +496,7 @@ namespace Makerspace
                     ItemsFormView.ChangeMode(FormViewMode.ReadOnly);
                     load();
                     loadDataFormViews(equipment_id);
-                }
+        }
                 catch (Exception exception)
                 {
                     ItemsFormView_ItemInserted(sender, new FormViewInsertedEventArgs(affectedRows, exception));
@@ -490,7 +513,7 @@ namespace Makerspace
                     string message = "New item added successfully";
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
-                }
+        }
             }
             else
             {
@@ -530,7 +553,7 @@ namespace Makerspace
                     Int32.TryParse(EquipmentFormView.DataKey.Value.ToString(), out int equipment_id);
                     loadDataFormViews(equipment_id);
                     EquipmentModalPopup.Show();
-                }
+        }
                 catch (Exception exception)
                 {
                     ItemsFormView_ItemUpdated(sender, new FormViewUpdatedEventArgs(affectedRows, exception));
@@ -549,7 +572,7 @@ namespace Makerspace
                     string message = "Item " + keyFieldValue + " has been updated successfully";
                     string script = "window.onload = function(){ alert('" + message + "')};";
                     ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
-                }
+        }
             }
             else
             {
@@ -577,9 +600,9 @@ namespace Makerspace
                     ItemsFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, null));
                 }
                 catch (Exception exception)
-                {
+        {
                     ItemsFormView_ItemDeleted(sender, new FormViewDeletedEventArgs(affectedRows, exception));
-                }
+        }
 
             }
             EquipmentFormView.ChangeMode(FormViewMode.ReadOnly);
@@ -665,12 +688,40 @@ namespace Makerspace
             }
         }
 
-
         protected void Category_ListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selected_category = Category_ListView.SelectedValue.ToString();
+            System.Diagnostics.Debug.WriteLine(selected_category);
 
+            if (selected_category == "All")
+            {
+                load();
+                return;
+            }
+
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            {
+                SqlCommand cmd;
+                if (selected_category == "Most Popular")
+                {
+                    cmd = new SqlCommand("uspReadMostPopularEquipment");   
+     
+                } else
+                {
+                    cmd = new SqlCommand("uspReadEquipmentByCategory");
+                    cmd.Parameters.AddWithValue("@category_name", selected_category);
+                }    
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Connection = con;
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                EquipLV.DataSource = dt;
+                EquipLV.DataBind();
+            }        
         }
+
     }
 
 }
