@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Equipment Lookup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Resource.aspx.cs" Inherits="Makerspace.Resource" %>
+﻿<%@ Page Title="Makerspace Equipment and Materials" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Resource.aspx.cs" Inherits="Makerspace.Resource" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
     <h1 class="text-center" style="font-size:70px"; font-weight:900> <span style="color:#00196E">Makerspace</span> <span style="color:#FFAD1D"> Equipment</span></h1>
@@ -19,10 +19,9 @@
         </div>
         <%-- endregion: Search Form --%>
 
-
         <%--startregion: ListView Category--%>
         <label style="color:#00196E; font-size:20px; font-weight:600">Category </label>
-        <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="3" DataSourceID="Category_DataSource">
+        <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="3" DataSourceID="Category_DataSource" DataKeyNames="name" OnSelectedIndexChanged="Category_ListView_SelectedIndexChanged">
             <GroupTemplate>
                 <tr id="itemPlaceholderContainer" runat="server">
                     <td id="itemPlaceholder" runat="server" colspan="4">
@@ -30,7 +29,9 @@
                 </tr>
             </GroupTemplate>
             <ItemTemplate>
+                
                 <td runat="server">
+                 <asp:LinkButton runat="server" CommandName="Select">
                     <table style="border-spacing:0; border-collapse:collapse; padding-top:0px; margin:0px">
                         <tr style="margin:0px; line-height:0px; align-content:center">
                             <td class="text-center" style="padding:0">
@@ -47,6 +48,7 @@
                             </td>
                         </tr>
                     </table>
+                    </asp:LinkButton>
                 </td>
             </ItemTemplate>
             <LayoutTemplate>
@@ -65,14 +67,64 @@
             </LayoutTemplate>
         </asp:ListView>
         <asp:SqlDataSource ID="Category_DataSource" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT [name] FROM [Category]"></asp:SqlDataSource>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        
+
+        <div class="my-4">
+            <%-- startregion: Equipment Listview --%>
+            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4">
+                <GroupTemplate>
+                    <tr id="itemPlaceholderContainer" runat="server">
+                        <td id="itemPlaceholder" runat="server" colspan="3"></td>
+                    </tr>
+                </GroupTemplate>
+                <ItemTemplate>
+                    <td runat="server" >
+                        <table class="rounded text-center" style="background-color: #F1F3F6; width:180px;">
+                            <tr>
+                                <td class="px-3 pt-3">
+                                    <img class="rounded" src='Images/<%# Eval("image") %>' width="150" height="120"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-0">
+                                    <asp:Label runat="server" Text='<%# Eval("name") %>' CssClass="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
+                                    <br />
+                                    <asp:Label runat="server" Text='<%# Eval("name_vie") %>' Font-Size="12px" ForeColor="#3A4276"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="background-color: #3A4276; font-size: 12px" class="rounded font-weight-bold text-white">
+                                        <asp:Label runat="server" Text='<%# Eval("room_space_name") %>'></asp:Label>
+                                    </div>
+                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 20px"><asp:Label runat="server" Text='<%# String.Concat (Eval("object_code").ToString().Trim(), Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
+                                </td>
+                            </tr>
+                            
+                        </table>
+
+                    </td>
+                </ItemTemplate>
+                <LayoutTemplate>
+                    <table  style="width:100%;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table cellpadding="3" class="table table-borderless" id="groupPlaceholderContainer" runat="server" style="width:100%">
+                                        <tr id="groupPlaceholder"></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                     
+                </LayoutTemplate>
+                
+            </asp:ListView>
+        </div>
         <div class="my-4">
             <%-- startregion: Equipment Gridview --%>
-            <asp:GridView ID="EquipGV" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="id" OnRowDeleting="EquipGV_RowDeleting" OnRowDeleted="EquipGV_RowDeleted">
+            <asp:GridView ID="EquipGV" Visible="false" runat="server" AutoGenerateColumns="False" CssClass="table table-hover text-center" OnRowCommand="EquipGV_RowCommand" DataKeyNames="id">
                 <Columns>
                     <asp:BoundField DataField="code" HeaderText="Code"/>
                     <asp:BoundField DataField="name" HeaderText="Name"/>
@@ -80,7 +132,6 @@
                     <asp:BoundField DataField="category_name" HeaderText="Category" />
                     <asp:BoundField DataField="room_space_name" HeaderText="Location" />
                     <asp:ButtonField runat="server"  Text="Select" ControlStyle-CssClass="btn btn-primary" CommandName="Select"/>
-                    <asp:ButtonField ButtonType="Button" Text="Delete" ControlStyle-CssClass="btn btn-danger" CommandName="Delete"/>
                 </Columns>
             </asp:GridView>
             <%-- endregion: Equipment Gridview --%>
@@ -230,7 +281,6 @@
                     OnItemUpdating="ItemsFormView_ItemUpdating" OnItemUpdated="ItemsFormView_ItemUpdated"
                     OnItemDeleting="ItemsFormView_ItemDeleting" OnItemDeleted="ItemsFormView_ItemDeleted">      
                     <ItemTemplate>
-                        <h3 class="px-5 py-2"><%# Eval("name")%>  #<%# Eval("num") %><asp:Button runat="server" Text="Edit" CssClass="btn btn-outline-primary ml-3" CommandName="Edit"/>
                             <asp:Button runat="server" Text="Delete" CssClass="btn btn-outline-danger ml-2" CommandName="Delete"/>
                      </div>
                         </h3>
