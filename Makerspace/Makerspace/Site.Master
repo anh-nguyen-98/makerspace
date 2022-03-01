@@ -7,15 +7,48 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Makerspace</title>
-
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/Images/logo.png" rel="shortcut icon" type="image/png" />
-
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            height: 50px;
+        }
+        .auto-style2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 42px;
+        }
+        .navbar-items {
+            color:white; 
+            margin-right:15px;
+        }
+    </style>
 </head>
+
 <body>
+    <br />
+    <br />
+    <div class="auto-style2" role="navigation" style="background-color:#00196E">
+        <div class="auto-style1">
+            <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/">Makerspace</a>
+            <div class="navbar-nav mr-auto" style="width:100%; list-style-type:none; padding:0px; display:inline; flex-direction:row;text-align:justify">
+                <a runat="server" class="navbar-items" href="~/">Home</a>
+                <a runat="server" class="navbar-items" href="~/About">About</a>
+                <a runat="server" class="navbar-items" href="~/Project">Project</a>
+                <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
+              </div>
+           </div>
+        </div>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -38,47 +71,6 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Makerspace</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Project">Project</a></li>
-                        <li><a runat="server" href="~/Equipment">Equipment</a></li>
-                        <li><a runat="server" href="~/Admin">Admin</a></li>
-          
-                    </ul>
-             
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Register</a></li>
-                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
-                            </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
-                                <li><a runat="server" href="~/Profile">My profile</a></li>
-                                <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                </li>
-                            </ul>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
-                
-                </div>
-            </div>
-        </div>
      
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
