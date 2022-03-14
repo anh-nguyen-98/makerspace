@@ -5,8 +5,8 @@
     <br />
     <br />
         <%-- startregion: Search Form --%>
-        <div class="container">
-            <div class="row">
+        <div class="container" style="z-index:1">
+            <div class="row" style="-ms-overflow-style:none">
                 <div class="input-group mb-3" id="inputGroup-sizing-default" style="margin-left:auto; margin-right:auto">
                     <asp:TextBox ID="searchBox" placeholder="Search here" runat="server" CssClass="form-control rounded" ></asp:TextBox>
                     <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary ml-1" OnClick="searchBtn_Click" Text="Search" style="background-color:#00196E"/>
@@ -21,7 +21,7 @@
 
         <%--startregion: ListView Category--%>
         <label style="color:#00196E; font-size:20px; font-weight:600">Category </label>
-        <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="3" DataSourceID="Category_DataSource" DataKeyNames="name" OnSelectedIndexChanged="Category_ListView_SelectedIndexChanged">
+        <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="8" DataSourceID="Category_DataSource" DataKeyNames="name" OnSelectedIndexChanged="Category_ListView_SelectedIndexChanged" style="z-index:1">
             <GroupTemplate>
                 <tr id="itemPlaceholderContainer" runat="server">
                     <td id="itemPlaceholder" runat="server" colspan="4">
@@ -79,25 +79,25 @@
                 </GroupTemplate>
                 <ItemTemplate>
                     <td runat="server" >
-                        <table class="rounded text-center" style="background-color: #F1F3F6; width:180px;">
+                        <table class="rounded text-center" style="background-color: #F1F3F6; width:200px; height: 350px">
                             <tr>
                                 <td class="px-3 pt-3">
-                                    <img class="rounded" src='Images/<%# Eval("image") %>' width="150" height="120"/>
+                                    <img class="rounded center" src='Images/hammer.jpg' width="200" height="160"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="p-0">
-                                    <asp:Label runat="server" Text='<%# Eval("name") %>' CssClass="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
+                                    <asp:Label runat="server" Text='<%# Eval("name") %>' class="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
                                     <br />
-                                    <asp:Label runat="server" Text='<%# Eval("name_vie") %>' Font-Size="12px" ForeColor="#3A4276"></asp:Label>
+                                    <asp:Label runat="server" Text='<%# Eval("name_vie") %>' Font-Size="16px" ForeColor="#3A4276"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div style="background-color: #3A4276; font-size: 12px" class="rounded font-weight-bold text-white">
+                                    <div style="background-color: #3A4276; font-size: 16px" class="rounded font-weight-bold text-white">
                                         <asp:Label runat="server" Text='<%# Eval("room_space_name") %>'></asp:Label>
                                     </div>
-                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 20px"><asp:Label runat="server" Text='<%# String.Concat (Eval("object_code").ToString().Trim(), Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
+                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 24px"><asp:Label runat="server" Text='<%# String.Concat (Eval("object_code").ToString().Trim(), Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
                                 </td>
                             </tr>
                             

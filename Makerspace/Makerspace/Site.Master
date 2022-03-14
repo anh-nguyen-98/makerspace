@@ -27,6 +27,7 @@
             left: 0;
             right: 0;
             height: 42px;
+            z-index: 3;
         }
         .navbar-items {
             color:white; 
