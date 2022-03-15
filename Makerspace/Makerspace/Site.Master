@@ -29,6 +29,10 @@
             height: 42px;
             z-index: 3;
         }
+        .category:visited {
+            background-color:yellow;
+            color:blue;
+        }
         .navbar-items {
             color:white; 
             margin-right:15px;

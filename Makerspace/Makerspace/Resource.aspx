@@ -32,7 +32,7 @@
                 
                 <td runat="server">
                  <asp:LinkButton runat="server" CommandName="Select">
-                    <table style="border-spacing:0; border-collapse:collapse; padding-top:0px; margin:0px">
+                    <table class="category" style="border-spacing:0; border-collapse:collapse; padding-top:0px; margin:0px">
                         <tr style="margin:0px; line-height:0px; align-content:center">
                             <td class="text-center" style="padding:0">
                                <div style="background-color:#F1F3F6; border-radius:12px; height:92px; width:92px; position:relative; vertical-align:bottom">
