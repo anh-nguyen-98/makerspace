@@ -1,2 +1,0 @@
-ALTER TABLE Equipment ADD name_vie NVARCHAR(256);
-ALTER TABLE Equipment ADD image NVARCHAR(100);
