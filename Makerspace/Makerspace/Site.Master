@@ -11,6 +11,9 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="~/Images/logo.png" rel="shortcut icon" type="image/png" />
     <style type="text/css">
         .auto-style1 {
@@ -29,7 +32,7 @@
             height: 42px;
             z-index: 3;
         }
-        .category:visited {
+        .category:focus-visible {
             background-color:yellow;
             color:blue;
         }
@@ -45,11 +48,11 @@
     <br />
     <div class="auto-style2" role="navigation" style="background-color:#00196E">
         <div class="auto-style1">
-            <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/">Makerspace</a>
+            <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/Resource.aspx">Makerspace</a>
             <div class="navbar-nav mr-auto" style="width:100%; list-style-type:none; padding:0px; display:inline; flex-direction:row;text-align:justify">
-                <a runat="server" class="navbar-items" href="~/">Home</a>
+                <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
                 <a runat="server" class="navbar-items" href="~/About">About</a>
-                <a runat="server" class="navbar-items" href="~/Project">Project</a>
+                <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
                 <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
               </div>
            </div>
@@ -86,7 +89,7 @@
                 <address>
                     Makerspace - Fulbright University Vietnam<br />
                     105 Ton Dat Tien, Tan Phu Ward, District 7, HCMC<br />
-                    <abbr title="Phone">P:</abbr>
+                    <abbr title="Phone">Phone:</abbr>
                     0903369880
                 </address>
 
@@ -95,7 +98,7 @@
  
                 </address>
 
-                <p>&copy; <%: DateTime.Now.Date %> Makerspace - Fulbright University Vietnam</p>
+                <p>&copy; <%: DateTime.Now.Year %> Makerspace - Fulbright University Vietnam</p>
             </footer>
         </div>
     </form>
