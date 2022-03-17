@@ -72,9 +72,10 @@ CREATE TABLE Equipment (
 	instruction NVARCHAR(4000),
 	training INT,
 	category_id INT,
-	room_space_id INT,
-	CONSTRAINT item_category FOREIGN KEY(category_id) REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT location_fk FOREIGN KEY(room_space_id) REFERENCES RoomSpace(id)
+	popular int default 0 CONSTRAINT popular_check  CHECK (popular >= 0),
+	name_vie NVARCHAR(256),
+	image NVARCHAR(100),
+	CONSTRAINT item_category FOREIGN KEY(category_id) REFERENCES Category(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
