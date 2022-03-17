@@ -48,7 +48,7 @@
     <br />
     <div class="auto-style2" role="navigation" style="background-color:#00196E">
         <div class="auto-style1">
-            <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/Resource.aspx">Makerspace</a>
+            <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/Default.aspx">Makerspace</a>
             <div class="navbar-nav mr-auto" style="width:100%; list-style-type:none; padding:0px; display:inline; flex-direction:row;text-align:justify">
                 <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
                 <a runat="server" class="navbar-items" href="~/About">About</a>
