@@ -3,6 +3,18 @@
 Management Web App at Fulbright Makerspace
 
 
+## Features
+
+View resource 
+
+
+Search resource
+
+Filter resource by category
+
+There's more to come.
+
+
 ## Authors
 
 Phan Nguyen Tuong Minh, Nguyen Hoang Nam Anh
