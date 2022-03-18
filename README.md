@@ -1,26 +1,52 @@
 # Makerspace Web App 
 
-Management Web App at Fulbright Makerspace
+Management Web App at Fulbright Makerspace. 
+
+It helps Fulbright students in finding information of resource and services provided at Fulbright Makerspace.
+
+It helps Makerspace staff to manage and update the resource and services to provide students with the most updated information.
 
 
 ## Features
 
-View resource 
+**1. View resource**
+
+View all resource at Makerspace including equipment and materials.
+
+![Resource page](https://raw.githubusercontent.com/anh-nguyen-98/makerspace/readme/demo/resource_page.jpg)
 
 
-Search resource
+**2. Search resource**
 
-Filter resource by category
+Search by resource name, location.
 
-There's more to come.
+Example for searching "printer".
+
+![Search resource](https://raw.githubusercontent.com/anh-nguyen-98/makerspace/readme/demo/search_equipment.jpg)
+
+
+**3. Filter resource by category**
+
+Filter resource by category. They are "Most popular", "Heavy Machine", "Handtools", "Mechanics", "Electronics", "Others".
+
+Example for filtering resource by "Heavy Machine".
+
+![Filter resource by category](https://raw.githubusercontent.com/anh-nguyen-98/makerspace/readme/demo/filter_equipment_by_category.jpg)
+
+
+**There's more to come.**
 
 
 ## Authors
 
-Phan Nguyen Tuong Minh, Nguyen Hoang Nam Anh
+Supervisor: Mr. Tran Thanh Thai - Associate Director of Fulbright Makerspace.
+
+Developers: Nguyen Hoang Nam Anh, Phan Nguyen Tuong Minh
+
+UX/UI Designer: Phan Ngoc Lan Khanh
 
 ## Contact us: 
 
-minh.phan.190048@student.fulbright.edu.vn
+Please contact us at makerspace.support@fulbright.edu.vn for feedback and suggestions. 
 
-anh.nguyen.190005@student.fulbright.edu.vn
+
