@@ -159,6 +159,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EquipmentDetail.aspx" />
     <Content Include="Images\hammer.jpg" />
     <Content Include="Resource.aspx" />
     <Content Include="Equipment.aspx" />
@@ -325,6 +326,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EquipmentDetail.aspx.cs">
+      <DependentUpon>EquipmentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EquipmentDetail.aspx.designer.cs">
+      <DependentUpon>EquipmentDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Resource.aspx.cs">
       <DependentUpon>Resource.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -345,13 +353,6 @@
     </Compile>
     <Compile Include="Resource.aspx.designer.cs">
       <DependentUpon>Resource.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="User.aspx.cs">
-      <DependentUpon>User.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="User.aspx.designer.cs">
-      <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

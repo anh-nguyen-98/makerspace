@@ -52,7 +52,6 @@ namespace Makerspace
                 cmd.Parameters.AddWithValue("@name", searchTerm);
                 cmd.Parameters.AddWithValue("@name_vie", searchTerm);
                 cmd.Parameters.AddWithValue("@code", searchTerm);
-                cmd.Parameters.AddWithValue("@purpose", searchTerm);
                 cmd.Parameters.AddWithValue("@category_name", searchTerm);
                 cmd.Parameters.AddWithValue("@room_space_name", searchTerm);
                 cmd.CommandType = CommandType.StoredProcedure;
