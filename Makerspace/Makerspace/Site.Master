@@ -44,25 +44,36 @@
         .wrapper {
             display: grid;
             grid-template-columns: 1fr 2fr;
-            grid-template-rows: 200px;
+            grid-template-rows: 160px;
             grid-gap: 5px;
+            grid-row-gap: 1px;
         }
 
         .one {
             grid-column: 1 / 2;
             grid-row-start:1;
             grid-row-end: 3;
+            display:flex;
+            align-self:flex-start;
+            align-items: flex-end;
+            justify-content: center;
         }
 
         .two {
             grid-column: 2;
-            align-content:justify
+            align-content:center;
         }
 
         .three {
            grid-column-start:2;
            grid-row-start: 2;
            height: 300px;
+        }
+
+        .equipment_info {
+            color:#00196E; 
+            font-weight:600; 
+            font-size:20px;
         }
     </style>
 </head>
