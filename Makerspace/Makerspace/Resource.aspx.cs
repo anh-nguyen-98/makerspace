@@ -102,6 +102,12 @@ namespace Makerspace
             }        
         }
 
+        protected void Direct_EquipmentDetail(object sender, EventArgs e)
+        {
+            string id = "1";
+            string url = "~/EquipmentDetail.aspx?id=" + id;
+            Response.Redirect(url);
+        }
     }
 
 }
