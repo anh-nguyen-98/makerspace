@@ -116,7 +116,7 @@
                                     <div style="background-color: #3A4276; font-size: 16px" class="rounded font-weight-bold text-white">
                                         <asp:Label runat="server" Text='<%# Eval("room_space_name") %>'></asp:Label>
                                     </div>
-                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 24px"><asp:Label runat="server" Text='<%# String.Concat (Eval("object_code").ToString().Trim(), Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
+                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 24px"><asp:Label runat="server" Text='<%# String.Concat (Eval("object_name").ToString().Trim(), " ", Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
                                 </td>
                             </tr>
                             

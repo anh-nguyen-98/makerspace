@@ -1,7 +1,7 @@
 USE [MakerspaceDB]
 GO
 
-/****** Object:  View [dbo].[LocationName_View]    Script Date: 3/15/2022 4:21:07 PM ******/
+/****** Object:  View [dbo].[LocationName_View]    Script Date: 4/19/2022 2:22:00 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,15 +10,15 @@ GO
 
 
 
+
 /****** Script for SelectTopNRows command from SSMS  ******/
 ALTER     VIEW [dbo].[LocationName_View]
 AS
     SELECT
-    DistinctEquipmentLocation_View.equipment_id, DistinctEquipmentLocation_View.location_id, Equipment.code, Equipment.name as equipment_name,
+    EquipmentItem.equipment_id, EquipmentItem.location_id,
     Room.name AS room_name, RoomSpace.name as room_space_name, Object.code as object_code, Object.name as object_name, Location.object_num
-    FROM DistinctEquipmentLocation_View
-	INNER JOIN Equipment ON DistinctEquipmentLocation_View.equipment_id = Equipment.id
-    INNER JOIN Location ON DistinctEquipmentLocation_View.location_id = Location.id
+    FROM EquipmentItem
+    INNER JOIN Location ON EquipmentItem.location_id = Location.id
     INNER JOIN RoomSpace on Location.room_space_id =RoomSpace.id
     INNER JOIN Object ON Location.object_id=Object.id
     INNER JOIN Room ON RoomSpace.room_id=Room.id;

@@ -81,16 +81,10 @@ namespace Makerspace
 
             using (SqlConnection con = new SqlConnection(CONSTRING))
             {
-                SqlCommand cmd;
-                if (selected_category == "Most Popular")
-                {
-                    cmd = new SqlCommand("uspReadMostPopularEquipment");   
-     
-                } else
-                {
-                    cmd = new SqlCommand("uspReadEquipmentByCategory");
-                    cmd.Parameters.AddWithValue("@category_name", selected_category);
-                }    
+               
+                SqlCommand cmd = new SqlCommand("uspReadEquipmentByCategory");
+                cmd.Parameters.AddWithValue("@category_name", selected_category);
+                   
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.Connection = con;
