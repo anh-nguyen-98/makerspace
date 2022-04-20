@@ -50,7 +50,7 @@
             </ItemTemplate>
             <SelectedItemTemplate>
                 <td runat="server">
-                    <asp:LinkButton class="" runat="server" CommandName="Select">
+                    <asp:LinkButton runat="server" CommandName="Select">
                         <table style="border-spacing:0; border-collapse:collapse; padding-top:0px; margin:0px; align-content: center; table-layout: fixed">
                             <tr style="margin:0px; line-height:0px; align-content:center">
                                 <td class="text-center" style="padding:0; align-content:center">
@@ -90,15 +90,16 @@
 
         <div class="mb-4">
             <%-- startregion: Equipment Listview --%>
-            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4">
+            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4" DataKeyNames="id" OnSelectedIndexChanging="EquipLV_SelectedIndexChanging" OnSelectedIndexChanged="EquipLV_SelectedIndexChanged">
                 <GroupTemplate>
                     <tr id="itemPlaceholderContainer" runat="server">
                         <td id="itemPlaceholder" runat="server" colspan="3"></td>
                     </tr>
                 </GroupTemplate>
                 <ItemTemplate>
-                    <td runat="server" >
-                        <table class="rounded text-center" style="background-color: #F1F3F6; width:220px; height: 350px">
+                    <td runat="server">
+                        <asp:LinkButton runat="server" CommandName="Select">
+                        <table id="equipment_re" class="rounded text-center" style="background-color: #F1F3F6; width:220px; height: 350px">
                             <tr>
                                 <td class="px-3 pt-3">
                                     <img class="rounded center" src="Images/<%#Eval("image")%>" onerror="this.src='Images/mechanics.png'" style="width:100%" height="165"/>
@@ -106,7 +107,7 @@
                             </tr>
                             <tr>
                                 <td class="px-3 py-0">
-                                    <asp:Label runat="server" Text='<%# Eval("name") %>' class="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
+                                    <asp:Label id="Label1" runat="server" Text='<%# Eval("name") %>' class="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
                                     <br />
                                     <asp:Label runat="server" Text='<%# Eval("name_vie") %>' Font-Size="16px" ForeColor="#3A4276"></asp:Label>
                                 </td>
@@ -119,9 +120,8 @@
                                     <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 24px"><asp:Label runat="server" Text='<%# String.Concat (Eval("object_name").ToString().Trim(), " ", Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
                                 </td>
                             </tr>
-                            
                         </table>
-
+                    </asp:LinkButton>
                     </td>
                 </ItemTemplate>
                 <LayoutTemplate>
