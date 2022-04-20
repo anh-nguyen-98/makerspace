@@ -108,6 +108,23 @@ namespace Makerspace
             string url = "~/EquipmentDetail.aspx?id=" + id;
             Response.Redirect(url);
         }
+
+        protected void EquipLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            System.Diagnostics.Debug.WriteLine(EquipLV.SelectedValue.ToString());
+            string id = EquipLV.SelectedValue.ToString();
+            string url = "~/EquipmentDetail.aspx?id=" + id;
+            Response.Redirect(url, false);
+            Context.ApplicationInstance.CompleteRequest();
+        }
+
+        protected void EquipLV_SelectedIndexChanging(object sender, ListViewSelectEventArgs e)
+        {
+            this.EquipLV.SelectedIndex = e.NewSelectedIndex;
+            //load();
+
+        }
     }
 
 }

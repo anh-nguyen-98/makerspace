@@ -90,7 +90,7 @@
 
         <div class="mb-4">
             <%-- startregion: Equipment Listview --%>
-            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4">
+            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4" DataKeyNames="id" OnSelectedIndexChanging="EquipLV_SelectedIndexChanging" OnSelectedIndexChanged="EquipLV_SelectedIndexChanged">
                 <GroupTemplate>
                     <tr id="itemPlaceholderContainer" runat="server">
                         <td id="itemPlaceholder" runat="server" colspan="3"></td>
@@ -98,7 +98,7 @@
                 </GroupTemplate>
                 <ItemTemplate>
                     <td runat="server">
-                        <asp:LinkButton runat="server" OnClick="Direct_EquipmentDetail">
+                        <asp:LinkButton runat="server" CommandName="Select">
                         <table id="equipment_re" class="rounded text-center" style="background-color: #F1F3F6; width:220px; height: 350px">
                             <tr>
                                 <td class="px-3 pt-3">

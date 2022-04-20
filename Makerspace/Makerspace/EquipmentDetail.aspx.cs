@@ -13,12 +13,21 @@ namespace Makerspace
         protected void code_Load(object sender, EventArgs e)
         {
             eid.Text = Request.QueryString["id"];
-            //SqlConnection con = new SqlConnection(CONSTRING);
-            //string command = "SELECT name FROM EQUIPMENT WHERE id = " + eid;
-            //SqlCommand cmd = new SqlCommand(command, con);
-            //con.Open();
-            //SqlDataReader reader = cmd.ExecuteReader();
-            //name.Text = reader.GetValue(0).ToString();
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            {
+                //string command = "SELECT * FROM Equipment WHERE id = " + eid.Text;
+                //SqlCommand cmd = new SqlCommand(command);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                //con.Open();
+                //cmd.Connection = con;
+                //cmd.ExecuteNonQuery();
+                //DataTable db = new DataTable();
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //adapter.Fill(db);
+
+
+
+            }
         }
     }
 }
