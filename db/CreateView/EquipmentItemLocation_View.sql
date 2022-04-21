@@ -1,12 +1,13 @@
 USE [MakerspaceDB]
 GO
 
-/****** Object:  View [dbo].[EquipmentItemLocation_View]    Script Date: 4/20/2022 7:42:08 PM ******/
+/****** Object:  View [dbo].[EquipmentItemLocation_View]    Script Date: 4/21/2022 12:15:32 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 ALTER VIEW [dbo].[EquipmentItemLocation_View] as
 	SELECT
@@ -25,6 +26,7 @@ ALTER VIEW [dbo].[EquipmentItemLocation_View] as
 	EquipmentItem.delivered_at,
 	EquipmentItem.removed_at,
 	Category.name as category_name,
+	Category.cat_src as catergory_src,
 	LocationName_View.room_name, LocationName_View.room_space_name, LocationName_View.object_code, LocationName_View.object_name, LocationName_View.object_num
 	FROM Equipment
 	INNER JOIN EquipmentItem
