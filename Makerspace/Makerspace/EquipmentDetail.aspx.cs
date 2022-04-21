@@ -29,5 +29,32 @@ namespace Makerspace
 
             }
         }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                using (SqlConnection con = new SqlConnection(CONSTRING))
+                {
+                    int id = Convert.ToInt32(Request.QueryString["id"]);
+                    
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM EquipmentItemLocation_View WHERE id = @id;", con);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    con.Open();
+
+                    DataTable db = new DataTable();
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(db);
+                    Subitem_Listview.DataSource = db;
+                    Subitem_Listview.DataBind();
+                }
+            }
+            else
+            {
+
+            }
+
+        }
+
+        
     }
 }
