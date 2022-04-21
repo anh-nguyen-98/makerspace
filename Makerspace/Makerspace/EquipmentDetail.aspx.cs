@@ -10,25 +10,6 @@ namespace Makerspace
     public partial class EquipmentDetail : System.Web.UI.Page
     {
         protected static string CONSTRING = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
-        protected void code_Load(object sender, EventArgs e)
-        {
-            eid.Text = Request.QueryString["id"];
-            using (SqlConnection con = new SqlConnection(CONSTRING))
-            {
-                //string command = "SELECT * FROM Equipment WHERE id = " + eid.Text;
-                //SqlCommand cmd = new SqlCommand(command);
-                //cmd.CommandType = CommandType.StoredProcedure;
-                //con.Open();
-                //cmd.Connection = con;
-                //cmd.ExecuteNonQuery();
-                //DataTable db = new DataTable();
-                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                //adapter.Fill(db);
-
-
-
-            }
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -55,6 +36,22 @@ namespace Makerspace
 
         }
 
-        
+        protected void Description_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(CONSTRING))
+            {
+
+
+            }
+
+            int id = Convert.ToInt32(Request.QueryString["id"]);
+            SqlCommand cmd = new SqlCommand("SELECT description FROM EquipmentItemLocation_View WHERE id = @id", conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            conn.Open();
+
+            var link = cmd.ExecuteScalar();
+
+            System.Diagnostics.Debug.WriteLine(link.ToString());
+        }
     }
 }

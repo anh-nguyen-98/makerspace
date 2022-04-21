@@ -12,15 +12,15 @@
   
         </div>
         <div class="two">
-            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:10px 30px 10px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server" OnLoad="code_Load"></asp:Label>
-            <asp:Label id="brand" runat="server" style="display:inline-block; color:#00196E; font-size:24px; font-weight:700; float:right" OnLoad="code_Load">Originial Prusa i3 MK3</asp:Label>
+            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:10px 30px 10px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server" Text='<%# Eval("code")%>'></asp:Label>
+            <asp:Label id="brand" runat="server" style="display:inline-block; color:#00196E; font-size:24px; font-weight:700; float:right" Text='<%# Eval("brand")%>'></asp:Label>
             <br />
-            <asp:Label runat="server" style="display:block; color:#00196E;  font-size:60px; font-weight:800; background-color:#E1E1DE; padding:10px 160px 10px 160px; height:100px; text-align:center; border-radius:12px">3D Printer</asp:Label>
+            <asp:Label runat="server" style="display:block; color:#00196E;  font-size:60px; font-weight:800; background-color:#E1E1DE; padding:10px 160px 10px 160px; height:100px; text-align:center; border-radius:12px" Text='<%# Eval("name")%>'>3D Printer</asp:Label>
         </div>
         <div class="three">
-            <asp:Label id="count" class="equipment_info" runat="server">Total: Link</asp:Label>
+            <asp:Label id="count" class="equipment_info" runat="server">Link</asp:Label>
             <br/>
-            <asp:Label id="description" class="equipment_info" runat="server">Quick guide: Link</asp:Label>
+            <asp:Label id="description" class="equipment_info" runat="server">Quick guide: <asp:LinkButton ID="desc" runat="server" OnClick="Description_Click">Link</asp:LinkButton></asp:Label>
             <br />
             <asp:Label id="instruction" class="equipment_info" runat="server">Video instruction: Link</asp:Label>
             <br />
