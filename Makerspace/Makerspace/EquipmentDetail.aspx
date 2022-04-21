@@ -28,7 +28,7 @@
             <br />
         </div>
     </div>
-    <div style="margin-bottom: 3rem"></div>
+<%--    <div style="margin-bottom: 3rem"></div>--%>
     <%-- startregion: Subitem Listview --%>
     <asp:ListView runat="server" ID="Subitem_Listview" GroupItemCount="2">
         <GroupTemplate>
