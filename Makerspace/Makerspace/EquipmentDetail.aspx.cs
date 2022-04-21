@@ -17,7 +17,7 @@ namespace Makerspace
                 using (SqlConnection con = new SqlConnection(CONSTRING))
                 {
                     int id = Convert.ToInt32(Request.QueryString["id"]);
-                    
+
                     SqlCommand cmd = new SqlCommand("SELECT * FROM EquipmentItemLocation_View WHERE id = @id;", con);
                     cmd.Parameters.AddWithValue("@id", id);
                     con.Open();
@@ -27,6 +27,18 @@ namespace Makerspace
                     adapter.Fill(db);
                     Subitem_Listview.DataSource = db;
                     Subitem_Listview.DataBind();
+
+                    name.Text = db.Rows[0]["name"].ToString();
+                    cat.Text = db.Rows[0]["category_name"].ToString();
+                    eid.Text = db.Rows[0]["code"].ToString();
+                    brand.Text =db.Rows[0]["brand"].ToString();
+                    desc.Text = db.Rows[0]["description"].ToString();
+                    int training = (Int32)db.Rows[0]["training"];
+                    if (training == 0)
+                    {
+                        train.Text = "Yes";
+                    }
+                    train.Text = "No";
                 }
             }
             else
@@ -36,22 +48,36 @@ namespace Makerspace
 
         }
 
-        protected void Description_Click(object sender, EventArgs e)
+        protected void Link_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(CONSTRING))
             {
+                int id = Convert.ToInt32(Request.QueryString["id"]);
+                SqlCommand cmd = new SqlCommand("SELECT instruction FROM EquipmentItemLocation_View WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+
+                string link = (String)cmd.ExecuteScalar();
+
+                //System.Diagnostics.Debug.WriteLine(link);
+                Response.Redirect(link, false);
+            }
+        }
+
+        protected void Count_Load(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(CONSTRING))
+            {
+                int id = Convert.ToInt32(Request.QueryString["id"]);
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(id) FROM EquipmentItemLocation_View WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+
+                int countItem = (Int32)cmd.ExecuteScalar();
+                count.Text = countItem.ToString();
 
 
             }
-
-            int id = Convert.ToInt32(Request.QueryString["id"]);
-            SqlCommand cmd = new SqlCommand("SELECT description FROM EquipmentItemLocation_View WHERE id = @id", conn);
-            cmd.Parameters.AddWithValue("@id", id);
-            conn.Open();
-
-            var link = cmd.ExecuteScalar();
-
-            System.Diagnostics.Debug.WriteLine(link.ToString());
         }
     }
 }

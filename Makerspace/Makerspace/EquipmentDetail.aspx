@@ -6,25 +6,25 @@
                 <img src="Images\A18-030.jpg" width="260" height="260" style="vertical-align:baseline">
             <br />
             <div style="display: flex; justify-content:center">
-                 <asp:Label id="name" style="background-color: #00196E; color: white; font-size: 24px; border-radius: 4px; font-weight: 700; position: absolute; padding: 6px 15px 6px 15px;" runat="server">Heavy Machine</asp:Label>
+                 <asp:Label id="cat" style="background-color: #00196E; color: white; font-size: 24px; border-radius: 4px; font-weight: 700; position: absolute; padding: 6px 15px 6px 15px;" runat="server"></asp:Label>
             </div>
             </div>
   
         </div>
         <div class="two">
-            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:10px 30px 10px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server" Text='<%# Eval("code")%>'></asp:Label>
-            <asp:Label id="brand" runat="server" style="display:inline-block; color:#00196E; font-size:24px; font-weight:700; float:right" Text='<%# Eval("brand")%>'></asp:Label>
+            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:10px 30px 10px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server"></asp:Label>
+            <asp:Label id="brand" runat="server" style="display:inline-block; color:#00196E; font-size:24px; font-weight:700; float:right"></asp:Label>
             <br />
-            <asp:Label runat="server" style="display:block; color:#00196E;  font-size:60px; font-weight:800; background-color:#E1E1DE; padding:10px 160px 10px 160px; height:100px; text-align:center; border-radius:12px" Text='<%# Eval("name")%>'>3D Printer</asp:Label>
+            <asp:Label ID="name" runat="server" style="display:block; color:#00196E;  font-size:60px; font-weight:800; background-color:#E1E1DE; padding:10px 160px 10px 160px; height:100px; text-align:center; border-radius:12px"></asp:Label>
         </div>
         <div class="three">
-            <asp:Label id="count" class="equipment_info" runat="server">Link</asp:Label>
+            <asp:Label class="equipment_info" runat="server">Total: <asp:Label id="count" class="equipment_info" runat="server" OnLoad="Count_Load" style="font-weight:normal"></asp:Label></asp:Label>
             <br/>
-            <asp:Label id="description" class="equipment_info" runat="server">Quick guide: <asp:LinkButton ID="desc" runat="server" OnClick="Description_Click">Link</asp:LinkButton></asp:Label>
+            <asp:Label id="description" class="equipment_info" runat="server">Decription: <asp:Label id="desc" runat="server" style="font-weight:normal" ></asp:Label></asp:Label>
             <br />
-            <asp:Label id="instruction" class="equipment_info" runat="server">Video instruction: Link</asp:Label>
+            <asp:Label id="instruction" class="equipment_info" runat="server">Instruction: <asp:LinkButton ID="ins" runat="server" OnClick="Link_Click" OnClientClick="document.forms[0].target = '_blank';">Link</asp:LinkButton></asp:Label>
             <br />
-            <asp:Label ID="training" class="equipment_info" runat="server">Training requirement: Link</asp:Label>
+            <asp:Label class="equipment_info" runat="server">Training requirement: <asp:Label id="train" runat="server"  style="font-weight:normal"></asp:Label></asp:Label>
             <br />
         </div>
     </div>

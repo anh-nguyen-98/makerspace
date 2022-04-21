@@ -15,13 +15,13 @@ namespace Makerspace
     {
 
         /// <summary>
-        /// name control.
+        /// cat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label name;
+        protected global::System.Web.UI.WebControls.Label cat;
 
         /// <summary>
         /// eid control.
@@ -40,6 +40,15 @@ namespace Makerspace
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label brand;
+
+        /// <summary>
+        /// name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label name;
 
         /// <summary>
         /// count control.
@@ -66,7 +75,7 @@ namespace Makerspace
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton desc;
+        protected global::System.Web.UI.WebControls.Label desc;
 
         /// <summary>
         /// instruction control.
@@ -78,13 +87,22 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.Label instruction;
 
         /// <summary>
-        /// training control.
+        /// ins control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label training;
+        protected global::System.Web.UI.WebControls.LinkButton ins;
+
+        /// <summary>
+        /// train control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label train;
 
         /// <summary>
         /// Subitem_Listview control.
