@@ -23,6 +23,7 @@ ALTER VIEW [dbo].[EquipmentItemLocation_View] as
 	Equipment.image,
 	Equipment.name_vie,
 	Equipment.popular,
+	Equipment.brand,
 	EquipmentItem.num,
 	EquipmentItem.status,
 	EquipmentItem.delivered_at,
