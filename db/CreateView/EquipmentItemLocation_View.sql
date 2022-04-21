@@ -1,12 +1,14 @@
 USE [MakerspaceDB]
 GO
 
-/****** Object:  View [dbo].[EquipmentItemLocation_View]    Script Date: 4/21/2022 12:15:32 PM ******/
+/****** Object:  View [dbo].[EquipmentItemLocation_View]    Script Date: 4/21/2022 3:35:17 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 ALTER VIEW [dbo].[EquipmentItemLocation_View] as
