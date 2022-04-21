@@ -2,12 +2,14 @@
 <asp:Content ID="EDetail" ContentPlaceHolderID="MainContent" runat="server">
     <div class="wrapper">
         <div class="one">
-            <div >          
-                <img src="Images\A18-030.jpg" width="260" height="260" style="vertical-align:baseline" class="rounded">
+            <div>          
+                <img src="Images\A18-030.jpg" width="260" height="260" style="vertical-align:baseline">
+            <br />
+            <div style="display: flex; justify-content:center">
+                 <asp:Label id="name" style="background-color: #00196E; color: white; font-size: 24px; border-radius: 4px; font-weight: 700; position: absolute; padding: 6px 15px 6px 15px;" runat="server">Heavy Machine</asp:Label>
             </div>
-            <div style="margin-top:1.625rem;">
-                 <asp:Label id="name" style="background-color: #00196E; color: white; font-size: 24px; border-radius: 4px; font-weight: 700; padding: 6px 15px 6px 15px;" runat="server">Heavy Machine</asp:Label>
-            </div>  
+            </div>
+  
         </div>
         <div class="two">
             <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:10px 30px 10px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server" OnLoad="code_Load"></asp:Label>
@@ -26,9 +28,9 @@
             <br />
         </div>
     </div>
-    <div style="margin-bottom: 6.25rem"></div>
+    <div style="margin-bottom: 3rem"></div>
     <%-- startregion: Subitem Listview --%>
-    <asp:ListView runat="server"  ID="Subitem_Listview" GroupItemCount="2">
+    <asp:ListView runat="server" ID="Subitem_Listview" GroupItemCount="2">
         <GroupTemplate>
             <tr id="itemPlaceholderContainer" runat="server" style="min-width:1140px; display: flex;justify-content: space-between">
                 <td id="itemPlaceholder" runat="server" ></td>
@@ -54,11 +56,11 @@
             </td>
         </ItemTemplate>
         <LayoutTemplate>
-            <table  style="width:100%;">
+            <table>
                 <tbody>
                     <tr>
                         <td>
-                            <table class="table table-borderless" id="groupPlaceholderContainer" runat="server" style="width:100%">
+                            <table class="table table-borderless" id="groupPlaceholderContainer" runat="server">
                                 <tr id="groupPlaceholder"></tr>
                             </table>
                         </td>
