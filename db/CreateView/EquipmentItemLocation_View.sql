@@ -26,7 +26,7 @@ ALTER VIEW [dbo].[EquipmentItemLocation_View] as
 	EquipmentItem.delivered_at,
 	EquipmentItem.removed_at,
 	Category.name as category_name,
-	Category.cat_src as catergory_src,
+	Category.cat_src as category_src,
 	LocationName_View.room_name, LocationName_View.room_space_name, LocationName_View.object_code, LocationName_View.object_name, LocationName_View.object_num
 	FROM Equipment
 	INNER JOIN EquipmentItem
