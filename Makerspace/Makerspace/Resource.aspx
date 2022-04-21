@@ -135,7 +135,7 @@
                                             <td colspan="4" style="text-align:right; position:relative">
                                                 <asp:DataPager runat="server" ID="DataPager"
                                                 PagedControlID="EquipLV" 
-                                                PageSize="20">
+                                                PageSize="16">
                                                 <Fields>
                                                     <asp:NextPreviousPagerField ButtonType="Image"
                                                     ShowFirstPageButton="true"
