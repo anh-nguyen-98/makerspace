@@ -12,7 +12,7 @@
   
         </div>
         <div class="two">
-            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:10px 30px 10px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server"></asp:Label>
+            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:7px 30px 7px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server"></asp:Label>
             <asp:Label id="brand" runat="server" style="display:inline-block; color:#00196E; font-size:24px; font-weight:700; float:right"></asp:Label>
             <br />
             <asp:Label ID="name" runat="server" style="display:block; color:#00196E;  font-size:60px; font-weight:800; background-color:#E1E1DE; padding:10px 160px 10px 160px; height:100px; text-align:center; border-radius:12px"></asp:Label>
