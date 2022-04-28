@@ -76,11 +76,12 @@
             font-size:20px;
         }
         .page-number {
-            position: absolute;
-            transform: translateX(-4px) translateY(8px);
             font-weight: 700 !important;
             color: #00196E;
             font-size: 1.375rem;
+        }
+        .page-number.active{
+            color: #FFAD1D;
         }
     </style>
 </head>

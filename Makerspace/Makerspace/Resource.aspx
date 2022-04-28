@@ -136,19 +136,8 @@
                                                 <asp:DataPager runat="server" ID="DataPager"
                                                 PagedControlID="EquipLV" 
                                                 PageSize="16">
-                                                <Fields>
-                                                    <asp:NextPreviousPagerField ButtonType="Image"
-                                                    ShowFirstPageButton="true"
-                                                    ShowNextPageButton="false"
-                                                    ShowPreviousPageButton="true"
-                                                    FirstPageImageUrl="~/Images/first_page.svg" PreviousPageImageUrl="~/Images/previous_page.svg"/>
-                                                    
-                                                    <asp:NumericPagerField ButtonCount="1" PreviousPageText="" NextPageText="" CurrentPageLabelCssClass="page-number"/>
-                                                    <asp:NextPreviousPagerField ButtonType="Image"
-                                                    ShowLastPageButton="true"
-                                                    ShowNextPageButton="true"
-                                                    ShowPreviousPageButton="false"
-                                                    LastPageImageUrl="~/Images/last_page.svg" NextPageImageUrl="~/Images/next_page.svg"/>
+                                                <Fields>                                    
+                                                    <asp:NumericPagerField ButtonCount="8" PreviousPageText="Previous" NextPageText="Next" CurrentPageLabelCssClass="page-number active" NumericButtonCssClass="page-number"/>
                                                 </Fields>
                                             </asp:DataPager>
                                             </td>
