@@ -28,47 +28,49 @@
             <br />
         </div>
     </div>
-<%--    <div style="margin-bottom: 3rem"></div>--%>
     <%-- startregion: Subitem Listview --%>
-    <asp:ListView runat="server" ID="Subitem_Listview" GroupItemCount="2">
-        <GroupTemplate>
-            <tr id="itemPlaceholderContainer" runat="server" style="min-width:1140px; display: flex;justify-content: space-between">
-                <td id="itemPlaceholder" runat="server" ></td>
-            </tr>
-        </GroupTemplate>
-        <ItemTemplate>
-            <td runat="server">
-                <table class="rounded" style="background-color: #F1F3F6; min-width:400px;">
-                    <tr>
-                        <td rowspan="2" style="width:104px" class="p-3">
-                            <div style="background-color:#F1F3F6;"><img src="Images/<%#Eval("category_src") %>" height="82" width="82"></div>
-                        </td>
-                        <td class="py-0 pl-0 pr-3 align-bottom">
-                            <asp:Label runat="server" Text='<%# String.Concat(Eval("name"), " #", Eval("num"))%>' CssClass="fs-5 text-blue-fuv font-weight-medium"></asp:Label>  
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-0 pl-0 pr-3 align-top">
-                            <asp:Label runat="server" Text='<%# String.Concat("Location: ", Eval("room_space_name"), " - ", Eval("object_name"), " ", Eval("object_num"))%>' ForeColor="#3A4276"></asp:Label>
-                        </td>
-                    </tr>          
-                </table>
-            </td>
-        </ItemTemplate>
-        <LayoutTemplate>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <table class="table table-borderless" id="groupPlaceholderContainer" runat="server">
-                                <tr id="groupPlaceholder"></tr>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>               
-        </LayoutTemplate>         
-    </asp:ListView>
+    <div style="width:60vw; margin:auto">
+        <asp:ListView runat="server" ID="Subitem_Listview" GroupItemCount="2">
+            <GroupTemplate>
+                <tr id="itemPlaceholderContainer" runat="server" style="display:flex; width:60vw; justify-content:space-between">
+                    <td id="itemPlaceholder" runat="server" ></td>
+                </tr>
+            </GroupTemplate>
+            <ItemTemplate>
+                <td runat="server">
+                    <table style="background-color: #F1F3F6; min-width:400px; border-radius:0.75rem">
+                        <tr>
+                            <td rowspan="2" style="width:104px" class="p-3">
+                                <div style="background-color:#F1F3F6;"><img src="Images/<%#Eval("category_src") %>" height="82" width="82"></div>
+                            </td>
+                            <td class="py-0 pl-0 pr-3 align-bottom">
+                                <asp:Label runat="server" Text='<%# String.Concat(Eval("name"), " #", Eval("num"))%>' CssClass="fs-5 text-blue-fuv font-weight-medium"></asp:Label>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-0 pl-0 pr-3 align-top">
+                                <asp:Label runat="server" Text='<%# String.Concat("Location: ", Eval("room_space_name"), " - ", Eval("object_name"), " ", Eval("object_num"))%>' ForeColor="#3A4276"></asp:Label>
+                            </td>
+                        </tr>          
+                    </table>
+                </td>
+            </ItemTemplate>
+            <LayoutTemplate>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <table class="table table-borderless" id="groupPlaceholderContainer" runat="server">
+                                    <tr id="groupPlaceholder"></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>               
+            </LayoutTemplate>         
+        </asp:ListView>
+    </div>
+
     <%-- endregion: Subitem Listview --%>
 
 </asp:Content>
