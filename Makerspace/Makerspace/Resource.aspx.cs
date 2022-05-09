@@ -96,18 +96,26 @@ namespace Makerspace
             }        
         }
 
-        protected void Direct_EquipmentDetail(object sender, EventArgs e)
-        {
-            string id = "1";
-            string url = "~/EquipmentDetail.aspx?id=" + id;
-            Response.Redirect(url);
-        }
+        //protected void Direct_EquipmentDetail(object sender, EventArgs e)
+        //{
+        //    string id = "1";
+        //    if (id == null)
+        //    {
+        //        Response.Redirect("~/Resource.aspx");
+        //    }
+        //    string url = "~/EquipmentDetail.aspx?id=" + id;
+        //    Response.Redirect(url);
+        //}
 
         protected void EquipLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             
             System.Diagnostics.Debug.WriteLine(EquipLV.SelectedValue.ToString());
             string id = EquipLV.SelectedValue.ToString();
+            if (id == null)
+            {
+                Response.Redirect("~/Resource.aspx");
+            }
             string url = "~/EquipmentDetail.aspx?id=" + id;
             Response.Redirect(url, false);
             Context.ApplicationInstance.CompleteRequest();

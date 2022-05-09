@@ -18,27 +18,40 @@ namespace Makerspace
                 {
                     int id = Convert.ToInt32(Request.QueryString["id"]);
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM EquipmentItemLocation_View WHERE id = @id;", con);
-                    cmd.Parameters.AddWithValue("@id", id);
-                    con.Open();
+                    System.Diagnostics.Debug.WriteLine(id.ToString());
 
-                    DataTable db = new DataTable();
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(db);
-                    Subitem_Listview.DataSource = db;
-                    Subitem_Listview.DataBind();
-
-                    name.Text = db.Rows[0]["name"].ToString();
-                    cat.Text = db.Rows[0]["category_name"].ToString();
-                    eid.Text = db.Rows[0]["code"].ToString();
-                    brand.Text =db.Rows[0]["brand"].ToString();
-                    desc.Text = db.Rows[0]["description"].ToString();
-                    int training = (Int32)db.Rows[0]["training"];
-                    if (training == 0)
+                    if (id==0)
                     {
-                        train.Text = "Yes";
+                        Response.Redirect("~/Resource.aspx");
                     }
-                    train.Text = "No";
+
+                    else
+                    {
+                        SqlCommand cmd = new SqlCommand("SELECT * FROM EquipmentItemLocation_View WHERE id = @id;", con);
+                        cmd.Parameters.AddWithValue("@id", id);
+                        con.Open();
+
+                        DataTable db = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(db);
+                        Subitem_Listview.DataSource = db;
+                        Subitem_Listview.DataBind();
+
+                        name.Text = db.Rows[0]["name"].ToString();
+                        cat.Text = db.Rows[0]["category_name"].ToString();
+                        eid.Text = db.Rows[0]["code"].ToString();
+                        brand.Text = db.Rows[0]["brand"].ToString();
+                        desc.Text = db.Rows[0]["description"].ToString();
+                        int training = (Int32)db.Rows[0]["training"];
+                        if (training == 0)
+                        {
+                            train.Text = "Yes";
+                        }
+                        train.Text = "No";
+
+                    }
+                    
+
                 }
             }
             else
@@ -57,10 +70,15 @@ namespace Makerspace
                 cmd.Parameters.AddWithValue("@id", id);
                 conn.Open();
 
+
                 string link = (String)cmd.ExecuteScalar();
 
+                if (link.Length > 0)
+                {
+                    Response.Redirect(link, false);
+                }
+
                 //System.Diagnostics.Debug.WriteLine(link);
-                Response.Redirect(link, false);
             }
         }
 
