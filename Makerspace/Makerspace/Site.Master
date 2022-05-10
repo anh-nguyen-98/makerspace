@@ -75,6 +75,10 @@
             font-weight:600; 
             font-size:20px;
         }
+        span.text-hover:hover {
+            color: #FFAD1D;
+            text-decoration: underline;     
+        }
     </style>
 </head>
 
