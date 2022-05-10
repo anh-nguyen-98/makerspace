@@ -37,9 +37,24 @@ namespace Makerspace
                         Subitem_Listview.DataSource = db;
                         Subitem_Listview.DataBind();
 
+                        string link = db.Rows[0]["instruction"].ToString();
+
+                        if (link.Equals(""))
+                        {
+                            ins.Enabled = false;
+                            ins.Style.Add("color", "black");
+                            ins.Style.Add("font-weight", "normal");
+                            ins.Text = "Instruction is not available yet";
+                        }
+                        else
+                        {
+                            ins.Text = "Click here for " + db.Rows[0]["name"].ToString().ToLower() + "'s instruction";
+                        }
+
                         name.Text = db.Rows[0]["name"].ToString();
                         cat.Text = db.Rows[0]["category_name"].ToString();
                         eid.Text = db.Rows[0]["code"].ToString();
+                        equipment_img.ImageUrl = "Images\\" + db.Rows[0]["image"].ToString();
                         brand.Text = db.Rows[0]["brand"].ToString();
                         desc.Text = db.Rows[0]["description"].ToString();
                         int training = (Int32)db.Rows[0]["training"];
@@ -73,10 +88,9 @@ namespace Makerspace
 
                 string link = (String)cmd.ExecuteScalar();
 
-                if (link.Length > 0)
-                {
-                    Response.Redirect(link, false);
-                }
+                System.Diagnostics.Debug.WriteLine(link);
+                Response.Redirect(link, false);
+
 
                 //System.Diagnostics.Debug.WriteLine(link);
             }
@@ -96,6 +110,11 @@ namespace Makerspace
 
 
             }
+        }
+
+        protected void Edit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

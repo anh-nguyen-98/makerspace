@@ -2,8 +2,9 @@
 <asp:Content ID="EDetail" ContentPlaceHolderID="MainContent" runat="server">
     <div class="wrapper">
         <div class="one">
-            <div>          
-                <img src="Images\A18-030.jpg" width="260" height="260" style="vertical-align:baseline">
+            <div>
+                <asp:Image ID="equipment_img" runat="server" Width="260" Height="260" style="vertical-align:baseline" />
+                <%--<img src="Images/<%#Eval("cat_src")%>" width="260" height="260" style="vertical-align:baseline">--%>
             <br />
             <div style="display: flex; justify-content:center">
                  <asp:Label id="cat" style="background-color: #00196E; color: white; font-size: 24px; border-radius: 4px; font-weight: 700; position: absolute; padding: 6px 15px 6px 15px;" runat="server"></asp:Label>
@@ -15,14 +16,15 @@
             <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:7px 30px 7px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server"></asp:Label>
             <asp:Label id="brand" runat="server" style="display:inline-block; color:#00196E; font-size:24px; font-weight:700; float:right"></asp:Label>
             <br />
-            <asp:Label ID="name" runat="server" style="display:block; color:#00196E;  font-size:60px; font-weight:800; background-color:#E1E1DE; padding:10px 160px 10px 160px; height:100px; text-align:center; border-radius:12px"></asp:Label>
+            <asp:Label ID="name" runat="server" style="display:inline-block; color:#00196E; font-size:3vw; font-weight:800; background-color:#E1E1DE; padding:10px 160px 10px 160px; height:100px; text-align:center; border-radius:12px"></asp:Label>
+            <asp:Button runat="server" Text="Edit" BorderStyle="None" style="width: 120px; height: 40px; position: relative; left: 75%; margin-top:15px; border-radius:4px; font-size: 24px; font-weight: 600; color: white; background-color: #00196E" OnClick="Edit_Click"/>
         </div>
         <div class="three">
             <asp:Label class="equipment_info" runat="server">Total: <asp:Label id="count" class="equipment_info" runat="server" OnLoad="Count_Load" style="font-weight:normal"></asp:Label></asp:Label>
             <br/>
             <asp:Label id="description" class="equipment_info" runat="server">Decription: <asp:Label id="desc" runat="server" style="font-weight:normal" ></asp:Label></asp:Label>
             <br />
-            <asp:Label id="instruction" class="equipment_info" runat="server">Instruction: <asp:LinkButton ID="ins" runat="server" OnClick="Link_Click" OnClientClick="document.forms[0].target = '_blank';">Link</asp:LinkButton></asp:Label>
+            <asp:Label id="instruction" class="equipment_info" runat="server">Instruction: <asp:LinkButton ID="ins" runat="server" OnClick="Link_Click" OnClientClick="document.forms[0].target = '_blank';"></asp:LinkButton></asp:Label>
             <br />
             <asp:Label class="equipment_info" runat="server">Training requirement: <asp:Label id="train" runat="server"  style="font-weight:normal"></asp:Label></asp:Label>
             <br />
