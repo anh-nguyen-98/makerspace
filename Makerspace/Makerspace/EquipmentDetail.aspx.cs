@@ -44,6 +44,7 @@ namespace Makerspace
                             ins.Enabled = false;
                             ins.Style.Add("color", "black");
                             ins.Style.Add("font-weight", "normal");
+                            ins.Style.Add("text-decoration", "none");
                             ins.Text = "Instruction is not available yet";
                         }
                         else
