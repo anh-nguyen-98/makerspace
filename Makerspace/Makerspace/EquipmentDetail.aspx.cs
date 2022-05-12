@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -14,6 +15,8 @@ namespace Makerspace
         {
             if (!IsPostBack)
             {
+
+
                 using (SqlConnection con = new SqlConnection(CONSTRING))
                 {
                     int id = Convert.ToInt32(Request.QueryString["id"]);
@@ -64,7 +67,11 @@ namespace Makerspace
                             train.Text = "Yes";
                         }
                         train.Text = "No";
-
+                        
+                        editBtn.Enabled = true;
+                        ins_box.Visible = false;
+                        desc_box.Visible = false;  
+                        submit_btn.Visible = false; 
                     }
                     
 
@@ -115,6 +122,54 @@ namespace Makerspace
 
         protected void Edit_Click(object sender, EventArgs e)
         {
+            ins.Visible = false;
+            ins_box.Visible = true;
+            desc.Visible = false;
+            desc_box.Visible = true;
+            submit_btn.Visible = true;
+            System.Diagnostics.Debug.WriteLine("Clicked");
+            
+        }
+
+        protected void submit_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection con = new SqlConnection(CONSTRING))
+            {
+                int id = Convert.ToInt32(Request.QueryString["id"]);
+                string desc_input = desc_box.Text.ToString();
+                string ins_input = ins_box.Text.ToString();
+
+                SqlCommand cmd = new SqlCommand("updateEquipment@eID", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@equipment_id", id);
+                cmd.Parameters.AddWithValue("@description", desc_input);
+                cmd.Parameters.AddWithValue("@instruction", ins_input);
+
+                con.Open();
+                
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+
+
+                desc_box.Text = "";
+                ins_box.Text = "";
+
+                ins_box.Visible = false;
+                desc_box.Visible = false;
+
+
+                ins.Visible = true;
+                desc.Visible = true;
+
+                submit_btn.Visible = false;
+
+
+
+
+
+
+            }
 
         }
     }
