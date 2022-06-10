@@ -75,6 +75,15 @@
             font-weight:600; 
             font-size:20px;
         }
+        .page-number {
+            font-weight: 700 !important;
+            color: #00196E;
+            font-size: 1.375rem;
+            margin-left: 0.5rem;
+        }
+        .page-number.active{
+            color: #FFAD1D;
+        }
         span.text-hover:hover {
             color: #FFAD1D;
             text-decoration: underline;     
