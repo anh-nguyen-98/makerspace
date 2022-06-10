@@ -7,7 +7,7 @@
         <div class="container body-content" style="z-index:1">
             <div class="row" style="-ms-overflow-style:none;">
                 <div class="input-group mb-3" id="inputGroup-sizing-default" style="margin-left:auto; margin-right:auto">
-                    <asp:TextBox ID="searchBox" placeholder="Search here" runat="server" CssClass="form-control rounded" ></asp:TextBox>
+                    <asp:TextBox ID="searchBox" placeholder="Search here" runat="server" CssClass="form-control rounded" BackColor="#F1F3F6"></asp:TextBox>
                     <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary ml-1" OnClick="searchBtn_Click" Text="Search" style="background-color:#00196E"/>
                 </div>
                
@@ -21,7 +21,7 @@
         </div>
         <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="8" DataSourceID="Category_DataSource" DataKeyNames="name" OnSelectedIndexChanged="Category_ListView_SelectedIndexChanged" style="z-index:1">
             <GroupTemplate>
-                <tr id="itemPlaceholderContainer" runat="server">
+                <tr id="itemPlaceholderContainer" runat="server" style="min-width:1140px; display: flex;justify-content: space-between">
                     <td id="itemPlaceholder" runat="server" colspan="4">
                     </td>
                 </tr>
@@ -89,9 +89,9 @@
 
         <div class="mb-4">
             <%-- startregion: Equipment Listview --%>
-            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4" DataKeyNames="id" OnSelectedIndexChanging="EquipLV_SelectedIndexChanging" OnSelectedIndexChanged="EquipLV_SelectedIndexChanged">
+            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4" DataKeyNames="id" OnSelectedIndexChanging="EquipLV_SelectedIndexChanging" OnSelectedIndexChanged="EquipLV_SelectedIndexChanged" OnPagePropertiesChanging="EquipLV_PagePropertiesChanging">
                 <GroupTemplate>
-                    <tr id="itemPlaceholderContainer" runat="server">
+                    <tr id="itemPlaceholderContainer" runat="server" style="min-width:1140px; display: flex;justify-content: space-between">
                         <td id="itemPlaceholder" runat="server" colspan="3"></td>
                     </tr>
                 </GroupTemplate>
@@ -130,6 +130,17 @@
                                 <td>
                                     <table cellpadding="3" class="table table-borderless" id="groupPlaceholderContainer" runat="server" style="width:100%">
                                         <tr id="groupPlaceholder"></tr>
+                                        <tr>
+                                            <td colspan="4" style="text-align:right; position:relative">
+                                                <asp:DataPager runat="server" ID="DataPager"
+                                                PagedControlID="EquipLV" 
+                                                PageSize="16">
+                                                <Fields>                                    
+                                                    <asp:NumericPagerField ButtonCount="8" PreviousPageText="Previous" NextPageText="Next" CurrentPageLabelCssClass="page-number active" NumericButtonCssClass="page-number"/>
+                                                </Fields>
+                                            </asp:DataPager>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>
@@ -139,7 +150,10 @@
                 </LayoutTemplate>
                 
             </asp:ListView>
+            
             <%-- endregion: Equipment Listview --%>
+
         </div>
+
     
 </asp:Content>

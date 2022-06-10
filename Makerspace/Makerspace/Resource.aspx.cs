@@ -116,6 +116,12 @@ namespace Makerspace
             //load();
 
         }
+
+        protected void EquipLV_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            (EquipLV.FindControl("DataPager") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            this.load();
+        }
     }
 
 }
