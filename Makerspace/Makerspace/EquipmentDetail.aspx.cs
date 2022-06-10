@@ -11,6 +11,7 @@ namespace Makerspace
     public partial class EquipmentDetail : System.Web.UI.Page
     {
         protected static string CONSTRING = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
+        private string link = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,7 +41,7 @@ namespace Makerspace
                         Subitem_Listview.DataSource = db;
                         Subitem_Listview.DataBind();
 
-                        string link = db.Rows[0]["instruction"].ToString();
+                        link = db.Rows[0]["instruction"].ToString();
 
                         if (link.Equals(""))
                         {
@@ -94,7 +95,7 @@ namespace Makerspace
                 conn.Open();
 
 
-                string link = (String)cmd.ExecuteScalar();
+                link = (String)cmd.ExecuteScalar();
 
                 System.Diagnostics.Debug.WriteLine(link);
                 Response.Redirect(link, false);
@@ -102,6 +103,8 @@ namespace Makerspace
 
                 //System.Diagnostics.Debug.WriteLine(link);
             }
+
+
         }
 
         protected void Count_Load(object sender, EventArgs e)
@@ -124,6 +127,8 @@ namespace Makerspace
         {
             ins.Visible = false;
             ins_box.Visible = true;
+            ins_box.Text = link;
+            desc_box.Text= desc.Text;    
             desc.Visible = false;
             desc_box.Visible = true;
             submit_btn.Visible = true;
@@ -150,6 +155,10 @@ namespace Makerspace
                 DataTable dt = new DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dt);
+
+
+                link = ins_input;
+                System.Diagnostics.Debug.WriteLine("link binded: " + link);
 
                 string url = "~/EquipmentDetail.aspx?id=" + id;
 
