@@ -151,21 +151,25 @@ namespace Makerspace
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dt);
 
+                string url = "~/EquipmentDetail.aspx?id=" + id;
 
-                desc_box.Text = "";
-                ins_box.Text = "";
-
-                ins_box.Visible = false;
-                desc_box.Visible = false;
+                Response.Redirect(url);
 
 
-                ins.Visible = true;
-                desc.Visible = true;
+                //desc_box.Text = "";
+                //ins_box.Text = "";
 
-                ins.Text = "Click here for instruction";
-                desc.Text = desc_input;
+                //ins_box.Visible = false;
+                //desc_box.Visible = false;
 
-                submit_btn.Visible = false;
+
+                //ins.Visible = true;
+                //desc.Visible = true;
+
+                //ins.Text = "Click here for instruction";
+                //desc.Text = desc_input;
+
+                //submit_btn.Visible = false;
 
 
 
