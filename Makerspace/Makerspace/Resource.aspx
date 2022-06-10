@@ -85,8 +85,7 @@
                 </table>
             </LayoutTemplate>
         </asp:ListView>
-        <asp:SqlDataSource ID="Category_DataSource" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT [name], [cat_src] FROM [Category]"></asp:SqlDataSource>
-        
+        <asp:SqlDataSource ID="Category_DataSource" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT [name], [cat_src] FROM [Category]"></asp:SqlDataSource>      
 
         <div class="mb-4">
             <%-- startregion: Equipment Listview --%>
@@ -98,30 +97,30 @@
                 </GroupTemplate>
                 <ItemTemplate>
                     <td runat="server">
-                        <asp:LinkButton runat="server" CommandName="Select">
-                        <table id="equipment_re" class="rounded text-center" style="background-color: #F1F3F6; width:220px; height: 350px">
-                            <tr>
-                                <td class="px-3 pt-3">
-                                    <img class="rounded center" src="Images/<%#Eval("image")%>" onerror="this.src='Images/mechanics.png'" style="width:100%" height="165"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-3 py-0">
-                                    <asp:Label id="Label1" runat="server" Text='<%# Eval("name") %>' class="text-blue-fuv font-weight-medium" Font-Size="18px"></asp:Label>
-                                    <br />
-                                    <asp:Label runat="server" Text='<%# Eval("name_vie") %>' Font-Size="16px" ForeColor="#3A4276"></asp:Label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div style="background-color: #3A4276; font-size: 16px" class="rounded font-weight-bold text-white">
-                                        <asp:Label runat="server" Text='<%# Eval("room_space_name") %>'></asp:Label>
-                                    </div>
-                                    <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 24px"><asp:Label runat="server" Text='<%# String.Concat(Eval("object_name").ToString().Trim(), " ", Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
-                                </td>
-                            </tr>
-                        </table>
-                    </asp:LinkButton>
+                        <asp:LinkButton runat="server" CommandName="Select" Font-Underline="false">
+                            <table id="equipment_re" class="text-center" style="background-color: #F1F3F6; width:220px; height: 350px; border-radius:0.75rem">    
+                                <tr>
+                                    <td class="px-3 pt-3">
+                                        <img class="center" src="Images/<%#Eval("image")%>" onerror="this.src='Images/mechanics.png'" style="width:100%;height:165px; border-radius: 0.75rem"/>    
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-0">
+                                        <asp:Label id="Label1" runat="server" Text='<%# Eval("name") %>' Font-Size="18px" CssClass="text-blue-fuv font-weight-medium text-hover"></asp:Label>
+                                        <br />
+                                        <asp:Label runat="server" Text='<%# Eval("name_vie") %>' Font-Size="16px"  CssClass="text-blue-fuv-light text-hover"></asp:Label>
+                                    </td>
+                                </tr>                    
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #3A4276; font-size: 16px" class="rounded font-weight-bold text-white">
+                                            <asp:Label runat="server" Text='<%# Eval("room_space_name") %>'></asp:Label>
+                                        </div>
+                                        <div class="text-blue-fuv font-weight-bold bg-white" style="font-size: 24px"><asp:Label runat="server" Text='<%# String.Concat(Eval("object_name").ToString().Trim(), " ", Eval("object_num").ToString().Trim()) %>'></asp:Label></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:LinkButton>
                     </td>
                 </ItemTemplate>
                 <LayoutTemplate>

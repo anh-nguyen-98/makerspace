@@ -84,6 +84,23 @@
         .page-number.active{
             color: #FFAD1D;
         }
+        span.text-hover:hover {
+            color: #FFAD1D;
+            text-decoration: underline;     
+        }
+        
+        .edit_button_style {
+            width: 120px; 
+            height: 40px; 
+            float:right; 
+            border-radius:4px; 
+            font-size: 24px; 
+            font-weight: 600; 
+            color: white; 
+            background-color: #00196E;
+            border-style:none;
+        }
+
     </style>
 </head>
 

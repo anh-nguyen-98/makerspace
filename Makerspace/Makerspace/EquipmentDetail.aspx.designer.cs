@@ -15,6 +15,15 @@ namespace Makerspace
     {
 
         /// <summary>
+        /// equipment_img control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image equipment_img;
+
+        /// <summary>
         /// cat control.
         /// </summary>
         /// <remarks>
@@ -51,6 +60,24 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.Label name;
 
         /// <summary>
+        /// editBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button editBtn;
+
+        /// <summary>
+        /// count_equip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label count_equip;
+
+        /// <summary>
         /// count control.
         /// </summary>
         /// <remarks>
@@ -78,6 +105,15 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.Label desc;
 
         /// <summary>
+        /// desc_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox desc_box;
+
+        /// <summary>
         /// instruction control.
         /// </summary>
         /// <remarks>
@@ -96,6 +132,15 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.LinkButton ins;
 
         /// <summary>
+        /// ins_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ins_box;
+
+        /// <summary>
         /// train control.
         /// </summary>
         /// <remarks>
@@ -103,6 +148,15 @@ namespace Makerspace
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label train;
+
+        /// <summary>
+        /// submit_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button submit_btn;
 
         /// <summary>
         /// Subitem_Listview control.
