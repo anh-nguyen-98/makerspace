@@ -162,6 +162,9 @@ namespace Makerspace
                 ins.Visible = true;
                 desc.Visible = true;
 
+                ins.Text = "Click here for instruction";
+                desc.Text = desc_input;
+
                 submit_btn.Visible = false;
 
 
