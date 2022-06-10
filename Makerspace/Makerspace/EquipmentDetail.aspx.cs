@@ -11,7 +11,6 @@ namespace Makerspace
     public partial class EquipmentDetail : System.Web.UI.Page
     {
         protected static string CONSTRING = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
-        private string link = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,7 +40,7 @@ namespace Makerspace
                         Subitem_Listview.DataSource = db;
                         Subitem_Listview.DataBind();
 
-                        link = db.Rows[0]["instruction"].ToString();
+                        String link = db.Rows[0]["instruction"].ToString();
 
                         if (link.Equals(""))
                         {
@@ -95,7 +94,7 @@ namespace Makerspace
                 conn.Open();
 
 
-                link = (String)cmd.ExecuteScalar();
+                String link = (String)cmd.ExecuteScalar();
 
                 System.Diagnostics.Debug.WriteLine(link);
                 Response.Redirect(link, false);
@@ -127,7 +126,7 @@ namespace Makerspace
         {
             ins.Visible = false;
             ins_box.Visible = true;
-            ins_box.Text = link;
+            ins_box.Text = getLink();
             desc_box.Text= desc.Text;    
             desc.Visible = false;
             desc_box.Visible = true;
@@ -157,8 +156,6 @@ namespace Makerspace
                 adapter.Fill(dt);
 
 
-                link = ins_input;
-                System.Diagnostics.Debug.WriteLine("link binded: " + link);
 
                 string url = "~/EquipmentDetail.aspx?id=" + id;
 
@@ -188,5 +185,27 @@ namespace Makerspace
             }
 
         }
+
+        private String getLink()
+        {
+            String link = "";
+
+            using (SqlConnection conn = new SqlConnection(CONSTRING))
+            {
+                int id = Convert.ToInt32(Request.QueryString["id"]);
+                SqlCommand cmd = new SqlCommand("SELECT instruction FROM EquipmentItemLocation_View WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+
+
+                link = (String)cmd.ExecuteScalar();
+
+                System.Diagnostics.Debug.WriteLine(link);
+
+            }
+            return link;
+        }
     }
+
+
 }
