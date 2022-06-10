@@ -96,6 +96,32 @@ namespace Makerspace
             }        
         }
 
+        protected void EquipLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            System.Diagnostics.Debug.WriteLine(EquipLV.SelectedValue.ToString());
+            string id = EquipLV.SelectedValue.ToString();
+            if (id == null)
+            {
+                Response.Redirect("~/Resource.aspx");
+            }
+            string url = "~/EquipmentDetail.aspx?id=" + id;
+            Response.Redirect(url, false);
+            Context.ApplicationInstance.CompleteRequest();
+        }
+
+        protected void EquipLV_SelectedIndexChanging(object sender, ListViewSelectEventArgs e)
+        {
+            this.EquipLV.SelectedIndex = e.NewSelectedIndex;
+            //load();
+
+        }
+
+        protected void EquipLV_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            (EquipLV.FindControl("DataPager") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            this.load();
+        }
     }
 
 }

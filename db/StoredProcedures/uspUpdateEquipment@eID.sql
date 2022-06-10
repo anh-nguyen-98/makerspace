@@ -18,9 +18,11 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[uspReadEquipItem@itemID]
+CREATE PROCEDURE [dbo].[UpdateEquipment@eID] 
 	-- Add the parameters for the stored procedure here
-	@itemID INT
+	@equipment_id INT,
+	@description VARCHAR(1000),
+	@instruction VARCHAR(1000)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -28,13 +30,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT EquipmentItem.itemID, Equipment.eID, EquipmentItem.itemStatus, EquipmentItem.locID,
-	EquipmentItem.itemDeliveryDate, EquipmentItem.itemRemovalDate,
-	CONCAT(Equipment.eCode, '-', EquipmentItem.itemNum) AS itemCode
-	
-	FROM EquipmentItem
-	INNER JOIN Equipment ON Equipment.eID = EquipmentItem.eID
-	
-	WHERE EquipmentItem.itemID = @itemID;
+	UPDATE Equipment
+	SET description = @description, instruction = @instruction 
+	WHERE id = @equipment_id;
 END
 GO
