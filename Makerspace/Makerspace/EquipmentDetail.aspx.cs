@@ -21,7 +21,6 @@ namespace Makerspace
                 {
                     int id = Convert.ToInt32(Request.QueryString["id"]);
 
-                    System.Diagnostics.Debug.WriteLine(id.ToString());
 
                     if (id==0)
                     {
@@ -86,23 +85,8 @@ namespace Makerspace
 
         protected void Link_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(CONSTRING))
-            {
-                int id = Convert.ToInt32(Request.QueryString["id"]);
-                SqlCommand cmd = new SqlCommand("SELECT instruction FROM EquipmentItemLocation_View WHERE id = @id", conn);
-                cmd.Parameters.AddWithValue("@id", id);
-                conn.Open();
-
-
-                String link = (String)cmd.ExecuteScalar();
-
-                System.Diagnostics.Debug.WriteLine(link);
-                Response.Redirect(link, false);
-
-
-                //System.Diagnostics.Debug.WriteLine(link);
-            }
-
+ 
+            Response.Redirect(getLink(), false);
 
         }
 
@@ -117,8 +101,6 @@ namespace Makerspace
 
                 int countItem = (Int32)cmd.ExecuteScalar();
                 count.Text = countItem.ToString();
-
-
             }
         }
 
@@ -131,7 +113,6 @@ namespace Makerspace
             desc.Visible = false;
             desc_box.Visible = true;
             submit_btn.Visible = true;
-            System.Diagnostics.Debug.WriteLine("Clicked");
             
         }
 
@@ -155,33 +136,8 @@ namespace Makerspace
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dt);
 
-
-
                 string url = "~/EquipmentDetail.aspx?id=" + id;
-
                 Response.Redirect(url);
-
-
-                //desc_box.Text = "";
-                //ins_box.Text = "";
-
-                //ins_box.Visible = false;
-                //desc_box.Visible = false;
-
-
-                //ins.Visible = true;
-                //desc.Visible = true;
-
-                //ins.Text = "Click here for instruction";
-                //desc.Text = desc_input;
-
-                //submit_btn.Visible = false;
-
-
-
-
-
-
             }
 
         }
@@ -197,10 +153,7 @@ namespace Makerspace
                 cmd.Parameters.AddWithValue("@id", id);
                 conn.Open();
 
-
                 link = (String)cmd.ExecuteScalar();
-
-                System.Diagnostics.Debug.WriteLine(link);
 
             }
             return link;
