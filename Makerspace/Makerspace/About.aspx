@@ -1,38 +1,165 @@
 ﻿<%@ Page Title="About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="Makerspace.About" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-   <div class="jumbotron">
-        <h1>Welcome to FUV Makerspace!</h1>
-        <p class="lead">A great place to build your projects.</p>
-        <p><a href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Resources</h2>
-            <p>
-                Makerspace provides you with free tools to build your projects. The categories include Mechanics, Electronics,
-                Printing, Textile Fabrication. 
-            </p>
-            <p>
-                <a class="btn btn-default" runat="server" href="~/Resource">View Resource &raquo;</a>
-            </p>
+    <div class="container about-page" style="width: 60vw">
+        <div class="row" style="margin-bottom: 40px">
+            <div class="d-flex" style="width:100%; min-height:200px;">
+                <div class="flex-grow-1" style="background-color: #00196E; border-top-left-radius: 12px; border-bottom-left-radius: 12px">
+                  
+                </div>
+                <div style="width: 66%;padding-top: 30px; padding-bottom: 30px; padding-left: 54px; padding-right:54px; background: #F1F3F6; color: #00196E;">
+                    <p> <i>Learn more about</i></p>
+                    <p style="font-size: 40px; font-weight:900;">
+                        BOOKING
+                    </p>
+                    <p>
+                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                    </p>
+                    <asp:Button runat="server" Text="Our Services" CssClass="yellow-btn"/>
+                 
+                </div>
+                <div class="d-flex flex-column" style="width: 32%;">
+                    <div style="background-color: #00196E; height: 40px; border-top-right-radius: 12px">
+
+
+                    </div>
+                    <div style="position: relative" class="flex-grow-1">
+                          <img src="Images/Makerspace_Logo.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 60%;" />
+                  
+
+                    </div>
+                    <div style="background-color: #00196E; height: 40px; border-bottom-right-radius: 12px">
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Booking</h2>
-            <p>
-                Make a booking with our assitants to get support for your projects. 
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Make a booking&raquo;</a>
-            </p>
+        <div class="row">
+            <div class="d-flex" style="width:100%; min-height:200px; margin-bottom: 40px">
+                 <div class="d-flex flex-column" style="width: 32%;">
+                    <div style="background-color: #00196E; height: 40px; border-top-left-radius: 12px">
+
+
+                    </div>
+                    <div style="position: relative; background-color: #00196E" class="flex-grow-1">
+                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                  
+
+                    </div>
+                    <div style="background-color: #00196E; height: 40px;border-bottom-left-radius: 12px">
+
+
+                    </div>
+                </div>
+              
+                <div style="width: 66%;padding-top: 30px; padding-bottom: 30px; padding-left: 54px; padding-right:54px; background: #F1F3F6; color: #00196E;">
+                    <p><i>Learn more about</i></p>
+                    <p style="font-size: 40px; font-weight:900;">
+                        WORKSHOPS
+                    </p>
+                    <p>
+                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                    </p>
+                    <div class="d-flex justify-content-between mb-2">
+                       
+                                <asp:Button runat="server" Text="Digital Design" CssClass="white-btn"/>
+                           
+                                 <asp:Button runat="server" Text="Electrics & Arduino" CssClass="white-btn"/>
+                                   
+
+                    </div>
+                    
+                   
+                    <div class="d-flex justify-content-between">
+                        <asp:Button runat="server" Text="Fabrication" CssClass="white-btn"/>
+                    <asp:Button runat="server" Text="Safety & Policy" CssClass="white-btn"/>
+                    </div>
+                    
+                </div>
+                  <div class="flex-grow-1" style="background-color: #00196E; border-top-right-radius: 12px; border-bottom-right-radius: 12px">
+                  
+                </div>
+               
+            </div>
+
+            
         </div>
-        <div class="col-md-4">
-            <h2>Project Gallery</h2>
-            <p>
-                To be featured soon at Makerspace!
-            </p>
+        <div class="row">
+            <div class="d-flex"  style="width:100%; min-height:200px; margin-bottom: 40px">
+                <div class="flex-grow-1" style="background-color: #00196E; border-top-left-radius: 12px; border-bottom-left-radius: 12px">
+                  
+                </div>
+                <div style="width: 66%;padding-top: 30px; padding-bottom: 30px; padding-left: 54px; padding-right:54px; background: #F1F3F6; color: #00196E;">
+                    <p> <i>Learn more about</i></p>
+                    <p style="font-size: 40px; font-weight:900;">
+                        PROJECTS
+                    </p>
+                    <p>
+                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                          <asp:Button runat="server" Text="Hearty Plant" CssClass="white-btn"/>
+                    <asp:Button runat="server" Text="E-dap" CssClass="white-btn ml-5"/>
+                    </div>
+                  
+                 
+                </div>
+                <div class="d-flex flex-column" style="width: 32%;">
+                    <div style="background-color: #00196E; height: 40px; border-top-right-radius: 12px">
+
+
+                    </div>
+                    <div style="position: relative; background-color:#00196E" class="flex-grow-1">
+                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                  
+
+                    </div>
+                    <div style="background-color: #00196E; height: 40px;border-bottom-right-radius: 12px">
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-        
+        <div class="row">
+            <div class="d-flex" style="width:100%; min-height:200px;">
+                 <div class="d-flex flex-column" style="width: 32%;">
+                    <div style="background-color: #00196E; height: 40px; border-top-left-radius: 12px">
+
+
+                    </div>
+                    <div style="position: relative; background-color:#00196E" class="flex-grow-1">
+                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                  
+
+                    </div>
+                    <div style="background-color: #00196E; height: 40px;border-bottom-left-radius: 12px">
+
+
+                    </div>
+                </div>
+              
+                <div style="width: 66%;padding-top: 30px; padding-bottom: 30px; padding-left: 54px; padding-right:54px; background: #F1F3F6; color: #00196E;">
+                    <p> <i>Learn more about</i></p>
+                    <p style="font-size: 40px; font-weight:900;">
+                        PRODUCT GALLERY
+                    </p>
+                    <p>
+                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                    </p>
+                    <asp:Button runat="server" Text="Submit Your Work" CssClass="white-btn"/>
+                    <asp:Button runat="server" Text="Visit" CssClass="yellow-btn"/>
+                 
+                </div>
+                  <div class="flex-grow-1" style="background-color: #00196E; border-top-right-radius: 12px; border-bottom-right-radius: 12px">
+                  
+                </div>
+               
+            </div>
+        </div>
 
     </div>
+
+    
 </asp:Content>

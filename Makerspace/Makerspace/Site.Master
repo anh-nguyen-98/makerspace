@@ -101,6 +101,29 @@
             border-style:none;
         }
 
+        .about-page .yellow-btn {
+            background-color: #FFAD1D;
+            color: #00196E;
+            font-weight: 900;
+            float: right;
+            border: none;
+            border-radius: 5px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .about-page .white-btn {
+            background-color: #FFFFFF;
+            color: #00196E;
+            font-weight: 900;
+            border: none;
+            border-radius: 5px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        
+
     </style>
 </head>
 

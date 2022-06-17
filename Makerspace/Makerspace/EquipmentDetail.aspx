@@ -38,7 +38,7 @@
             <asp:Button ID="submit_btn" runat="server" OnClick="submit_Click" Text="Done" class="edit_button_style" style="margin-top: 20px; background-color: #EAEAE8; color: #00196E"/>
         </div>
     </div>
-    <div style="margin-top:20px"></div>
+    <div style="margin-top:40px"></div>
 
     <%-- startregion: Subitem Listview --%>
     <div style="width:60vw; margin:auto">
