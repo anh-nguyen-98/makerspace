@@ -127,7 +127,7 @@
                 left: -20px;
             }
             .image-cover {
-                width: 300vw;
+                width: 200vw;
             }
         }
 
