@@ -122,6 +122,33 @@
             padding-right: 12px;
         }
 
+        @media only screen and (max-width: 1139px) {
+            .cover-align {
+                left: -20px;
+            }
+            .image-cover {
+                width: 300vw;
+            }
+        }
+
+        @media only screen and (min-width:1140px) {
+             .cover-align {
+                left: -100px;
+            }
+             .image-cover {
+                width: 150vw;
+            }
+        }
+
+        @media only screen and (min-width: 1800px) {
+            .cover-align {
+                left: -380px;
+            }
+            .image-cover {
+                width: 105vw;
+            }
+        }
+
         
 
     </style>

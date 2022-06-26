@@ -2,8 +2,8 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1 class="text-center" style="font-size:70px; font-weight:900;"> <span style="color:#00196E">Makerspace</span> <span style="color:#FFAD1D"> Information</span></h1>
-    <div style="width:100vw; height: 500px; position:relative" >
-        <asp:Image ID="cover" src="Images/Makerspace_Cover.png" runat="server" style="height: 383px; position: absolute"/>
+    <div class= "cover-align" style="width:100vw; height: 500px; position:relative" >
+        <asp:Image ID="cover" class="image-cover" src="Images/Makerspace_Cover.png" runat="server" style="height: 383px; position: absolute"/>
         <h3 style="width:60vw">Served for DST A Class: 9:45AM - 11:15AM</h3>
     </div>
     <div class="container about-page" style="width: 60vw">
