@@ -54,8 +54,8 @@
                         <table style="border-spacing:0; border-collapse:collapse; padding-top:0px; margin:0px; align-content: center; table-layout: fixed">
                             <tr style="margin:0px; line-height:0px; align-content:center">
                                 <td class="text-center" style="padding:0; align-content:center">
-                                   <div style="background-color:#F1F3F6; border-radius:12px; height:115px; width:115px; position:relative; vertical-align:bottom">
-                                            <img src="Images/<%#Eval("cat_src")%>" style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); height:40px"/>
+                                   <div style="background-color:#00196E; border-radius:12px; height:115px; width:115px; position:relative; vertical-align:bottom">
+                                            <img src="Images/<%#Eval("cat_src")%>" style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); height:40px; filter: invert(91%) sepia(62%) saturate(6193%) hue-rotate(178deg) brightness(135%) contrast(96%);"/>
                                     </div>
                                     <div>
                                     </div>
