@@ -12,10 +12,10 @@
   
         </div>
         <div class="two">
-            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:7px 30px 7px 30px; font-size:24px; font-weight:700; text-align:center; border-radius:4px; vertical-align: super" runat="server"></asp:Label>
+            <asp:Label id="eid" style="background-color:#FFAD1D; color:#00196E; padding:7px 30px 7px 30px; font-size:24px; font-weight:700; text-align:center;  border-top-left-radius: 4px; border-top-right-radius: 4px; vertical-align: super" runat="server"></asp:Label>
             <asp:Label id="brand" runat="server" style="display:inline-block; color:#00196E; font-size:24px; font-weight:700; float:right"></asp:Label>
             <br />
-            <asp:Label ID="name" runat="server" style="display:block; color:#00196E; min-width: 590px; font-size:2.5vw; font-weight:800; background-color:#E1E1DE; padding:15px 20px 15px 20px; height:100px; text-align:center; border-radius:12px"></asp:Label>
+            <asp:Label ID="name" runat="server" style="display:block; color:#00196E; min-width: 590px; font-size:38px; font-weight:800; background-color:#E1E1DE; padding:15px 20px 15px 20px; height:100px; text-align:center; border-bottom-left-radius:12px; border-bottom-right-radius:12px; border-top-right-radius: 12px"></asp:Label>
         </div>
         <div class="three">
             <%--<asp:Button ID="editBtn" runat="server" OnClick="Edit_Click" Text="Edit" CommandName="edit" class="edit_button_style"/>--%>
