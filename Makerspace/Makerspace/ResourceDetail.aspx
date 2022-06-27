@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Equipment Detail" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EquipmentDetail.aspx.cs" Inherits="Makerspace.EquipmentDetail" %>
+﻿<%@ Page Title="Resource Detail" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ResourceDetail.aspx.cs" Inherits="Makerspace.ResourceDetail" %>
 <asp:Content ID="EDetail" ContentPlaceHolderID="MainContent" runat="server">
     <div class="wrapper" style="width: 60vw">
         <div class="one">

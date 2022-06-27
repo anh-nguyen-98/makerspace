@@ -107,7 +107,7 @@ namespace Makerspace
             {
                 Response.Redirect("~/Resource.aspx");
             }
-            string url = "~/EquipmentDetail.aspx?id=" + id;
+            string url = "~/ResourceDetail.aspx?id=" + id;
             Response.Redirect(url, false);
             Context.ApplicationInstance.CompleteRequest();
         }

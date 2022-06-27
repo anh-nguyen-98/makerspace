@@ -11,7 +11,7 @@ namespace Makerspace
 {
 
 
-    public partial class EquipmentDetail
+    public partial class ResourceDetail
     {
 
         /// <summary>

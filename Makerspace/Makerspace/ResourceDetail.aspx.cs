@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Makerspace
 {
-    public partial class EquipmentDetail : System.Web.UI.Page
+    public partial class ResourceDetail : System.Web.UI.Page
     {
         protected static string CONSTRING = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
