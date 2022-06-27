@@ -159,7 +159,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="EquipmentDetail.aspx" />
     <Content Include="Images\hammer.jpg" />
     <Content Include="Resource.aspx" />
     <Content Include="Equipment.aspx" />
@@ -169,6 +168,7 @@
     <Content Include="Images\logo.png" />
     <Content Include="Profile.aspx" />
     <Content Include="Project.aspx" />
+    <Content Include="ResourceDetail.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -325,13 +325,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentDetail.aspx.cs">
-      <DependentUpon>EquipmentDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EquipmentDetail.aspx.designer.cs">
-      <DependentUpon>EquipmentDetail.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Resource.aspx.cs">
       <DependentUpon>Resource.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -365,6 +358,13 @@
       <DependentUpon>Project.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceDetail.aspx.cs">
+      <DependentUpon>ResourceDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResourceDetail.aspx.designer.cs">
+      <DependentUpon>ResourceDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
