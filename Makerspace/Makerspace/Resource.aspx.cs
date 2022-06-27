@@ -16,7 +16,7 @@ namespace Makerspace
         {
             if (!IsPostBack)
             {
-                load();
+                this.load();
             }
             else
             {
@@ -25,26 +25,49 @@ namespace Makerspace
 
         }
 
-        //Post back data
-        //Bind ListView
+
+
         protected void load()
         {
+            string selected_category = "All";
+            if (Category_ListView.SelectedValue != null)
+            {
+                selected_category = Category_ListView.SelectedValue.ToString();
+            }
+            if (selected_category == "All")
+            {
+                using (SqlConnection con = new SqlConnection(CONSTRING))
+                {
+                    SqlCommand cmd = new SqlCommand("uspReadAllEquipment");
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.Connection = con;
+                    DataTable db = new DataTable();
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(db);
+                    EquipLV.DataSource = db;
+                    EquipLV.DataBind();
+                }
+                return;
+            }
             using (SqlConnection con = new SqlConnection(CONSTRING))
             {
-                SqlCommand cmd = new SqlCommand("uspReadAllEquipment");
+                SqlCommand cmd = new SqlCommand("uspReadEquipmentByCategory");
+                cmd.Parameters.AddWithValue("@category_name", selected_category);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.Connection = con;
-                DataTable db = new DataTable();
+                DataTable dt = new DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(db);
-                EquipLV.DataSource = db;
+                adapter.Fill(dt);
+                EquipLV.DataSource = dt;
                 EquipLV.DataBind();
             }
         }
 
         protected void searchBtn_Click(object sender, EventArgs e)
         {
+            this.Category_ListView.SelectedIndex = -1; // reset category selected item
             string searchTerm = string.Format("%{0}%", searchBox.Text.Trim().ToLower());
             using (SqlConnection con = new SqlConnection(CONSTRING))
             {
@@ -70,36 +93,15 @@ namespace Makerspace
 
         protected void Category_ListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selected_category = Category_ListView.SelectedValue.ToString();
-            System.Diagnostics.Debug.WriteLine(selected_category);
-
-            if (selected_category == "All")
+            if ((EquipLV.FindControl("DataPager") as DataPager) != null)
             {
-                load();
-                return;
+                (EquipLV.FindControl("DataPager") as DataPager).SetPageProperties(0, 16, false);
             }
-
-            using (SqlConnection con = new SqlConnection(CONSTRING))
-            {
-               
-                SqlCommand cmd = new SqlCommand("uspReadEquipmentByCategory");
-                cmd.Parameters.AddWithValue("@category_name", selected_category);
-                   
-                cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                cmd.Connection = con;
-                DataTable dt = new DataTable();
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(dt);
-                EquipLV.DataSource = dt;
-                EquipLV.DataBind();
-            }        
+            load();
         }
 
         protected void EquipLV_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            System.Diagnostics.Debug.WriteLine(EquipLV.SelectedValue.ToString());
             string id = EquipLV.SelectedValue.ToString();
             if (id == null)
             {
@@ -113,8 +115,6 @@ namespace Makerspace
         protected void EquipLV_SelectedIndexChanging(object sender, ListViewSelectEventArgs e)
         {
             this.EquipLV.SelectedIndex = e.NewSelectedIndex;
-            //load();
-
         }
 
         protected void EquipLV_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
