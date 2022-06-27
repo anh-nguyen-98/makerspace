@@ -67,7 +67,7 @@ namespace Makerspace
                         }
                         train.Text = "No";
                         
-                        editBtn.Enabled = true;
+                        //editBtn.Enabled = true;
                         ins_box.Visible = false;
                         desc_box.Visible = false;  
                         submit_btn.Visible = false; 
