@@ -118,6 +118,7 @@ namespace Makerspace
             desc_box.Visible = true;
             submit_btn.Visible = true;
             train.Visible = false;
+            is_required.Checked = train.Text.Equals("Yes");
             is_required.Visible = true;
             
         }

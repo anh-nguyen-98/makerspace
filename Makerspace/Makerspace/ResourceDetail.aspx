@@ -34,7 +34,7 @@
             <br />
             <asp:Label class="equipment_info" runat="server">Training requirement: 
                 <asp:Label id="train" runat="server"  style="font-weight:normal"></asp:Label>
-                <asp:CheckBox ID="is_required" runat="server" Text="Yes" EnableViewState="false" />
+                <asp:CheckBox ID="is_required" runat="server" EnableViewState="false" />
             </asp:Label>
             <br />
 
