@@ -10,7 +10,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -124,29 +124,29 @@
             padding-right: 12px;
         }
 
-
+        /*for phone*/
         @media only screen and (max-device-width: 1139px) and (max-device-height: 1024px) and (orientation:portrait) {
             .cover-align {
                 left: -20px;
             }
             .image-cover {
-                width: 300vw;
+                width: 260vw;
             }
         }
 
-
-        @media only screen and (min-width:1140px) {
-             .cover-align {
-                left: -100px;
-            }
-             .image-cover {
-                width: 150vw;
+        /*for desktop*/
+        @media screen and (min-width:600) and (max-width: 1023px) {
+            .image-cover {
+                width: 205vw;
             }
         }
 
-        @media only screen and (min-width: 1141px) and (max-width: 1799px) {
+       @media only screen and (min-width: 1024px) and (max-width: 1799px) {
             .cover-align {
                 left: -30vw;
+            }
+            .image-cover {
+                width: 124.5vw;
             }
         }
 
@@ -155,7 +155,7 @@
                 left: -380px;
             }
             .image-cover {
-                width: 105vw;
+                width: 99vw;
             }
         }
 
@@ -167,18 +167,18 @@
 <body>
     <br />
     <br />
-    <div class="auto-style2" role="navigation" style="background-color:#00196E">
+    <div class="auto-style2" role="navigation" style="background-color: #00196E">
         <div class="auto-style1">
-            <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/Resource.aspx">Makerspace</a>
-            <div class="navbar-nav mr-auto" style="width:100%; list-style-type:none; padding:0px; display:inline; flex-direction:row;text-align:justify">
+            <a class="navbar-brand" style="color: white; font-weight: 800" runat="server" href="~/Resource.aspx">Makerspace</a>
+            <div class="navbar-nav mr-auto" style="width: 100%; list-style-type: none; padding: 0px; display: inline; flex-direction: row; text-align: justify">
                 <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
                 <a runat="server" class="navbar-items" href="~/About">About</a>
                 <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
                 <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
                 <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
-              </div>
-           </div>
+            </div>
         </div>
+    </div>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -186,7 +186,7 @@
                 <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
-                <asp:scriptReference Path="~/Scripts/umd/popper.min.js" />
+                <asp:ScriptReference Path="~/Scripts/umd/popper.min.js" />
                 <asp:ScriptReference Name="bootstrap" />
                 <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
                 <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
@@ -201,10 +201,9 @@
             </Scripts>
         </asp:ScriptManager>
 
-     
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                 
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
@@ -217,7 +216,7 @@
 
                 <address>
                     <strong>Support:</strong>   <a href="mailto:makerspace.support@fulbright.edu.vn">makerspace.support@fulbright.edu.vn</a><br />
- 
+
                 </address>
 
                 <p>&copy; <%: DateTime.Now.Year %> Makerspace - Fulbright University Vietnam</p>
