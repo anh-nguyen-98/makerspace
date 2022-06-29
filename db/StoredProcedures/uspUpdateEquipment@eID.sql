@@ -18,11 +18,12 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[UpdateEquipment@eID] 
+ALTER PROCEDURE [dbo].[uspUpdateEquipment@eID] 
 	-- Add the parameters for the stored procedure here
 	@equipment_id INT,
 	@description VARCHAR(1000),
-	@instruction VARCHAR(1000)
+	@instruction VARCHAR(1000),
+	@training INT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -31,7 +32,7 @@ BEGIN
 
     -- Insert statements for procedure here
 	UPDATE Equipment
-	SET description = @description, instruction = @instruction 
+	SET description = @description, instruction = @instruction, training = @training 
 	WHERE id = @equipment_id;
 END
 GO
