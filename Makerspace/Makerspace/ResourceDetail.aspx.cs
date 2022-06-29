@@ -61,15 +61,19 @@ namespace Makerspace
                         brand.Text = db.Rows[0]["brand"].ToString();
                         desc.Text = db.Rows[0]["description"].ToString();
                         int training = (Int32)db.Rows[0]["training"];
-                        if (training == 0)
+                        if (training == 1)
                         {
                             train.Text = "Yes";
                         }
-                        train.Text = "No";
-                        
+                        else
+                        {
+                            train.Text = "No";
+                        }
+
                         //editBtn.Enabled = true;
                         ins_box.Visible = false;
-                        desc_box.Visible = false;  
+                        desc_box.Visible = false;
+                        is_required.Visible = false;    
                         submit_btn.Visible = false; 
                     }
                     
@@ -113,6 +117,9 @@ namespace Makerspace
             desc.Visible = false;
             desc_box.Visible = true;
             submit_btn.Visible = true;
+            train.Visible = false;
+            is_required.Checked = train.Text.Equals("Yes");
+            is_required.Visible = true;
             
         }
 
@@ -123,12 +130,18 @@ namespace Makerspace
                 int id = Convert.ToInt32(Request.QueryString["id"]);
                 string desc_input = desc_box.Text.ToString();
                 string ins_input = ins_box.Text.ToString();
+                int training_input = 0; 
+                if (is_required.Checked)
+                {
+                    training_input = 1;
+                }
 
-                SqlCommand cmd = new SqlCommand("updateEquipment@eID", con);
+                SqlCommand cmd = new SqlCommand("uspUpdateEquipment@eID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@equipment_id", id);
                 cmd.Parameters.AddWithValue("@description", desc_input);
                 cmd.Parameters.AddWithValue("@instruction", ins_input);
+                cmd.Parameters.AddWithValue("@training", training_input);
 
                 con.Open();
                 
@@ -136,7 +149,7 @@ namespace Makerspace
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dt);
 
-                string url = "~/EquipmentDetail.aspx?id=" + id;
+                string url = "~/ResourceDetail.aspx?id=" + id;
                 Response.Redirect(url);
             }
 
