@@ -160,6 +160,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Images\hammer.jpg" />
+    <Content Include="Images\Makerspace_Logo.png" />
     <Content Include="Resource.aspx" />
     <Content Include="Equipment.aspx" />
     <Content Include="favicon.ico" />
