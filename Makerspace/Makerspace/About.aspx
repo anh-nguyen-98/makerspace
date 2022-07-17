@@ -48,7 +48,7 @@
 
                     </div>
                     <div style="position: relative; background-color: #00196E" class="flex-grow-1">
-                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                          <img src="Images/About_Workshop.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
                   
 
                     </div>
@@ -64,7 +64,7 @@
                         WORKSHOPS
                     </p>
                     <p>
-                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                        The Makerspace workshop offers theoretical background information and practical hands-on activities in a variety of "soft skills" areas that are relevant to working in the tech sector, especially those themes that are customized to the context of Engineers..
                     </p>
                     <div class="d-flex justify-content-between mb-2">
                        
@@ -101,7 +101,7 @@
                         PROJECTS
                     </p>
                     <p>
-                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                        The FUV Makerspace encourages students to actively drive social change and positively impact local communities. To solve a need they identify in their communities, abroad or in their own countries, students independently initiate and develop initiatives according to their own interests and talents. Student-led projects provide an opportunity for leadership, personal growth, and hands-on learning while collaborating with others, being creative, and making a difference in the world.
                     </p>
                     <div class="d-flex justify-content-center">
                           <asp:Button runat="server" Text="Hearty Plant" CssClass="white-btn"/>
@@ -116,7 +116,7 @@
 
                     </div>
                     <div style="position: relative; background-color:#00196E" class="flex-grow-1">
-                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                          <img src="Images/About_Project.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
                   
 
                     </div>
