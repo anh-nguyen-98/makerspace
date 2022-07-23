@@ -72,10 +72,15 @@ namespace Makerspace
 
         }
 
-        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+
+
+        protected void Logout(object sender, EventArgs e)
         {
-            Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.RemoveAll();
+            Response.Redirect("~/Resource.aspx");
+
         }
+
     }
 
 }

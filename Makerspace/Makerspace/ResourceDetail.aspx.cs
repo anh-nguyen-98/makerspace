@@ -16,7 +16,10 @@ namespace Makerspace
             if (!IsPostBack)
             {
 
-
+                if (Session["role"] != null)
+                {
+                    editBtn.Visible = true;
+                }
                 using (SqlConnection con = new SqlConnection(CONSTRING))
                 {
                     int id = Convert.ToInt32(Request.QueryString["id"]);

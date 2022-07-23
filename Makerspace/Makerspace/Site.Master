@@ -169,21 +169,24 @@
 </head>
 
 <body>
-    <br />
-    <br />
-    <div class="auto-style2" role="navigation" style="background-color: #00196E">
-        <div class="auto-style1">
-            <a class="navbar-brand" style="color: white; font-weight: 800" runat="server" href="~/Resource.aspx">Makerspace</a>
-            <div class="navbar-nav mr-auto" style="width: 100%; list-style-type: none; padding: 0px; display: inline; flex-direction: row; text-align: justify">
-                <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
-                <a runat="server" class="navbar-items" href="~/About">About</a>
-                <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
-                <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
-                <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
+    <form runat="server">
+        <div class="auto-style2" role="navigation" style="background-color: #00196E">
+            <div class="auto-style1">
+                <a class="navbar-brand" style="color: white; font-weight: 800" runat="server" href="~/Resource.aspx">Makerspace</a>
+                <div class="navbar-nav mr-auto" style="width: 100%; list-style-type: none; padding: 0px; display: inline; flex-direction: row; text-align: justify">
+                    <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
+                    <a runat="server" class="navbar-items" href="~/About">About</a>
+                    <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
+                    <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
+                    <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
+                    <% if(Session["role"] == null) { %>
+                    <a runat="server" class="navbar-items" href="Login.aspx">Login</a>
+                    <%} else { %>
+                    <asp:Button runat="server" Text="Log out" OnClick="Logout" />
+                    <%} %>
+                </div>
             </div>
         </div>
-    </div>
-    <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -208,6 +211,7 @@
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
+          
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
