@@ -15,22 +15,13 @@ namespace Makerspace
     {
 
         /// <summary>
-        /// ErrorMessage control.
+        /// EmailLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder ErrorMessage;
-
-        /// <summary>
-        /// FailureText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal FailureText;
+        protected global::System.Web.UI.WebControls.Label EmailLabel;
 
         /// <summary>
         /// Email control.
@@ -42,6 +33,24 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.TextBox Email;
 
         /// <summary>
+        /// EmailErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EmailErrorMessage;
+
+        /// <summary>
+        /// PasswordLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PasswordLabel;
+
+        /// <summary>
         /// Password control.
         /// </summary>
         /// <remarks>
@@ -51,12 +60,12 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.TextBox Password;
 
         /// <summary>
-        /// RememberMe control.
+        /// PasswordErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox RememberMe;
+        protected global::System.Web.UI.WebControls.Label PasswordErrorMessage;
     }
 }

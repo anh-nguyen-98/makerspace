@@ -72,7 +72,10 @@ namespace Makerspace
 
         }
 
-
+        protected void Login(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
 
         protected void Logout(object sender, EventArgs e)
         {
