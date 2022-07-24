@@ -11,13 +11,13 @@
             <div style="padding-top:30px; padding-bottom:20px; padding-left: 50px; padding-right:50px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;background: white">
                 <div class="input-group">
                     <asp:Label runat="server" AssociatedControlID="Email" CssClass="input-label" ID="EmailLabel">Fulbright email</asp:Label>
-                    <asp:TextBox runat="server" ID="Email" CssClass="input-box"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="Email" CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>
                     <asp:Label runat="server" CssClass="text-small text-red p-1" ID="EmailErrorMessage"></asp:Label>
    
                 </div>
                 <div class="input-group">
                     <asp:Label runat="server" AssociatedControlID="Password" CssClass="input-label" ID="PasswordLabel">Password</asp:Label>
-                    <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="input-box"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>
                     <asp:Label runat="server" CssClass="text-small text-red" ID="PasswordErrorMessage"></asp:Label>
                    
                 </div>
