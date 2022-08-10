@@ -144,26 +144,28 @@
         </asp:ScriptManager>
 
      
-        <div class="container body-content">
+        <div >
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
                  
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <address>
-                    Makerspace - Fulbright University Vietnam<br />
-                    105 Ton Dat Tien, Tan Phu Ward, District 7, HCMC<br />
-                    <abbr title="Phone">Phone:</abbr>
-                    0903369880
-                </address>
+            <div class="container body-content">
+                <footer>
+                    <address>
+                        Makerspace - Fulbright University Vietnam<br />
+                        105 Ton Dat Tien, Tan Phu Ward, District 7, HCMC<br />
+                        <abbr title="Phone">Phone:</abbr>
+                        0903369880
+                    </address>
 
-                <address>
-                    <strong>Support:</strong>   <a href="mailto:makerspace.support@fulbright.edu.vn">makerspace.support@fulbright.edu.vn</a><br />
+                    <address>
+                        <strong>Support:</strong>   <a href="mailto:makerspace.support@fulbright.edu.vn">makerspace.support@fulbright.edu.vn</a><br />
  
-                </address>
+                    </address>
 
-                <p>&copy; <%: DateTime.Now.Year %> Makerspace - Fulbright University Vietnam</p>
-            </footer>
+                    <p>&copy; <%: DateTime.Now.Year %> Makerspace - Fulbright University Vietnam</p>
+                </footer>
+            </div>
         </div>
     </form>
 </body>
