@@ -159,7 +159,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EngineeringProjectView.aspx" />
     <Content Include="Images\hammer.jpg" />
+    <Content Include="EngineeringProjectMain.aspx" />
     <Content Include="Resource.aspx" />
     <Content Include="Equipment.aspx" />
     <Content Include="favicon.ico" />
@@ -169,6 +171,7 @@
     <Content Include="Profile.aspx" />
     <Content Include="Project.aspx" />
     <Content Include="ResourceDetail.aspx" />
+    <Content Include="SandBox.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -325,6 +328,20 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EngineeringProjectMain.aspx.cs">
+      <DependentUpon>EngineeringProjectMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EngineeringProjectMain.aspx.designer.cs">
+      <DependentUpon>EngineeringProjectMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EngineeringProjectView.aspx.cs">
+      <DependentUpon>EngineeringProjectView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EngineeringProjectView.aspx.designer.cs">
+      <DependentUpon>EngineeringProjectView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Resource.aspx.cs">
       <DependentUpon>Resource.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -364,6 +381,13 @@
     </Compile>
     <Compile Include="ResourceDetail.aspx.designer.cs">
       <DependentUpon>ResourceDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SandBox.aspx.cs">
+      <DependentUpon>SandBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SandBox.aspx.designer.cs">
+      <DependentUpon>SandBox.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

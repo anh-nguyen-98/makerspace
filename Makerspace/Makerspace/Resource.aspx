@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Resource" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Resource.aspx.cs" Inherits="Makerspace.Resource" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1 class="text-center" style="font-size:70px; font-weight:900;"> <span style="color:#00196E">Makerspace</span> <span style="color:#FFAD1D"> Resource</span></h1>
+    <h1 class="text-center" style="font-size:70px; font-weight:900;"> <span style="color:#00196E">Makerspace Hohoho</span> <span style="color:#FFAD1D"> Resource</span></h1>
     <br />
     <br />
         <%-- startregion: Search Form --%>
@@ -19,7 +19,14 @@
         <div class="px-3">
             <label style="color:#00196E; font-size:20px; font-weight:600">Category </label>
         </div>
-        <asp:ListView ID="Category_ListView" runat="server" GroupItemCount="8" DataSourceID="Category_DataSource" DataKeyNames="name" OnSelectedIndexChanged="Category_ListView_SelectedIndexChanged" style="z-index:1">
+        <asp:ListView 
+            ID="Category_ListView" 
+            runat="server" 
+            GroupItemCount="8" 
+            DataSourceID="Category_DataSource" 
+            DataKeyNames="name" 
+            OnSelectedIndexChanged="Category_ListView_SelectedIndexChanged" 
+            style="z-index:1">
             <GroupTemplate>
                 <tr id="itemPlaceholderContainer" runat="server" style="min-width:1140px; display: flex;justify-content: space-between">
                     <td id="itemPlaceholder" runat="server" colspan="4">
@@ -89,10 +96,13 @@
 
         <div class="mb-4">
             <%-- startregion: Equipment Listview --%>
-            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4" DataKeyNames="id" OnSelectedIndexChanging="EquipLV_SelectedIndexChanging" OnSelectedIndexChanged="EquipLV_SelectedIndexChanged" OnPagePropertiesChanging="EquipLV_PagePropertiesChanging">
+            <asp:ListView runat="server"  ID="EquipLV" GroupItemCount="4" DataKeyNames="id" 
+                OnSelectedIndexChanging="EquipLV_SelectedIndexChanging" 
+                OnSelectedIndexChanged="EquipLV_SelectedIndexChanged" 
+                OnPagePropertiesChanging="EquipLV_PagePropertiesChanging">
                 <GroupTemplate>
                     <tr id="itemPlaceholderContainer" runat="server" style="min-width:1140px; display: flex;justify-content: space-between">
-                        <td id="itemPlaceholder" runat="server" colspan="3"></td>
+                        <td id="itemPlaceholder" runat="server" colspan="4"></td>
                     </tr>
                 </GroupTemplate>
                 <ItemTemplate>
@@ -123,6 +133,7 @@
                         </asp:LinkButton>
                     </td>
                 </ItemTemplate>
+                <%--Page Number Indicator--%>
                 <LayoutTemplate>
                     <table  style="width:100%;">
                         <tbody>

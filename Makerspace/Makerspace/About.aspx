@@ -23,13 +23,22 @@
                 Make a booking with our assitants to get support for your projects. 
             </p>
             <p>
-                <a class="btn btn-default" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Make a booking&raquo;</a>
+                <a class="btn btn-default" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Make a booking &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
             <h2>Project Gallery</h2>
             <p>
                 To be featured soon at Makerspace!
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2>Student Projects</h2>
+            <p>
+                See all ongoing student-led engineering projects here:
+            </p>
+            <p>
+                <a class="btn btn-default" runat="server" href="~/EngineeringProjectMain">View Student Engineering Projects &raquo</a>
             </p>
         </div>
         
