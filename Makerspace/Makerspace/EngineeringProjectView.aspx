@@ -442,13 +442,13 @@
 
         <section id="image_group_1_box">
             <%--set image url in page_load()--%>
-            <asp:Image ID="image1" runat="server" />
+            <asp:Image ID="image1" ImageUrl="Images/engineering_project/girl.jpg" runat="server" />
 
-            <asp:Button ID="Button1" Text="Back" runat="server"/>
+            <asp:Button ID="previous_image_1" Text="Back" runat="server"/>
 
             <asp:Label runat="server" Text="1/5"></asp:Label>
 
-            <asp:Button ID="Button2" Text="Next" runat="server"/>
+            <asp:Button ID="next_image_1" Text="Next" runat="server"/>
         </section>
     </section>
 

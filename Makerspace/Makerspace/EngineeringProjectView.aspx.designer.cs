@@ -24,22 +24,22 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.Image image1;
 
         /// <summary>
-        /// Button1 control.
+        /// previous_image_1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button previous_image_1;
 
         /// <summary>
-        /// Button2 control.
+        /// next_image_1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button next_image_1;
 
         /// <summary>
         /// project_department_listview control.
