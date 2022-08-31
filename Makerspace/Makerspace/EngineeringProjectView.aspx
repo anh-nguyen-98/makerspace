@@ -379,7 +379,9 @@
                         flex: none;
                         order: 0;
                         flex-grow: 0;
-                        ">Project Name</span>
+                        ">
+                        <asp:Label ID="project_title" runat="server"></asp:Label>
+                    </span>
 
                     <asp:Label
                         runat="server" 
@@ -391,19 +393,20 @@
 
                 <div id="edit_button">
                     <a>
-                            <img src="Images/engineering_project/edit.png"/>
+                            <asp:Image runat="server" ImageUrl="Images\engineering_projects\edit.png"/>
                     </a>
                 </div>   
         </div>
 
-            <%--gradient still pending--%>
+            <%--gradient still under construction--%>
         <div id="cover_image_container">
-            <asp:Image ImageUrl="Images\engineering_project\1.jpg" runat="server" width="100%" height="300px"/>
+            <asp:Image ID="coverImage" runat="server" width="100%" height="300px"/>
         </div>
     </section>
 
     <%--ABOUT THE PROJECT--%>
     <section id="about_project">
+        <asp:Label runat="server" ID="debug_label" Text="DEBUG: <%= imagePathRoot %>"> </asp:Label>
 
         <section class="section_title">
             <div class="box" style="display:inline-block"></div>
@@ -443,12 +446,6 @@
         <section id="image_group_1_box">
             <%--set image url in page_load()--%>
             <asp:Image ID="image1" ImageUrl="Images/engineering_project/girl.jpg" runat="server" />
-
-            <asp:Button ID="previous_image_1" Text="Back" runat="server"/>
-
-            <asp:Label runat="server" Text="1/5"></asp:Label>
-
-            <asp:Button ID="next_image_1" Text="Next" runat="server"/>
         </section>
     </section>
 

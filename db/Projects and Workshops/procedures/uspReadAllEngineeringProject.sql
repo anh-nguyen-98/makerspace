@@ -27,8 +27,13 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT name, begin_date, end_date, ongoing, overview
-	FROM Projects
+	SELECT projectID, name, begin_date, end_date, ongoing, overview, image_path
+	FROM 
+		Projects p JOIN
+			(SELECT Images.image_path, Images.pageID
+			FROM Images
+			WHERE position=1 AND section=1) i
+		ON p.projectID = i.pageID
 	ORDER BY begin_date DESC
 END
 GO

@@ -532,10 +532,11 @@
                                     <a id="edit_button">
                                         <img src="Images/engineering_project/edit.png"/>
                                     </a>
-
+                                    <!-- in order to pass multiple query strings, put '&' in between fields -->
                                     <asp:HyperLink
                                         id="read_more"
-                                        NavigateUrl='<%# Eval("name","~/EngineeringProjectView.aspx?project_name={0}") %>'
+                                        NavigateUrl='<%# String.Format("~/EngineeringProjectView.aspx?projectID={0}&projectName={1}", Eval("projectID"), Eval("name")) %>'
+                                        
                                         runat="server">
 
                                         <div id="read_more_button">
