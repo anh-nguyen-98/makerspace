@@ -486,12 +486,6 @@
         <div id="image_group_2_box">
             <%--set image url in page_load()--%>
             <asp:Image ID="image_group_2" runat="server" />
-
-            <asp:Button ID="previous_image_2" Text="Back" runat="server"/>
-
-            <asp:Label runat="server" Text="1/5"></asp:Label>
-
-            <asp:Button ID="next_image_2" Text="Next" runat="server"/>
         </div>
 
         <div id="project_phase">
