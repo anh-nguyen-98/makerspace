@@ -156,6 +156,21 @@
             align-self: stretch;
             flex-grow: 0;
         }
+        .section_content_container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 20px;
+
+            width: 780px;
+
+            /* Inside auto layout */
+
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+        }
         #project_progress {
             display: flex;
             flex-direction: row;
@@ -177,7 +192,68 @@
             align-self: stretch;
             flex-grow: 0;
         }
+        .image2_box{
+            width: 382px;
+
+            /* Inside auto layout */
+
+            flex: none;
+            order: 0;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+        #project_progress_content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 30px;
+
+            width: 380px;
+
+            /* Inside auto layout */
+
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+        }
         #join_us {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 50px;
+            gap: 30px;
+
+            width: 100%;
+
+            background: #FFFFFF;
+
+            flex: none;
+            order: 4;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+        .project_contact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 50px;
+            gap: 30px;
+
+            width: 100%;
+
+            /* Neutral/B75 */
+
+            background: #F1F3F6;
+
+            /* Inside auto layout */
+
+            flex: none;
+            order: 5;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+        .project_contact_hidden {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -197,24 +273,71 @@
             align-self: stretch;
             flex-grow: 0;
         }
-        #project_contact {
+        #project_contact_content {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 40px 50px;
-            gap: 30px;
+            align-items: flex-start;
+            padding: 0px 30px;
+            gap: 20px;
 
-            width: 100%;
-
-            /* Neutral/B75 */
-
-            background: #F1F3F6;
+            width: 780px;
 
             /* Inside auto layout */
 
             flex: none;
-            order: 5;
-            align-self: stretch;
+            order: 1;
+            flex-grow: 0;
+        }
+        .link_box {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 14px;
+
+            height: 24px;
+
+
+            /* Inside auto layout */
+
+            flex: none;
+            flex-grow: 0;
+        }
+        .link {
+            height: 24px;
+
+            /* Title Medium - Roboto Medium 16 . 24 . +0.15 */
+
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height, or 150% */
+
+            display: flex;
+            align-items: flex-end;
+            letter-spacing: 0.1px;
+
+            /* Function/Blue */
+
+            color: #295FCC;
+
+
+            /* Inside auto layout */
+
+            flex: none;
+            flex-grow: 0;
+        }
+        .link_icon {
+            width: 24px;
+            height: 24px;
+
+
+            /* Inside auto layout */
+
+            flex: none;
+            order: 0;
             flex-grow: 0;
         }
         .section_title {
@@ -247,13 +370,12 @@
 
             order: 1;
         }
-        #about_project_content {
+        .about_project_content {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             padding: 0px;
             gap: 20px;
-
             width: 780px;
 
             flex: none;
@@ -271,15 +393,6 @@
         }
         #image_group_1_box{
             order:3;
-        }
-        #image_group_2_box{
-            width: 382px;
-            height: 517px;
-
-            flex: none;
-            order: 0;
-            align-self: stretch;
-            flex-grow: 0;
         }
         h2 {
             display:inline-block;
@@ -300,7 +413,7 @@
 
             text-align:center;
         }
-        h3 {
+        .para_header {
             font-family: 'Roboto';
             font-style: normal;
             font-weight: 600;
@@ -309,7 +422,7 @@
 
             color: #33478B;
         }
-        p {
+        .long_text {
             font-family: 'Roboto';
             font-style: normal;
             font-weight: 400;
@@ -332,6 +445,16 @@
             color: #1F2531;
             flex: none;
             order: 1;
+            flex-grow: 0;
+        }
+        .image_1 {
+            width: 780px;
+            height: 439px;
+
+            /* Inside auto layout */
+
+            flex: none;
+            order: 3;
             flex-grow: 0;
         }
     </style>
@@ -384,16 +507,17 @@
                     </span>
 
                     <asp:Label
+                        id="statusChip"
                         runat="server" 
                         CssClass="status_chip" 
                         Text="Ongoing" 
-                        Visible=true
                         />
                 </div>
 
                 <div id="edit_button">
                     <a>
-                            <asp:Image runat="server" ImageUrl="Images\engineering_projects\edit.png"/>
+                        <%--<asp:Image runat="server" ImageUrl="Images\engineering_projects\edit.png"/>--%>
+                        <img src="Images/engineering_project/edit.svg" />
                     </a>
                 </div>   
         </div>
@@ -406,46 +530,59 @@
 
     <%--ABOUT THE PROJECT--%>
     <section id="about_project">
-        <asp:Label runat="server" ID="debug_label" Text="DEBUG: <%= imagePathRoot %>"> </asp:Label>
 
         <section class="section_title">
             <div class="box" style="display:inline-block"></div>
             <div class="intro" style="display:inline-block">About the Project</div>
         </section>
 
-        <section class="advisor">Advisor(s): Phan Vu Xuan Hung</section>
+        <%--<section class="advisor">Advisor(s): Phan Vu Xuan Hung</section>--%>
 
-        <section id="about_project_content">
-            <section id="brief_overview">
-                <h3>Brief Overview</h3>
-                <p>
-                    <asp:Label runat="server"></asp:Label>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit sagittis feugiat sit nunc. Risus at maecenas senectus elementum neque. Turpis sodales neque, in cursus tellus enim imperdiet. Urna tincidunt a gravida quam a volutpat vehicula congue. Eu sit morbi ut vulputate habitant. Feugiat et vulputate nibh ut a feugiat. Porttitor turpis sed pretium blandit et eget porttitor ultrices. Maecenas lectus egestas turpis sed eu mauris, etiam.
-                </p>
-               
-            </section>
+        <asp:FormView
+            id="aboutProjectFormView"
+            runat="server"
+            datakeynames="projectID"
+            CssClass="about_project_content"
+            >
 
-            <section id="objective">
-                <h3>Objectives</h3>
-                <p>
-                    <asp:Label runat="server"></asp:Label>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit sagittis feugiat sit nunc. Risus at maecenas senectus elementum neque. Turpis sodales neque, in cursus tellus enim imperdiet. Urna tincidunt a gravida quam a volutpat vehicula congue. Eu sit morbi ut vulputate habitant. Feugiat et vulputate nibh ut a feugiat. Porttitor turpis sed pretium blandit et eget porttitor ultrices. Maecenas lectus egestas turpis sed eu mauris, etiam.
-                </p>
-            </section>
+            <ItemTemplate>
+                <table>
+                    <p class="advisor">
+                        <asp:Label runat="server" Text= '<%#Eval("advisor", "Advisor(s): {0}") %>'></asp:Label>
+                    </p>
+                    <p class="para_header">Brief Overview
+                        <br />
+                        <span class="long_text">
+                            <asp:Label CssClass="long_text" runat="server" Text='<%# Eval("overview") %>'></asp:Label>
+                        </span>
+                    </p>
+                    
+                    <p class="para_header">Objectives
+                        <br />
+                        <span class="long_text">
+                            <asp:Label CssClass="long_text" runat="server" Text='<%# Eval("objective") %>'></asp:Label>
+                        </span>
+                    </p>
+                    
+                    <p class="para_header">Duration
+                        <br />
+                        <span class="long_text">
+                            <asp:Label CssClass="long_text" runat="server" Text='<%# Eval("duration") %>'></asp:Label>
+                        </span>
+                    </p>
+                    
+                </table>
 
-            <section id="duration">
-                <h3>Duration</h3>
-                <p>
-                    <asp:Label runat="server"></asp:Label>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit sagittis feugiat sit nunc. Risus at maecenas senectus elementum neque. 
-                </p>
-            </section>
+            </ItemTemplate>
 
-        </section>
+        </asp:FormView>
+
+        <asp:Label runat="server" ID="debug_label" Text="DEBUG:"> </asp:Label>
 
         <section id="image_group_1_box">
             <%--set image url in page_load()--%>
-            <asp:Image ID="image1" ImageUrl="Images/engineering_project/girl.jpg" runat="server" />
+            <asp:Image width="780px" Height="439px" ID="image1" ImageUrl="Images/engineering_project/girl.jpg" runat="server" />
+            <%--<img class="image_1" id="image1" runat="server" />--%>
         </section>
     </section>
 
@@ -456,41 +593,53 @@
             <div class="intro" style="display:inline-block">Departments</div>
         </section>
 
-        <asp:ListView
-            id="project_department_listview"
-            runat="server"
-            GroupItemCount="1">
+        <section class="section_content_container">
+            <asp:ListView
+                id="projectDepartmentListview"
+                runat="server"
+                GroupItemCount="1"
+                >
 
-            <GroupTemplate>
-                <tr runat="server">
-                    <td runat="server" id="itemPlaceholder"/>
-                </tr>
-            </GroupTemplate>
+                <GroupTemplate>
+                    <tr runat="server">
+                        <td runat="server" id="itemPlaceholder"/>
+                    </tr>
+                </GroupTemplate>
 
-            <ItemTemplate>
-                <td runat="server">
-                    <span>Department 1</span>
-                    <span>Placeholder for department description.</span>
-                </td>
-            </ItemTemplate>
-        </asp:ListView>
+                <ItemTemplate>
+                    <td runat="server">
+                        <p>
+                            <asp:Label runat="server" CssClass="para_header" Text='<%# Eval("name") %>'></asp:Label>
+                            <br />
+                            <asp:Label runat="server" CssClass="long_text" Text='<%# Eval("role") %>'></asp:Label>
+                        </p>
+                    
+                    </td>
+                </ItemTemplate>
+
+            </asp:ListView>
+        </section>
+            
     </section>
 
     <%--PROGRESS--%>
     <section id="project_progress">
-        <section class="section_title">
-            <div class="box" style="display:inline-block"></div>
-            <div class="intro" style="display:inline-block">Progress</div>
-        </section>
 
-        <div id="image_group_2_box">
+        <asp:Image CssClass="image2_box" ID="image2" runat="server"/>
+
+        <div id="image2_box">
             <%--set image url in page_load()--%>
-            <asp:Image ID="image_group_2" runat="server" />
+            
         </div>
 
-        <div id="project_phase">
+        <div id="project_progress_content">
+            <section class="section_title">
+                <div class="box" style="display:inline-block"></div>
+                <div class="intro" style="display:inline-block">Progress</div>
+            </section>
+
             <asp:ListView
-                id="project_phase_listview"
+                id="projectProgressListview"
                 runat="server"
                 GroupItemCount="1">
 
@@ -502,8 +651,11 @@
 
                 <ItemTemplate>
                     <td runat="server">
-                        <span>Phase 1</span>
-                        <span>Placeholder for department description.</span>
+                        <p>
+                            <asp:Label runat="server" CssClass="para_header" Text='<%# Eval("phase", "Phase {0}") %>'></asp:Label>
+                            <br />
+                            <asp:Label runat="server" CssClass="long_text" Text='<%# Eval("description") %>'></asp:Label>
+                        </p>
                     </td>
                 </ItemTemplate>
 
@@ -512,52 +664,69 @@
     </section>
 
     <%-- JOIN US --%>
-    <section id="join_us">
+    <section id="join_us" runat="server">
         <section class="section_title">
             <div class="box" style="display:inline-block"></div>
             <div class="intro" style="display:inline-block">Join Us!</div>
         </section>
-                
-        <asp:Listview
-            id="join_us_listview"
-            runat="server"
-            GroupItemCount="1"
-            Visible= true>
+        
+        <section class="section_content_container">
+            <asp:Listview
+                id="projectPositionListview"
+                runat="server"
+                GroupItemCount="1"
+                >
 
-            <GroupTemplate>
-                <tr runat="server">
-                    <td runat="server" id="itemPlaceholder"/>
-                </tr>
-            </GroupTemplate>
+                <GroupTemplate>
+                    <tr runat="server">
+                        <td runat="server" id="itemPlaceholder"/>
+                    </tr>
+                </GroupTemplate>
 
-            <ItemTemplate>
-                <td runat="server">
-                    <span>Position 1</span>
-                    <span>Placeholder for position description.</span>
-                </td>
-            </ItemTemplate>
+                <ItemTemplate>
+                    <td runat="server">
+                        <p>
+                            <asp:Label runat="server" CssClass="para_header" Text='<%# Eval("name") %>'></asp:Label>
+                            <br />
+                            <asp:Label runat="server" CssClass="long_text" Text='<%# Eval("description") %>'></asp:Label>
+                        </p>
+                    </td>
+                </ItemTemplate>
 
-        </asp:Listview>
+            </asp:Listview>
+        </section>
+        
     </section>
 
     <%-- CONTACTS --%>
-    <section id="project_contact">
+    <section id="project_contact" runat="server">
         <section class="section_title">
             <div class="box" style="display:inline-block"></div>
             <div class="intro" style="display:inline-block">Contacts</div>
         </section>
+
+        <section id="project_contact_content">
+
+            <div class="link_box">
+                <img src="Images/engineering_project/youtube_icon.svg"/>
+                <a id="youtubeLink" runat="server" class="link" target="_blank" rel="noopener noreferrer"
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Youtube Link</a>
+            </div>
+
+            <div class="link_box">
+                <img src="Images/engineering_project/facebook_icon.svg"/>
+                <a id="facebookLink" runat="server" class="link" target="_blank" rel="noopener noreferrer"
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Facebook Link</a>
+            </div>
+
+            <div class="link_box">
+                <img src="Images/engineering_project/email_icon.svg"/>
+                <a id="emailLink" runat="server" class="link" target="_blank" rel="noopener noreferrer"
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Email</a>
+            </div>
+        </section>
                 
-        <p id="youtube_link">
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Youtube Link</a>
-        </p>
-
-        <p id="facebook_link">
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Facebook Link</a>
-        </p>
-
-        <p id="email_address">
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Email</a>
-        </p>
+        
     </section>
     </div>
 </asp:Content>

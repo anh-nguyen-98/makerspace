@@ -459,6 +459,7 @@
             <%--Project Listing--%>
             <section id="project_listing">
                 <%--https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.listview?view=netframework-4.8--%>
+                <asp:Label runat="server" ID="debug"></asp:Label>
                 <asp:ListView 
                     runat="server" 
                     ID="ListView1" 

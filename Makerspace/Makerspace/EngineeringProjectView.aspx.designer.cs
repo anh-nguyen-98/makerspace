@@ -24,6 +24,15 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.Label project_title;
 
         /// <summary>
+        /// statusChip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label statusChip;
+
+        /// <summary>
         /// coverImage control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace Makerspace
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image coverImage;
+
+        /// <summary>
+        /// aboutProjectFormView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView aboutProjectFormView;
 
         /// <summary>
         /// debug_label control.
@@ -51,39 +69,84 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.Image image1;
 
         /// <summary>
-        /// project_department_listview control.
+        /// projectDepartmentListview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView project_department_listview;
+        protected global::System.Web.UI.WebControls.ListView projectDepartmentListview;
 
         /// <summary>
-        /// image_group_2 control.
+        /// image2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image image_group_2;
+        protected global::System.Web.UI.WebControls.Image image2;
 
         /// <summary>
-        /// project_phase_listview control.
+        /// projectProgressListview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView project_phase_listview;
+        protected global::System.Web.UI.WebControls.ListView projectProgressListview;
 
         /// <summary>
-        /// join_us_listview control.
+        /// join_us control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView join_us_listview;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl join_us;
+
+        /// <summary>
+        /// projectPositionListview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView projectPositionListview;
+
+        /// <summary>
+        /// project_contact control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl project_contact;
+
+        /// <summary>
+        /// youtubeLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor youtubeLink;
+
+        /// <summary>
+        /// facebookLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor facebookLink;
+
+        /// <summary>
+        /// emailLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor emailLink;
     }
 }
