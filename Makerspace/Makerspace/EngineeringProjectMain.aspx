@@ -19,7 +19,7 @@
             gap: 30px;
 
             width: 780px;
-            height: 273px;
+            /*height: 273px;*/
             margin: auto;
 
             /* Inside auto layout */
@@ -135,7 +135,6 @@
             flex-grow: 0;
         }
         #long_intro {
-            height:120px;
             width: 780px;
             left: 0.5px;
             top: 153px;
@@ -414,8 +413,6 @@
             <%--Description--%>
             <section id="sloganAndDescription" style="
                 width: 781px;
-                height: 172px;
-
                 /* Inside auto layout */
 
                 flex: none;
@@ -426,7 +423,8 @@
                     <div id="intro" style="display:inline-block">We have all engineering projects @ FUV</div>
                 </section>
                 <p id="long_intro">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit sagittis feugiat sit nunc. Risus at maecenas senectus elementum neque. Turpis sodales neque, in cursus tellus enim imperdiet. Urna tincidunt a gravida quam a volutpat vehicula congue. Eu sit morbi ut vulputate habitant. Feugiat et vulputate nibh ut a feugiat. Porttitor turpis sed pretium blandit et eget porttitor ultrices. Maecenas lectus egestas turpis sed eu mauris, etiam.
+                    Here at Fulbright we have many inspired engineering projects led by students, with the help of at least a faculty member. Be sure to check this section often for new exciting project updates!<br />
+                    Happy browsing!
                 </p>
             </section>
         </section>
@@ -459,7 +457,6 @@
             <%--Project Listing--%>
             <section id="project_listing">
                 <%--https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.webcontrols.listview?view=netframework-4.8--%>
-                <asp:Label runat="server" ID="debug"></asp:Label>
                 <asp:ListView 
                     runat="server" 
                     ID="ListView1" 
@@ -497,21 +494,6 @@
                                         Text="Ongoing" 
                                         Visible= <%# (int)Eval("ongoing") == 1%> 
                                         />
-                                    <%--<div id="status_chip">
-                                        <span style="font-family: 'Roboto';
-                                                font-style: normal;
-                                                font-weight: 500;
-                                                font-size: 11px;
-                                                line-height: 16px;
-                                                /* identical to box height, or 145% */
-
-                                                letter-spacing: 0.5px;
-
-                                                /* Foundation /Blue/blue-500 */
-
-                                                color: #00196E;
-                                                ">Ongoing</span>
-                                    </div>--%>
                                 </div>
 
                                 <div id="headline">
@@ -530,9 +512,10 @@
 
                                 <div id="actions">
 
-                                    <a id="edit_button">
+                                    <%--<a id="edit_button">
                                         <img src="Images/engineering_project/edit.png"/>
-                                    </a>
+                                    </a>--%>
+
                                     <!-- in order to pass multiple query strings, put '&' in between fields -->
                                     <asp:HyperLink
                                         id="read_more"

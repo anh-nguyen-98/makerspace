@@ -51,15 +51,6 @@ namespace Makerspace
         protected global::System.Web.UI.WebControls.FormView aboutProjectFormView;
 
         /// <summary>
-        /// debug_label control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label debug_label;
-
-        /// <summary>
         /// image1 control.
         /// </summary>
         /// <remarks>

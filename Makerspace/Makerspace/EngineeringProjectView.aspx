@@ -514,12 +514,11 @@
                         />
                 </div>
 
-                <div id="edit_button">
+                <%--<div id="edit_button">
                     <a>
-                        <%--<asp:Image runat="server" ImageUrl="Images\engineering_projects\edit.png"/>--%>
                         <img src="Images/engineering_project/edit.svg" />
                     </a>
-                </div>   
+                </div>   --%>
         </div>
 
             <%--gradient still under construction--%>
@@ -576,8 +575,6 @@
             </ItemTemplate>
 
         </asp:FormView>
-
-        <asp:Label runat="server" ID="debug_label" Text="DEBUG:"> </asp:Label>
 
         <section id="image_group_1_box">
             <%--set image url in page_load()--%>

@@ -128,20 +128,9 @@ namespace Makerspace
                     imagePathList.Add(imagePathRoot + path + ".jpg");
                 }
 
-                // DEBUG
-                debug_label.Text = "image count" + imagePathList.Count();
-
                 // at least 3 images must be available, otherwise stock image will be used
                 if (imagePathList.Count() > 2)
                 {
-                    //try
-                    //{
-                    //    setImage();
-                    //}
-                    //catch (ArgumentOutOfRangeException e)
-                    //{
-                    //    setImageDefault();
-                    //}
                     setImage();
                 } else
                 {

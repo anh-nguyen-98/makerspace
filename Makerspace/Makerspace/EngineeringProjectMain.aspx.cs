@@ -40,7 +40,6 @@ namespace Makerspace
                 adapter.Fill(dt);
                 ListView1.DataSource = dt;
                 ListView1.DataBind();
-                debug.Text = "Debug: number of items: " + dt.Rows.Count;
             }
         }
 
