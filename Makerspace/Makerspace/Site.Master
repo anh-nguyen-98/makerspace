@@ -68,6 +68,8 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             grid-template-rows: 160px;
+            grid-gap: 25px;
+            grid-row-gap: 1px;
             margin-left: auto;
             margin-right: auto;
         }
