@@ -18,7 +18,7 @@
             <asp:Label ID="name" runat="server" style="display:block; color:#00196E; min-width: 590px; font-size:38px; font-weight:800; background-color:#E1E1DE; padding:15px 20px 15px 20px; height:100px; text-align:center; border-bottom-left-radius:12px; border-bottom-right-radius:12px; border-top-right-radius: 12px"></asp:Label>
         </div>
         <div class="three">
-            <%--<asp:Button ID="editBtn" runat="server" OnClick="Edit_Click" Text="Edit" CommandName="edit" class="edit_button_style"/>--%>
+            <asp:Button ID="editBtn" runat="server" OnClick="Edit_Click" Text="Edit" CommandName="edit" class="edit_button_style"/>
 
             <asp:Label class="equipment_info" ID="count_equip" runat="server">Total: <asp:Label id="count" class="equipment_info" runat="server" OnLoad="Count_Load" style="font-weight:normal"></asp:Label></asp:Label>
             <br/>
@@ -32,13 +32,16 @@
                     <asp:TextBox ID="ins_box" runat="server" style="margin-right:5px" EnableViewState="false"/>
             </asp:Label>
             <br />
-            <asp:Label class="equipment_info" runat="server">Training requirement: <asp:Label id="train" runat="server"  style="font-weight:normal"></asp:Label></asp:Label>
+            <asp:Label class="equipment_info" runat="server">Training requirement: 
+                <asp:Label id="train" runat="server"  style="font-weight:normal"></asp:Label>
+                <asp:CheckBox ID="is_required" runat="server" EnableViewState="false" />
+            </asp:Label>
             <br />
 
             <asp:Button ID="submit_btn" runat="server" OnClick="submit_Click" Text="Done" class="edit_button_style" style="margin-top: 20px; background-color: #EAEAE8; color: #00196E"/>
         </div>
     </div>
-    <div style="margin-top:20px"></div>
+    <div style="margin-top:40px"></div>
 
     <%-- startregion: Subitem Listview --%>
     <div style="width:60vw; margin:auto">
