@@ -28,7 +28,8 @@ namespace Makerspace
             try
             {
                 int count = Request.QueryString["projectID"].Count();
-            } catch (ArgumentNullException noProjectID)
+            }
+            catch (ArgumentNullException noProjectID)
             {
                 Server.Transfer("EngineeringProjectMain.aspx");
             }
@@ -37,6 +38,7 @@ namespace Makerspace
 
             projectName = Request.QueryString["projectName"];
             project_title.Text = projectName;
+            Page.Title = projectName;
             load();
 
         }
@@ -84,7 +86,7 @@ namespace Makerspace
                 aboutProjectFormView.DataSource = projectInfoTable;
                 aboutProjectFormView.DataBind();
                 // set visibility of Ongoing chip
-                Ongoing = (1 == Int32.Parse(""+ projectInfoTable.Rows[0]["ongoing"]));
+                Ongoing = (1 == Int32.Parse("" + projectInfoTable.Rows[0]["ongoing"]));
                 statusChip.Visible = Ongoing;
                 // set links at the end of the page
                 youtubeLink.HRef = "" + projectInfoTable.Rows[0]["youtube_link"];
@@ -132,7 +134,8 @@ namespace Makerspace
                 if (imagePathList.Count() > 2)
                 {
                     setImage();
-                } else
+                }
+                else
                 {
                     setImageDefault();
                 }
@@ -142,7 +145,8 @@ namespace Makerspace
                 {
                     join_us.Attributes.Add("style", "display: flex; flex-direction: column; align-items: center; padding: 40px 50px; gap: 30px; width: 100%; background: #FFFFFF; flex: none; order: 4; align-self: stretch; flex-grow: 0;");
                     project_contact.Attributes.Add("style", "display: flex;\r\n            flex-direction: column;\r\n            align-items: center;\r\n            padding: 40px 50px;\r\n            gap: 30px;\r\n\r\n            width: 100%;\r\n\r\n            /* Neutral/B75 */\r\n\r\n            background: #F1F3F6;\r\n\r\n            /* Inside auto layout */\r\n\r\n            flex: none;\r\n            order: 5;\r\n            align-self: stretch;\r\n            flex-grow: 0;");
-                } else // project is not ongoing anymore
+                }
+                else // project is not ongoing anymore
                 {
                     join_us.Attributes.Add("style", "display: none; flex-direction: column;  align-items: center;  padding: 40px 50px;   gap: 30px;  width: 100%; background: #F1F3F6;   flex: none;\r\n            order: 5;\r\n            align-self: stretch;\r\n            flex-grow: 0;");
                     project_contact.Attributes.Add("style", "display: flex;  flex-direction: column;  align-items: center;  padding: 40px 50px; gap: 30px;  width: 100%; background: #FFFFFF;\r\n\r\n            /* Inside auto layout */\r\n\r\n            flex: none;\r\n            order: 4;\r\n            align-self: stretch;\r\n            flex-grow: 0;");

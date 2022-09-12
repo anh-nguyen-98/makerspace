@@ -346,6 +346,7 @@
     </Compile>
     <Compile Include="EngineeringProjectView.aspx.designer.cs">
       <DependentUpon>EngineeringProjectView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

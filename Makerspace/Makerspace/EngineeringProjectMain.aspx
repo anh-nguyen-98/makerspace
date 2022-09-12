@@ -1,6 +1,7 @@
-﻿<%@ Page Title="ProjectContent" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EngineeringProjectMain.aspx.cs" Inherits="Makerspace.ProjectContent" %>
+﻿<%@ Page Title="Independent Projects" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EngineeringProjectMain.aspx.cs" Inherits="Makerspace.ProjectContent" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
     <style>
         #main {
             display: flex;
@@ -502,8 +503,11 @@
                                         <span id="project_title"><%#Eval("name") %></span>
                                     </div>
                                     <p id="project_span">
-                                        <%# Eval("begin_date") %> - <%#Eval("end_date") %>
+                                        <%--<%# Eval("begin_date") %> - <%#Eval("end_date") %>--%>
+                                        <%--<asp:Label runat="server" Text='<%# (int)Eval("ongoing") == 1 ? Eval("begin_date") + " - " + Eval("end_date") : Eval("begin_date") + " - Present"%>'></asp:Label>--%>
+                                        <asp:Label runat="server" Text='<%# (int)Eval("ongoing") == 1 ? String.Concat(Eval("begin_date").ToString().Substring(0,10), " - Present") : String.Concat( Eval("begin_date").ToString().Substring(0,10), " - ", Eval("end_date").ToString().Substring(0,10))%>'></asp:Label> 
                                     </p>
+                                    
                                 </div>
 
                                 <div id="overview_box">
