@@ -16,6 +16,10 @@ namespace Makerspace
         {
             if (!IsPostBack)
             {
+                if (Session["role"] != null)
+                {
+                    System.Diagnostics.Debug.WriteLine(Session["role"]);
+                }
                 this.load();
             }
             else
