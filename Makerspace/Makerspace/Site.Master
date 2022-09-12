@@ -20,17 +20,26 @@
             width: 100%;
             padding-right: 15px;
             padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-            height: 50px;
+            height: 100%;
+            display: flex;
+            align-items: center;
         }
         .auto-style2 {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 42px;
+            height: 45px;
             z-index: 3;
+        }
+
+        .navbar-nav-1 {
+            display: flex;
+            padding-left: 0;
+            margin-bottom: 0;
+            height: 100%;
+            flex-grow: 1;
+            align-items: center;
         }
         .category:focus-visible {
             background-color:yellow;
@@ -39,6 +48,20 @@
         .navbar-items {
             color:white; 
             margin-right:15px;
+        }
+        .navbar-log-items {
+            width: 85px;
+            height: 35px;
+            border-radius: 100px;
+            padding: 8px, 20px, 8px, 20px;
+            gap: 10px;
+            background-color: #F1F3F6;
+            color: #00196E;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.1px;
+            margin-left: auto;
         }
 
         .wrapper {
@@ -103,6 +126,141 @@
             border-style:none;
         }
 
+        .about-page .yellow-btn {
+            background-color: #FFAD1D;
+            color: #00196E;
+            font-weight: 900;
+            float: right;
+            border: none;
+            border-radius: 5px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .about-page .yellow-btn:hover {
+            text-decoration: none;
+        }
+
+        .about-page .white-btn {
+            background-color: #FFFFFF;
+            color: #00196E;
+            font-weight: 900;
+            border: none;
+            border-radius: 5px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .input-group:active {
+            color: blue;
+        }
+
+        .input-group .input-box {
+            border-radius: 10px;
+            outline: 2px solid #8A95BC;
+            border: 2px solid #8A95BC;
+            padding: 0px 16px 0px 16px;
+            width: 100%;
+            height: 56px;
+        }
+
+        input.input-box:focus {
+            caret-color: #295FCC;
+            outline: 2px solid #295FCC;
+            border: 2px solid #295FCC; 
+        }
+
+        .input-group .input-box-danger {
+            border-radius: 10px;
+            padding: 0px 16px 0px 16px;
+            width: 100%;
+            height: 56px;
+            outline: 2px solid #FF3333;
+            border: 2px solid #FF3333;   
+        }
+        .input-group .input-label {
+            color: #8A95BC;
+            font-weight: 500;
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            letter-spacing: 0.5px;
+            z-index: 1;
+            background: white;
+            padding: 0px 4px 0px 4px;
+        }
+
+        .input-group .input-label-danger {
+            color: #FF3333;
+            font-weight: 500;
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            letter-spacing: 0.5px;
+            z-index: 1;
+            background: white;
+            padding: 0px 4px 0px 4px;
+        }
+
+        .login-btn {
+            background: #FFAD1D;
+            padding: 12px, 16px, 12px, 16px;
+            width: 200px;
+            height: 40px;
+            border-radius: 12px;
+            border: none;
+            color: #1F2531;
+            font-weight: 500;
+        }
+        /*for phone*/
+        @media only screen and (max-device-width: 1139px) and (max-device-height: 1024px) and (orientation:portrait) {
+            .cover-align {
+                left: -20px;
+            }
+            .image-cover {
+                width: 260vw;
+            }
+        }
+
+        /*for desktop*/
+        @media screen and (min-width:600) and (max-width: 1023px) {
+            .image-cover {
+                width: 205vw;
+            }
+        }
+
+       @media only screen and (min-width: 1024px) and (max-width: 1799px) {
+            .cover-align {
+                left: -30vw;
+            }
+            .image-cover {
+                width: 124.5vw;
+            }
+        }
+
+        @media only screen and (min-width: 1800px) {
+            .cover-align {
+                left: -380px;
+            }
+            .image-cover {
+                width: 99vw;
+            }
+        }
+
+        .text-small {
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 16px;
+            letter-spacing: 0.5px;
+        }
+        .text-red {
+            color: #FF3333; 
+        }
+
     </style>
 </head>
 
@@ -143,11 +301,62 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
-     
-        <div>
+        
+        <ajaxToolkit:ModalPopupExtender ID="mpe" runat="server" TargetControlId="LoginBtn" PopupControlID="ModalPanel" CancelControlID="CancelBtn"/>
+        <div class="auto-style2" role="navigation" style="background-color: #00196E">
+            <div class="auto-style1">
+                <a class="navbar-brand" style="color: white; font-weight: 800" runat="server" href="~/Resource.aspx">Makerspace</a>
+                <div class="navbar-nav-1">
+                    <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
+                    <a runat="server" class="navbar-items" href="~/About">About</a>
+                    <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
+                    <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
+                    <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
+                    <% if(Session["role"] == null) { %>
+                    <asp:Button ID="LoginBtn" runat="server" Text="Log in" CssClass="navbar-log-items"/>
+                    <%} else { %>
+                    <asp:Button runat="server" Text="Log out" OnClick="Logout" CssClass="navbar-log-items"/>
+                    <%} %>
+                   
+                </div>
+                <asp:UpdatePanel runat="server"  ID="ModalPanel" style="display: none" UpdateMode="Conditional" EnableViewState="false">
+                    <ContentTemplate>
+                        <div runat="server" Width="500px">
+                            <div style="width: 520px; margin-left: auto; margin-right:auto;">
+                                <div style="background: #00196E; text-align: center; border-top-left-radius: 12px; border-top-right-radius: 12px;" class="py-4">
+                                    <span style="color: white; font-weight: 600; line-height: 36px; font-size: 28px;">Teaching Assistant Login</span>
+                                </div>
+                                <div style="padding-top:30px; padding-bottom:20px; padding-left: 50px; padding-right:50px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;background: white">
+                                    <div class="input-group">
+                                        <asp:Label runat="server" AssociatedControlID="Email" CssClass="input-label" ID="EmailLabel">Fulbright email</asp:Label>
+                                        <asp:TextBox runat="server" ID="Email" CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>
+                                        <asp:Label runat="server" CssClass="text-small text-red p-1" ID="EmailErrorMessage"></asp:Label>
+   
+                                    </div>
+                                    <div class="input-group">
+                                        <asp:Label runat="server" AssociatedControlID="Password" CssClass="input-label" ID="PasswordLabel">Password</asp:Label>
+                                        <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>
+                                        <asp:Label runat="server" CssClass="text-small text-red" ID="PasswordErrorMessage"></asp:Label>
+                                    </div>
+                                    <div style="display: flex; justify-content:space-between">
+                                        <asp:Button ID="CancelBtn" runat="server" Text="Cancel" CssClass="login-btn"/>
+                                        <asp:Button runat="server" Text="Log in" OnClick="LogIn" CssClass="login-btn"/>
+                                    </div>
+                                    <div class="mt-3"
+                                            style="color: #8A95BC; font-weight:500; font-size:14px; letter-spacing: 0.1px">Note: Please contact admin if you forget your password.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="CancelBtn"/>
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+        <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                 
             </asp:ContentPlaceHolder>
             <hr />
             <div class="container body-content">
