@@ -2,12 +2,17 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1 class="text-center" style="font-size:70px; font-weight:900;"> <span style="color:#00196E">Makerspace</span> <span style="color:#FFAD1D"> Information</span></h1>
-        <div style="display: flex; justify-content: center; background:#f1f3f6; width: 60vw; margin-left: auto; margin-right: auto; margin-bottom: 40px" >
-        <asp:Image ID="cover" src="Images/Makerspace_Cover.png" runat="server"/>
-        </div>
+
     <div class="container about-page" style="width: 60vw">
+        <div class="row" style="margin-bottom: 40px; justify-content: center; background:#f1f3f6;">
+            <div>
+                <asp:Image ID="cover" src="Images/Makerspace_Cover.png" runat="server"/>
+            </div>
+        </div>
+
         <div class="row" style="margin-bottom: 40px">
             <div class="d-flex" style="width:100%; min-height:200px;">
+                      
                 <div class="flex-grow-1" style="background-color: #00196E; border-top-left-radius: 12px; border-bottom-left-radius: 12px">
                   
                 </div>
