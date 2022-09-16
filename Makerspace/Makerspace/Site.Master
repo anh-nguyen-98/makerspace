@@ -297,6 +297,7 @@
                     <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
                     <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
                     <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
+                    <a runat="server" class="navbar-items" href="~/Management">Management</a>
                     <% if(Session["role"] == null) { %>
                     <asp:Button ID="LoginBtn" runat="server" Text="Log in" CssClass="navbar-log-items"/>
                     <%} else { %>

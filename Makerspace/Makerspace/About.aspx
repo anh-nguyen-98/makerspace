@@ -139,7 +139,7 @@
 
                     </div>
                     <div style="position: relative; background-color:#00196E" class="flex-grow-1">
-                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                          <img src="Images/About_ProductGallery.jpg"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
                   
 
                     </div>
