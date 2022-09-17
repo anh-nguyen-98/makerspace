@@ -25,12 +25,14 @@
             align-items: center;
         }
         .auto-style2 {
+            height: 60px;
             position: fixed;
-            top: 0;
+            top: 20px;
             left: 0;
             right: 0;
-            height: 45px;
             z-index: 3;
+            color: #FFAD1D;
+            font-weight: 800;
         }
 
         .navbar-nav-1 {
@@ -62,6 +64,13 @@
             line-height: 24px;
             letter-spacing: 0.1px;
             margin-left: auto;
+        }
+
+        .hover-navbar-items{
+            background-color: #FFAD1D;
+            padding: 8px 20px 8px 20px;
+            border-radius: 100px
+
         }
 
         .wrapper {

@@ -15,7 +15,25 @@ namespace Makerspace
  
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("~/Resource.aspx");
+            if (id==0)
+            {
+                Response.Redirect("~/Resource.aspx");
+
+                double users = 0;
+                TextReader textReader = new StreamReader(Server.MapPath("count_visit.txt"));
+                users = Convert.ToDouble(textReader.readLine());
+                textReader.Close();
+                textReader.Dispose();
+
+                try {
+                    users ++;
+                    TextWriter writer = new StreamWriter(Server.MapPath("count_visit.txt"));
+                    writer.Write(users);
+                    writer.Close();
+                    writer.Dispose();
+                    
+                }
+            }
         }
 
     }

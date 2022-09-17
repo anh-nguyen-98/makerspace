@@ -43,6 +43,17 @@ namespace Makerspace
                         Subitem_Listview.DataBind();
 
                         String link = db.Rows[0]["instruction"].ToString();
+                        double popular = db.Rows[0]["popular"].ToDouble() + 1;
+
+                        con.Close();
+                        
+                        SqlCommand updateCmd = new SqlCommand("UPDATE EquipmentItemLocation_View SET popular = @popular WHERE id = @id");
+                        updateCmd.Parameters.AddWithValue("@popular", popular);
+                        updateCmd.Parameters.AddWithValue("@id", id);
+                        con.Open();
+
+                        popular = (Double)updateCmd.ExecuteScalar();
+                        System.Diagnostics.Debug.WriteLine(popular);
 
                         if (link.Equals(""))
                         {
@@ -103,11 +114,13 @@ namespace Makerspace
             {
                 int id = Convert.ToInt32(Request.QueryString["id"]);
                 SqlCommand cmd = new SqlCommand("SELECT COUNT(id) FROM EquipmentItemLocation_View WHERE id = @id", conn);
+                
                 cmd.Parameters.AddWithValue("@id", id);
                 conn.Open();
 
                 int countItem = (Int32)cmd.ExecuteScalar();
                 count.Text = countItem.ToString();
+
             }
         }
 
