@@ -108,8 +108,7 @@
                         The FUV Makerspace encourages students to actively drive social change and positively impact local communities. To solve a need they identify in their communities, abroad or in their own countries, students independently initiate and develop initiatives according to their own interests and talents. Student-led projects provide an opportunity for leadership, personal growth, and hands-on learning while collaborating with others, being creative, and making a difference in the world.
                     </p>
                     <div class="d-flex justify-content-center">
-                          <asp:Button runat="server" Text="Hearty Plant" CssClass="white-btn"/>
-                    <asp:Button runat="server" Text="E-dap" CssClass="white-btn ml-5"/>
+                          <asp:Button OnClick="epBtn_Click" ID="epBtn" runat="server" Text="See More" CssClass="white-btn"/>
                     </div>
                   
                  
@@ -169,6 +168,4 @@
         </div>
 
     </div>
-
-    
 </asp:Content>

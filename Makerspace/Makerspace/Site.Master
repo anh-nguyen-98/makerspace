@@ -10,7 +10,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <webopt:bundlereference runat="server" path="~/Content/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -265,26 +265,41 @@
 </head>
 
 <body>
+    <br />
+    <br />
+    <div class="auto-style2" role="navigation" style="background-color:#00196E">
+        <div class="auto-style1">
+            <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/Resource.aspx">Makerspace</a>
+            <div class="navbar-nav mr-auto" style="width:100%; list-style-type:none; padding:0px; display:inline; flex-direction:row;text-align:justify">
+                <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
+                <a runat="server" class="navbar-items" href="~/About">About</a>
+                <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
+                <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
+                <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
+                <a runat="server" class="navbar-items" href="EngineeringProjectMain.aspx">Independent Projects</a>
+              </div>
+           </div>
+        </div>
     <form runat="server">
-        <asp:ScriptManager runat="server" EnablePartialRendering="true">
-        <Scripts>
-            <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-            <%--Framework Scripts--%>
-            <asp:ScriptReference Name="MsAjaxBundle" />
-            <asp:ScriptReference Name="jquery" />
-            <asp:ScriptReference Path="~/Scripts/umd/popper.min.js" />
-            <asp:ScriptReference Name="bootstrap" />
-            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-            <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-            <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-            <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-            <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-            <asp:ScriptReference Name="WebFormsBundle" />
-            <%--Site Scripts--%>
-        </Scripts>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:scriptReference Path="~/Scripts/umd/popper.min.js" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
         </asp:ScriptManager>
         
         <ajaxToolkit:ModalPopupExtender ID="mpe" runat="server" TargetControlId="LoginBtn" PopupControlID="ModalPanel" CancelControlID="CancelBtn"/>
@@ -294,8 +309,8 @@
                 <div class="navbar-nav-1">
                     <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
                     <a runat="server" class="navbar-items" href="~/About">About</a>
-                    <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
                     <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
+                    <a runat="server" class="navbar-items" href="~/EngineeringProjectMain">Projects</a>
                     <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
                     <a runat="server" class="navbar-items" href="~/Management">Management</a>
                     <% if(Session["role"] == null) { %>
@@ -324,7 +339,6 @@
                                         <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>
                                         <asp:Label runat="server" CssClass="text-small text-red" ID="PasswordErrorMessage"></asp:Label>
                                     </div>
-
                                     <div style="display: flex; justify-content:space-between">
                                         <asp:Button ID="CancelBtn" runat="server" Text="Cancel" CssClass="login-btn"/>
                                         <asp:Button runat="server" Text="Log in" OnClick="LogIn" CssClass="login-btn"/>
@@ -342,26 +356,27 @@
                 </asp:UpdatePanel>
             </div>
         </div>
-        <div class="container body-content">
+        <div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-          
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <address>
-                    Makerspace - Fulbright University Vietnam<br />
-                    105 Ton Dat Tien, Tan Phu Ward, District 7, HCMC<br />
-                    <abbr title="Phone">Phone:</abbr>
-                    0903369880
-                </address>
+            <div class="container body-content">
+                <footer>
+                    <address>
+                        Makerspace - Fulbright University Vietnam<br />
+                        105 Ton Dat Tien, Tan Phu Ward, District 7, HCMC<br />
+                        <abbr title="Phone">Phone:</abbr>
+                        0903369880
+                    </address>
 
-                <address>
-                    <strong>Support:</strong>   <a href="mailto:makerspace.support@fulbright.edu.vn">makerspace.support@fulbright.edu.vn</a><br />
+                    <address>
+                        <strong>Support:</strong>   <a href="mailto:makerspace.support@fulbright.edu.vn">makerspace.support@fulbright.edu.vn</a><br />
+ 
+                    </address>
 
-                </address>
-
-                <p>&copy; <%: DateTime.Now.Year %> Makerspace - Fulbright University Vietnam</p>
-            </footer>
+                    <p>&copy; <%: DateTime.Now.Year %> Makerspace - Fulbright University Vietnam</p>
+                </footer>
+            </div>
         </div>
     </form>
 </body>
