@@ -166,7 +166,7 @@
     <Content Include="Images\hammer.jpg" />
     <Content Include="EngineeringProjectMain.aspx" />
     <Content Include="Images\Makerspace_Logo.png" />
-    <Content Include="Login.aspx" />
+    <Content Include="Management.aspx" />
     <Content Include="Resource.aspx" />
     <Content Include="Equipment.aspx" />
     <Content Include="favicon.ico" />
@@ -351,8 +351,8 @@
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="Management.aspx.designer.cs">
+      <DependentUpon>Management.aspx</DependentUpon>
     </Compile>
     <Compile Include="Resource.aspx.cs">
       <DependentUpon>Resource.aspx</DependentUpon>

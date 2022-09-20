@@ -110,6 +110,7 @@ namespace Makerspace
                 {
                     Session.RemoveAll();
                     Session["role"] = db.Rows[0]["role"];
+                    Session["level"] = db.Rows[0]["level"];
                     Response.Redirect("~/Resource.aspx");
                 }
                 else

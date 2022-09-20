@@ -2,13 +2,17 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1 class="text-center" style="font-size:70px; font-weight:900;"> <span style="color:#00196E">Makerspace</span> <span style="color:#FFAD1D"> Information</span></h1>
-        <div class= "cover-align" style="height: 430px; position:relative" >
-        <asp:Image ID="cover" class="image-cover" src="Images/Makerspace_Cover.png" runat="server" style="height: 383px; position: absolute"/>
-        <h3 class="image-cover" style="position: relative; background-color: white; top: 55px; text-align: center; color: #00196E; padding-top: 20px; padding-bottom: 20px; opacity: 0.7;">Served for DST A Class: 9:45AM - 11:15AM</h3>
-    </div>
+
     <div class="container about-page" style="width: 60vw">
+        <div class="row" style="margin-bottom: 40px; justify-content: center; background:#f1f3f6;">
+            <div>
+                <asp:Image ID="cover" src="Images/Makerspace_Cover.png" runat="server"/>
+            </div>
+        </div>
+
         <div class="row" style="margin-bottom: 40px">
             <div class="d-flex" style="width:100%; min-height:200px;">
+                      
                 <div class="flex-grow-1" style="background-color: #00196E; border-top-left-radius: 12px; border-bottom-left-radius: 12px">
                   
                 </div>
@@ -48,7 +52,7 @@
 
                     </div>
                     <div style="position: relative; background-color: #00196E" class="flex-grow-1">
-                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                          <img src="Images/About_Workshop.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
                   
 
                     </div>
@@ -64,7 +68,7 @@
                         WORKSHOPS
                     </p>
                     <p>
-                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                        The Makerspace workshop offers theoretical background information and practical hands-on activities in a variety of "soft skills" areas that are relevant to working in the tech sector, especially those themes that are customized to the context of Engineers..
                     </p>
                     <div class="d-flex justify-content-between mb-2">
                        
@@ -101,7 +105,7 @@
                         PROJECTS
                     </p>
                     <p>
-                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                        The FUV Makerspace encourages students to actively drive social change and positively impact local communities. To solve a need they identify in their communities, abroad or in their own countries, students independently initiate and develop initiatives according to their own interests and talents. Student-led projects provide an opportunity for leadership, personal growth, and hands-on learning while collaborating with others, being creative, and making a difference in the world.
                     </p>
                     <div class="d-flex justify-content-center">
                           <asp:Button OnClick="epBtn_Click" ID="epBtn" runat="server" Text="See More" CssClass="white-btn"/>
@@ -115,7 +119,7 @@
 
                     </div>
                     <div style="position: relative; background-color:#00196E" class="flex-grow-1">
-                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                          <img src="Images/About_Project.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
                   
 
                     </div>
@@ -134,7 +138,7 @@
 
                     </div>
                     <div style="position: relative; background-color:#00196E" class="flex-grow-1">
-                          <img src="Images/Makerspace_Cover.png"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
+                          <img src="Images/About_ProductGallery.jpg"  style="display:block; position: absolute; top:50%; left:50%; transform:translateX(-50%) translateY(-50%); width: 100%;" />
                   
 
                     </div>
