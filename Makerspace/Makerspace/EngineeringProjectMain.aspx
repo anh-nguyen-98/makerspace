@@ -394,7 +394,7 @@
             border-radius: 12px;
         }
     </style>
-    <main id="main">
+    <main>
         <%--Title and description--%>
         <section id="title">
             <h1 style="
@@ -461,9 +461,7 @@
                 <asp:ListView 
                     runat="server" 
                     ID="ListView1" 
-                    GroupItemCount="2">
-                    <%--Changing the name of the ListView to ListView1 somehow made it work..?--%>
-                    
+                    GroupItemCount="2">                    
                     <LayoutTemplate>
                         <table cellpadding="10" runat="server" id="tblProject">
                             <tr runat="server" id="groupPlaceholder" />
@@ -476,19 +474,13 @@
                         </tr>
                     </GroupTemplate>
 
-<%--                    <GroupSeparatorTemplate>
-                      <tr runat="server">
-                        <td colspan="2"><hr /></td>
-                      </tr>
-                    </GroupSeparatorTemplate>--%>
-
                     <ItemTemplate>
                         <td runat="server">
                             <div id="project_card">
                                 <%--Note: div of image has position:relative so that status chip can display over image--%>
                                 <div id="project_image_group" style="position: relative">
                                     <img id="project_card_image" src='Images/engineering_project/<%#Eval("image_path")%>.jpg' onerror="this.src='Images/engineering_project/1.png'"/>
-                                    <%--DO NOT show the "Ongoing" label if the "ongoing" field returns 0--%>
+                                    <%--Doesn't show the "Ongoing" label if the "ongoing" field returns 0--%>
                                     <asp:Label
                                         runat="server" 
                                         CssClass="status_chip" 
@@ -499,7 +491,6 @@
 
                                 <div id="headline">
                                     <div>
-                                        <%--<asp:Label ID="project_name" runat="server" Text='<%#Eval("name") %>'></asp:Label>--%>
                                         <span id="project_title"><%#Eval("name") %></span>
                                     </div>
                                     <p id="project_span">
@@ -515,7 +506,7 @@
                                 </div>
 
                                 <div id="actions">
-
+                                    <!-- EDIT BUTTON -->
                                     <%--<a id="edit_button">
                                         <img src="Images/engineering_project/edit.png"/>
                                     </a>--%>
@@ -548,10 +539,6 @@
                             </div>
                         </td>
                     </ItemTemplate>
-
-                    <%--<ItemSeparatorTemplate>
-                        <td class="separator" runat="server"></td>
-                    </ItemSeparatorTemplate>--%>
                 </asp:ListView>
             </section>
         </section>
