@@ -494,8 +494,6 @@
                                         <span id="project_title"><%#Eval("name") %></span>
                                     </div>
                                     <p id="project_span">
-                                        <%--<%# Eval("begin_date") %> - <%#Eval("end_date") %>--%>
-                                        <%--<asp:Label runat="server" Text='<%# (int)Eval("ongoing") == 1 ? Eval("begin_date") + " - " + Eval("end_date") : Eval("begin_date") + " - Present"%>'></asp:Label>--%>
                                         <asp:Label runat="server" Text='<%# (int)Eval("ongoing") == 1 ? String.Concat( DateTime.Parse(Eval("begin_date").ToString()).ToShortDateString() , " - Present") : String.Concat( DateTime.Parse (Eval("begin_date").ToString()).ToShortDateString(), " - ", DateTime.Parse( Eval("end_date").ToString()).ToShortDateString())%>'></asp:Label> 
                                     </p>
                                     
