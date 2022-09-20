@@ -440,7 +440,7 @@
                         ID="search" 
                         runat="server" 
                         CssClass="search_box" 
-                        Text="Search" 
+                        placeholder="Search" 
                         ForeColor="#8A95BC"
                         BorderWidth="0px"></asp:TextBox>
                     
@@ -505,7 +505,7 @@
                                     <p id="project_span">
                                         <%--<%# Eval("begin_date") %> - <%#Eval("end_date") %>--%>
                                         <%--<asp:Label runat="server" Text='<%# (int)Eval("ongoing") == 1 ? Eval("begin_date") + " - " + Eval("end_date") : Eval("begin_date") + " - Present"%>'></asp:Label>--%>
-                                        <asp:Label runat="server" Text='<%# (int)Eval("ongoing") == 1 ? String.Concat(Eval("begin_date").ToString().Substring(0,10), " - Present") : String.Concat( Eval("begin_date").ToString().Substring(0,10), " - ", Eval("end_date").ToString().Substring(0,10))%>'></asp:Label> 
+                                        <asp:Label runat="server" Text='<%# (int)Eval("ongoing") == 1 ? String.Concat( DateTime.Parse(Eval("begin_date").ToString()).ToShortDateString() , " - Present") : String.Concat( DateTime.Parse (Eval("begin_date").ToString()).ToShortDateString(), " - ", DateTime.Parse( Eval("end_date").ToString()).ToShortDateString())%>'></asp:Label> 
                                     </p>
                                     
                                 </div>
