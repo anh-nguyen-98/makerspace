@@ -1,43 +1,23 @@
 USE [MakerspaceDB]
 GO
 
-/****** Object:  View [dbo].[EquipmentItemLocation_View]    Script Date: 4/21/2022 3:35:17 PM ******/
+/****** Object:  View [dbo].[EquipmentItemLocation_View]    Script Date: 10/15/2022 2:31:51 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-
-
-ALTER VIEW [dbo].[EquipmentItemLocation_View] as
-	SELECT
-	Equipment.id,
-	Equipment.code,
-	Equipment.name,
-	Equipment.description,
-	Equipment.instruction,
-	Equipment.training,
-	Equipment.category_id,
-	Equipment.image,
-	Equipment.name_vie,
-	Equipment.popular,
-	Equipment.brand,
-	EquipmentItem.num,
-	EquipmentItem.status,
-	EquipmentItem.delivered_at,
-	EquipmentItem.removed_at,
-	Category.name as category_name,
-	Category.cat_src as category_src,
-	LocationName_View.room_name, LocationName_View.room_space_name, LocationName_View.object_code, LocationName_View.object_name, LocationName_View.object_num
-	FROM Equipment
-	INNER JOIN EquipmentItem
-	ON EquipmentItem.equipment_id = Equipment.id
-	INNER JOIN Category
-	ON Equipment.category_id = Category.id
-	INNER JOIN LocationName_View
-	ON EquipmentItem.location_id = LocationName_View.location_id;
+ALTER VIEW [dbo].[EquipmentItemLocation_View]
+AS
+SELECT        dbo.Equipment.id, dbo.Equipment.code, dbo.Equipment.name, dbo.Equipment.description, dbo.Equipment.instruction, dbo.Equipment.training, dbo.Equipment.category_id, dbo.Equipment.image, dbo.Equipment.name_vie, 
+                         dbo.Equipment.popular, dbo.Equipment.brand, dbo.EquipmentItem.num, dbo.EquipmentItem.status, dbo.EquipmentItem.delivered_at, dbo.EquipmentItem.removed_at, dbo.Category.name AS category_name, 
+                         dbo.Category.cat_src AS category_src, dbo.LocationName_View.room_space_id, dbo.LocationName_View.room_name, dbo.LocationName_View.room_space_name, dbo.LocationName_View.object_id, dbo.LocationName_View.object_code, dbo.LocationName_View.object_name, 
+                         dbo.LocationName_View.object_num, dbo.Equipment.deleted
+FROM            dbo.Equipment INNER JOIN
+                         dbo.EquipmentItem ON dbo.EquipmentItem.equipment_id = dbo.Equipment.id INNER JOIN
+                         dbo.Category ON dbo.Equipment.category_id = dbo.Category.id INNER JOIN
+                         dbo.LocationName_View ON dbo.EquipmentItem.location_id = dbo.LocationName_View.location_id
+WHERE        (dbo.Equipment.deleted = 0) OR
+                         (dbo.Equipment.deleted IS NULL)
 GO
-
-

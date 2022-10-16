@@ -14,6 +14,10 @@ namespace Makerspace
         protected static string CONSTRING = ConfigurationManager.ConnectionStrings["MakerspaceDBConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            this.Form.DefaultButton = searchBtn.UniqueID;
+            this.Form.DefaultFocus = searchBox.ClientID;
+            this.Page.MaintainScrollPositionOnPostBack = true;
             if (!IsPostBack)
             {
                 if (Session["role"] != null)
@@ -21,10 +25,21 @@ namespace Makerspace
                     System.Diagnostics.Debug.WriteLine(Session["role"]);
                 }
                 this.load();
+                //AddNewEquipmentPanel.Visible = false;
+                AddEquipmentBtn.Visible = false;
             }
             else
             {
-
+                if (Session["level"] == null || Convert.ToInt16(Session["level"].ToString()) > 1)
+                {
+                    AddNewEquipmentPanel.Visible = false;
+                    
+                }
+                else
+                {
+                    AddNewEquipmentPanel.Visible = true;
+                    AddEquipmentBtn.Visible = true;
+                }
             }
 
         }
@@ -81,6 +96,7 @@ namespace Makerspace
                 cmd.Parameters.AddWithValue("@code", searchTerm);
                 cmd.Parameters.AddWithValue("@category_name", searchTerm);
                 cmd.Parameters.AddWithValue("@room_space_name", searchTerm);
+                cmd.Parameters.AddWithValue("@description", searchTerm);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 cmd.Connection = con;
@@ -125,6 +141,23 @@ namespace Makerspace
         {
             (EquipLV.FindControl("DataPager") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
             this.load();
+        }
+
+        protected void RoomDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlDataSource2.SelectCommand = "SELECT * from RoomSpace where room_id = " + RoomDropDownList.SelectedValue;
+            SpaceDropDownList.DataBind();
+        }
+
+        protected void LocationDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ObjectDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlDataSource4.SelectCommand = "SELECT * from LocationName_View where (room_name = " + RoomDropDownList.SelectedItem + " & room_space_name = " + SpaceDropDownList.SelectedItem + " & object_name = " + ObjectDropDownList.SelectedItem+ ")";
+            SpaceDropDownList.DataBind();
         }
     }
 

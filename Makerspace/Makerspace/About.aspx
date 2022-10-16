@@ -8,6 +8,9 @@
             <div>
                 <asp:Image ID="cover" src="Images/Makerspace_Cover.png" runat="server"/>
             </div>
+            <div  style="width: 66%;padding-top: 30px; padding-bottom: 30px; padding-left: 54px; padding-right:54px; background: #F1F3F6; color: #00196E;">
+                <i>Check out the Makerspace with the most comprehensive set of built-in learning and accessibility tools</i>
+            </div>
         </div>
 
         <div class="row" style="margin-bottom: 40px">
@@ -22,7 +25,7 @@
                         BOOKING
                     </p>
                     <p>
-                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                        Not sure what you need? Book a session with us to understand your goals, iron out problems, or just to help you with crafting your products!
                     </p>
                     <a class="yellow-btn" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Our Services</a>
                  
@@ -72,17 +75,20 @@
                     </p>
                     <div class="d-flex justify-content-between mb-2">
                        
-                                <asp:Button runat="server" Text="Digital Design" CssClass="white-btn"/>
-                           
-                                 <asp:Button runat="server" Text="Electrics & Arduino" CssClass="white-btn"/>
-                                   
+                                <%--<asp:Button runat="server" Text="Digital Design" CssClass="white-btn"/>--%>
 
+                        <a class="white-btn" href="WorkshopDigitalDesign.aspx">Digital Design</a>
+                        <a class="white-btn" href="WorkshopElectrics.aspx">Electrics</a>
+                           
+                                 <%--<asp:Button runat="server" Text="Electrics & Arduino" CssClass="white-btn"/>--%>
                     </div>
                     
                    
                     <div class="d-flex justify-content-between">
-                        <asp:Button runat="server" Text="Fabrication" CssClass="white-btn"/>
-                    <asp:Button runat="server" Text="Safety & Policy" CssClass="white-btn"/>
+                        <%--<asp:Button runat="server" Text="Fabrication" CssClass="white-btn"/>
+                    <asp:Button runat="server" Text="Safety & Policy" CssClass="white-btn"/>--%>
+                        <a class="white-btn" href="WorkshopFabrication.aspx">Fabrication</a>
+                        <a class="white-btn" href="WorkshopSafety.aspx">Safety & Policy</a>
                     </div>
                     
                 </div>
@@ -108,7 +114,7 @@
                         The FUV Makerspace encourages students to actively drive social change and positively impact local communities. To solve a need they identify in their communities, abroad or in their own countries, students independently initiate and develop initiatives according to their own interests and talents. Student-led projects provide an opportunity for leadership, personal growth, and hands-on learning while collaborating with others, being creative, and making a difference in the world.
                     </p>
                     <div class="d-flex justify-content-center">
-                          <asp:Button OnClick="epBtn_Click" ID="epBtn" runat="server" Text="See More" CssClass="white-btn"/>
+                          <asp:Button OnClick="epBtn_Click" ID="epBtn" runat="server" Text="See More" CssClass="yellow-btn"/>
                     </div>
                   
                  
@@ -154,7 +160,7 @@
                         PRODUCT GALLERY
                     </p>
                     <p>
-                        Not sure what you need? Grab 60 minutes with us and we will work with you to understand your goals, and to develop a proposal and price estimate.
+                        Need inspiration? Take a look at projects from past semesters and see how they were built. Alternatively, you can also submit your work here for others to see.
                     </p>
                     <asp:Button runat="server" Text="Submit Your Work" CssClass="white-btn"/>
                     <asp:Button runat="server" Text="Visit" CssClass="yellow-btn"/>
@@ -162,6 +168,13 @@
                 </div>
                   <div class="flex-grow-1" style="background-color: #00196E; border-top-right-radius: 12px; border-bottom-right-radius: 12px">
                   
+                </div>
+
+                <div>
+                    <video <%--width="320" height="240"--%> controls>
+                      <source src="~\Videos\digital-design-video-1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                    </video> <br>
                 </div>
                
             </div>

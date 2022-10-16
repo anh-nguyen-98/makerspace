@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AddNewEquipment.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -163,10 +164,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="EngineeringProjectView.aspx" />
+    <Content Include="EngineeringSkillsManagement.aspx" />
+    <Content Include="FindItemsByLocation_QR.aspx" />
+    <Content Include="FindItemsByLocation.aspx" />
     <Content Include="Images\hammer.jpg" />
     <Content Include="EngineeringProjectMain.aspx" />
     <Content Include="Images\Makerspace_Logo.png" />
-	<Content Include="Login.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Management.aspx" />
     <Content Include="Resource.aspx" />
     <Content Include="Equipment.aspx" />
@@ -227,6 +231,10 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="WorkshopDigitalDesign.aspx" />
+    <Content Include="WorkshopElectrics.aspx" />
+    <Content Include="WorkshopFabrication.aspx" />
+    <Content Include="WorkshopSafety.aspx" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -309,6 +317,13 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNewEquipment.aspx.cs">
+      <DependentUpon>AddNewEquipment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddNewEquipment.aspx.designer.cs">
+      <DependentUpon>AddNewEquipment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -348,20 +363,41 @@
     <Compile Include="EngineeringProjectView.aspx.designer.cs">
       <DependentUpon>EngineeringProjectView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EngineeringSkillsManagement.aspx.cs">
+      <DependentUpon>EngineeringSkillsManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EngineeringSkillsManagement.aspx.designer.cs">
+      <DependentUpon>EngineeringSkillsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FindItemsByLocation_QR.aspx.cs">
+      <DependentUpon>FindItemsByLocation_QR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FindItemsByLocation_QR.aspx.designer.cs">
+      <DependentUpon>FindItemsByLocation_QR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FindItemsByLocation.aspx.cs">
+      <DependentUpon>FindItemsByLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FindItemsByLocation.aspx.designer.cs">
+      <DependentUpon>FindItemsByLocation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-	<Compile Include="Login.aspx.designer.cs">
-		<DependentUpon>Login.aspx</DependentUpon>
-	</Compile>
-	<Compile Include="Management.aspx.cs">
-		<DependentUpon>Management.aspx</DependentUpon>
-		<SubType>ASPXCodeBehind</SubType>
-	</Compile>
-	<Compile Include="Management.aspx.designer.cs">
-		<DependentUpon>Management.aspx</DependentUpon>
-	</Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management.aspx.cs">
+      <DependentUpon>Management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management.aspx.designer.cs">
+      <DependentUpon>Management.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Resource.aspx.cs">
       <DependentUpon>Resource.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -423,6 +459,34 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkshopDigitalDesign.aspx.cs">
+      <DependentUpon>WorkshopDigitalDesign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkshopDigitalDesign.aspx.designer.cs">
+      <DependentUpon>WorkshopDigitalDesign.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkshopElectrics.aspx.cs">
+      <DependentUpon>WorkshopElectrics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkshopElectrics.aspx.designer.cs">
+      <DependentUpon>WorkshopElectrics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkshopFabrication.aspx.cs">
+      <DependentUpon>WorkshopFabrication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkshopFabrication.aspx.designer.cs">
+      <DependentUpon>WorkshopFabrication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkshopSafety.aspx.cs">
+      <DependentUpon>WorkshopSafety.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkshopSafety.aspx.designer.cs">
+      <DependentUpon>WorkshopSafety.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

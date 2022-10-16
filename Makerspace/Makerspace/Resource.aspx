@@ -4,6 +4,8 @@
         <h1 class="text-center" style="font-size:70px; font-weight:900;"> <span style="color:#00196E">Makerspace</span> <span style="color:#FFAD1D"> Resource</span></h1>
         <br />
         <br />
+
+
             <%-- startregion: Search Form --%>
             <div class="container body-content" style="z-index:1">
                 <div class="row" style="-ms-overflow-style:none;">
@@ -11,7 +13,8 @@
                         <asp:TextBox ID="searchBox" placeholder="Search here" runat="server" CssClass="form-control rounded" BackColor="#F1F3F6"></asp:TextBox>
                         <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary ml-1" OnClick="searchBtn_Click" Text="Search" style="background-color:#00196E"/>
                     </div>
-               
+                    <asp:Button runat="server" ID="addBtn" Text="Add Equipment"/>
+                   
                 </div>
             </div>
             <%-- endregion: Search Form --%>
@@ -164,6 +167,60 @@
                 </asp:ListView>
             
                 <%-- endregion: Equipment Listview --%>
+
+
+                       <div runat="server" Width="500px" id="AddNewEquipmentPanel">
+                            <div style="width: 520px; margin-left: auto; margin-right:auto;">
+                                <div style="background: #00196E; text-align: center; border-top-left-radius: 12px; border-top-right-radius: 12px;" class="py-4">
+                                    <span style="color: white; font-weight: 600; line-height: 36px; font-size: 28px;">New Equipment</span>
+                                </div>
+                                <div style="padding-top:30px; padding-bottom:20px; padding-left: 50px; padding-right:50px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;background: white">
+                                    <div class="input-group">
+                                        <asp:Label runat="server" AssociatedControlID="Code" CssClass="input-label" ID="CodeLabel">Code</asp:Label>
+                                        <asp:TextBox runat="server" ID="Code" CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>
+                                       <%-- <asp:Label runat="server" CssClass="text-small text-red p-1" ID="EmailErrorMessage"></asp:Label>--%>
+   
+                                    </div>
+                                    <div class="input-group">
+                                        <asp:Label runat="server" AssociatedControlID="Name" CssClass="input-label" ID="NameLabel">Name</asp:Label>
+                                        <asp:TextBox runat="server" ID="Name" CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>
+                                    <%--    <asp:Label runat="server" CssClass="text-small text-red" ID="PasswordErrorMessage"></asp:Label>--%>
+                                    </div>
+                                     <div >
+                                     <%--   <asp:Label runat="server" AssociatedControlID="Location" CssClass="input-label" ID="Locationlabel">Location</asp:Label>
+                                        <asp:TextBox runat="server" ID="Location" CssClass="input-box" AutoCompleteType="Disabled"></asp:TextBox>--%>
+                                    <%--    <asp:Label runat="server" CssClass="text-small text-red" ID="PasswordErrorMessage"></asp:Label>--%>
+
+                                         <asp:DropDownList runat="server" ID="RoomDropDownList" DataSourceID="SqlDataSource1" DataTextField="name" DataValueField="id" OnSelectedIndexChanged="RoomDropDownList_SelectedIndexChanged" AutoPostBack="True">
+                                             
+                                         </asp:DropDownList>
+                                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT * FROM [Room]"></asp:SqlDataSource>
+                                         
+                                         <asp:DropDownList runat="server" ID="SpaceDropDownList" DataSourceID="SqlDataSource2" DataTextField="name" DataValueField="id" AutoPostBack="True">
+                                             
+
+                                         </asp:DropDownList>
+                                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>"></asp:SqlDataSource>
+                                        <asp:DropDownList ID="ObjectDropDownList" runat="server" DataSourceID="SqlDataSource3" DataTextField="name" DataValueField="id" AutoPostBack="True" OnSelectedIndexChanged="ObjectDropDownList_SelectedIndexChanged">
+
+                                        </asp:DropDownList>
+                                         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT * FROM [Object]"></asp:SqlDataSource>
+                                         
+                                      <asp:DropDownList ID="LocationDropDownList" runat="server" DataSourceID="SqlDataSource4" DataTextField="object_num" DataValueField="id" AutoPostBack="True" OnSelectedIndexChanged="LocationDropDownList_SelectedIndexChanged">
+
+                                        </asp:DropDownList>
+                                         <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:MakerspaceDBConnectionString %>" SelectCommand="SELECT * FROM [Location]"></asp:SqlDataSource>
+                                     </div>
+
+                                    <div style="display: flex; justify-content:space-between">
+                                        <asp:Button ID="CancelBtn" runat="server" Text="Cancel" CssClass="login-btn"/>
+                                        <asp:Button ID="AddEquipmentBtn" runat="server" Text="Add" CssClass="login-btn"/>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                
 
             </div>
 

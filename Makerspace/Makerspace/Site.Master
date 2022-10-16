@@ -267,20 +267,20 @@
 <body>
     <br />
     <br />
-    <div class="auto-style2" role="navigation" style="background-color:#00196E">
+<%--    <div class="auto-style2" role="navigation" style="background-color:#00196E">
         <div class="auto-style1">
             <a class="navbar-brand" style="color:white; font-weight:800" runat="server" href="~/Resource.aspx">Makerspace</a>
-            <div class="navbar-nav mr-auto" style="width:100%; list-style-type:none; padding:0px; display:inline; flex-direction:row;text-align:justify">
+            <div class="navbar-nav mr-auto" style="width:100%; list-style-type:none; padding:0px; display:inline; flex-direction:row;text-align:justify">--%>
                 <%--<a runat="server" class="navbar-items" href="~/">Home</a> --%>
-                <a runat="server" class="navbar-items" href="~/About">About</a>
+                <%--<a runat="server" class="navbar-items" href="~/About">About</a>--%>
                 <%--<a runat="server" class="navbar-items" href="~/Project">Project</a> --%>
-                <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
+<%--                <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
                 <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
                 <a runat="server" class="navbar-items" href="EngineeringProjectMain.aspx">Independent Projects</a>
               </div>
            </div>
-        </div>
-    <form runat="server">
+        </div>--%>
+    <form runat="server" >
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -311,8 +311,25 @@
                     <a runat="server" class="navbar-items" href="~/About">About</a>
                     <a runat="server" class="navbar-items" href="~/Resource">Resources</a>
                     <a runat="server" class="navbar-items" href="~/EngineeringProjectMain">Projects</a>
+                    <a runat="server" class="navbar-items" href="~/FindItemsByLocation">FindItems_By_Location</a>
                     <a runat="server" class="navbar-items" href="https://outlook.office365.com/owa/calendar/Makerspacebooking@fulbright.edu.vn/bookings/">Booking</a>
-                    <a runat="server" class="navbar-items" href="~/Management">Management</a>
+                    <%--<a runat="server" class="navbar-items" href="~/Management">Management</a>--%>
+<%--                    <ul class="dropdown-menu">
+                        <li><a runat="server" href="Resource.aspx">Page 1-1</a></li>
+                        <li><a runat="server" href="Resource.aspx">Page 1-1</a></li>
+                        <li><a runat="server" href="Resource.aspx">Page 1-1</a></li>
+                    </ul>--%>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" style="background-color: #00196E;">
+                        Management
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Management">Fixed Assets</a>
+                        <a class="dropdown-item" href="/EngineeringSkillsManagement">Engineering Skills</a>
+                        <a class="dropdown-item" href="#">Mainternance plan</a>
+                        <a class="dropdown-item" href="#">Safety Management</a>
+                      </div>
+                    </div>
                     <% if(Session["role"] == null) { %>
                     <asp:Button ID="LoginBtn" runat="server" Text="Log in" CssClass="navbar-log-items"/>
                     <%} else { %>
@@ -365,8 +382,8 @@
                     <address>
                         Makerspace - Fulbright University Vietnam<br />
                         105 Ton Dat Tien, Tan Phu Ward, District 7, HCMC<br />
-                        <abbr title="Phone">Phone:</abbr>
-                        0903369880
+                        <%--<abbr title="Phone">Phone:</abbr>
+                        0903369880--%>
                     </address>
 
                     <address>
