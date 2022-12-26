@@ -13,7 +13,7 @@ It helps Makerspace staff to manage and update the resource and services to prov
 
 View all resource at Makerspace including equipment and materials.
 
-![Resource page](https://raw.githubusercontent.com/anh-nguyen-98/makerspace/readme/demo/resource_page.jpg)
+![Resource page](https://github.com/anh-nguyen-98/makerspace/blob/main/demo/resource_page.jpg)
 
 
 **2. Search resource**
