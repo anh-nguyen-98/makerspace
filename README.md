@@ -22,7 +22,7 @@ Search by resource name, location.
 
 Example for searching "printer".
 
-![Search resource](https://raw.githubusercontent.com/anh-nguyen-98/makerspace/readme/demo/search_equipment.jpg)
+![Search resource](https://github.com/anh-nguyen-98/makerspace/blob/main/demo/search_equipment.jpg)
 
 
 **3. Filter resource by category**
@@ -31,7 +31,7 @@ Filter resource by category. They are "Most popular", "Heavy Machine", "Handtool
 
 Example for filtering resource by "Heavy Machine".
 
-![Filter resource by category](https://raw.githubusercontent.com/anh-nguyen-98/makerspace/readme/demo/filter_equipment_by_category.jpg)
+![Filter resource by category](https://github.com/anh-nguyen-98/makerspace/blob/main/demo/filter_equipment_by_category.jpg)
 
 
 **There's more to come.**
